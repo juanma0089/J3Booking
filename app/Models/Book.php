@@ -19,5 +19,6 @@ class Book extends Model
 
     public function bottles() {
         return $this->belongsToMany(Bottle::class)->withTimestamps()->withPivot('amount');
+
     }
 }
