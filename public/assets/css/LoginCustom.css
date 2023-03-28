@@ -20,8 +20,6 @@
     width: 350px;
     background: #131419;
     border-radius: 10px;
-    box-shadow: -5px -5px 10px 0 rgba(255, 255, 255, 0.45),
-      5px 5px 15px 0 rgba(0, 0, 0, 0.4);
     transition: 1.5s;
   }
   .form h2 {
