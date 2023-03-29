@@ -1,8 +1,11 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    min-height: 100vh;
-    background: #131419;
-    transition: 1.5s;
-  }
+    background-color: #111214 !important;
+}
+
+.bg-custom {
+    background-color: #111214 !important;
+}
+
+.fa-eye {
+    cursor: pointer;
+}
