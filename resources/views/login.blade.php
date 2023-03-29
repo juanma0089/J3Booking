@@ -4,11 +4,14 @@
     <section class="vh-100 ">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="col-10 col-md-8 col-lg-6 col-xl-5">
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center mt-5">
-                            <div class="mb-md-5 mt-md-4 pb-5">
-                                <h2 class="fw-bold mb-5 text-uppercase">Iniciar sesión</h2>
+                        <div class="card-body text-center">
+                            <div>
+
+                                <img src="{{ asset('assets/img/logo.png') }}" class="pb-3 logo-login" alt="logo J3">
+
+                                <h2 class="fw-bold my-5 text-uppercase">Iniciar sesión</h2>
 
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -42,13 +45,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row mb-3">
+                                    <div class="form-group row mb-3 text-start">
                                         <div class="col-md-6 offset-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="remember" {{ old('remember') ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="remember">
-                                                    {{ __('Remember Me') }}
+                                                    {{ __('Recuérdame') }}
                                                 </label>
                                             </div>
                                         </div>
@@ -58,6 +61,7 @@
                                     {{-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot
                                             password?</a></p> --}}
 
+                                    {{-- TODO Se puede poner el botón como iniciar sesión? --}}
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">
                                         {{ __('Login') }}</button>
 
