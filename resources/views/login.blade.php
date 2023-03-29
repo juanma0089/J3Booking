@@ -29,7 +29,7 @@
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">
                                                 <input id="password" type="password"
-                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
                                                     name="password" required autocomplete="current-password">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -54,6 +54,7 @@
                                         </div>
                                     </div>
 
+                                    {{-- TODO Implementar recordar contraseña --}}
                                     {{-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot
                                             password?</a></p> --}}
 
