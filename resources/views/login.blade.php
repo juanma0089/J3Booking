@@ -12,16 +12,24 @@
 
                                     <h2 class="fw-bold mb-5 text-uppercase">Iniciar sesión</h2>
 
+                                    <div class="d-grid ">
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typeEmailX">Email</label>
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                                            <label class="form-label" for="typeEmailX">Email</label>
+                                        </div>
+
+                                        <div class="form-group d-flex">
+
+                                            <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                                <input type="password" id="typePasswordX"
+                                                    class="form-control form-control-lg">
+                                                <label class="form-label" for="typePasswordX">Password</label>
+                                            </div>
+                                            <i class="fas fa-eye mx-3 my-3"></i>
+                                        </div>
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typePasswordX">Password</label>
-                                    </div>
 
                                     {{-- TODO Crear opción de si has olvidado la contraseña, recuperarla mediante email --}}
                                     {{-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot
