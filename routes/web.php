@@ -18,5 +18,5 @@ Route::get('/', function () {
 })->name('login');
 
 Route::get('/template', function () {
-    return view('template');
-});
+    return view('/templates/template');
+})->name('template');
