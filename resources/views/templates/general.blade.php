@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <script defer src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
