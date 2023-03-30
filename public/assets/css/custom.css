@@ -26,10 +26,11 @@ select {
     -webkit-text-fill-color: white !important;
 }
 
-.mesa-icon i {
+.mesa-icon{
     font-size: 3rem;
-    color: #ffffff;
 }
+
+
 
 /** MOBILE PARAMS  */
 
@@ -44,5 +45,5 @@ select {
         font-size: 2rem;
         color: #ffffff;
     }
-    
+
 }
