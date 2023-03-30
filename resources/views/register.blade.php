@@ -14,9 +14,9 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Registrar nuevo usuario</h3>
 
-                                <div class="alert alert-danger" role="alert" > HOLA</div>
+                                <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="" id='register'>
+                                <form method="POST" action="{{route('user.create')}}" id='register'>
                                     @csrf
 
                                     <div class="d-grid ">
@@ -36,7 +36,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
                                                 class="form-control form-control-lg no-autofill @error('surname') is-invalid @enderror"
-                                                name="surname" value="{{ old('surname') }}" required autofocus>
+                                                name="surname" value="{{ old('surname') }}">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -48,8 +48,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
                                                 class="form-control form-control-lg no-autofill @error('email') is-invalid @enderror"
-                                                name="email" value="{{ old('email') }}" required autocomplete="email"
-                                                autofocus>
+                                                name="email" value="{{ old('email') }}" required autocomplete="email">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -62,7 +61,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
                                                 class="form-control form-control-lg no-autofill @error('phone') is-invalid @enderror"
-                                                name="phone" value="{{ old('phone') }}" required autofocus>
+                                                name="phone" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -74,7 +73,7 @@
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('jobtitle') is-invalid @enderror"
-                                                name="jobtitle" required>
+                                                name="jobtitle" id='jobtitle' required>
                                                 <option value="" hidden selected>Puesto</option>
                                                 <option value="rrpp">Relaciones públicas</option>
 

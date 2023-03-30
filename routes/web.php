@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,6 @@ Route::get('/', function () {
 Route::get('/template', function () {
     return view('/templates/template');
 })->name('template');
-
 
 Route::get('/register', function () {
     return view('register');
