@@ -16,9 +16,9 @@
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="{{route('user.create')}}" id='register'>
+                                <form method="POST" action="{{route('register')}}" id='register'>
                                     @csrf
-
+                                    {{-- TODO -> La contraseña está required y no hay campo inútí  --}}
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"

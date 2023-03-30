@@ -44,7 +44,7 @@
                                 class="fa-solid fa-house fa-xl bg-black" style="color: #ffffff;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-plus fa-xl"
+                        <a class="nav-link" href="#"><i class="bi bi-plus-lg fa-xl"
                                 style="color: #ffffff;"></i></a>
                     </li>
                     <li class="nav-item">
