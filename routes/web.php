@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/template', function () {
     return view('/templates/template');
 })->name('template');
+
+Route::get('/index', function () {
+    return view('index');
+})->name('index');
