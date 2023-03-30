@@ -8,24 +8,30 @@
         </div>
         <div class="row d-flex justify-content-center align-content-center">
             <div class="col-md-9 d-flex mb-sm-2 justify-content-center align-content-center">
-                <div class="col-1 ">
-                    <button class="mesa-icon"><i class="bi bi-square bg-success"></i></button>
+
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
-                <div class="col-1">
-                    <button class="mesa-icon "><i class="bi bi-square"></i></button>
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon  ocupada"><i class="bi bi-square bg-danger"></i></div>
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon"><i class="bi bi-square"></i></div>
+                <div class="col-1 d-flex justify-content-center align-content-center mx-2 p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill fs-1"></i></button>
                 </div>
+
+
+
+
+
             </div>
             <div class="col-md-9 d-flex mb-sm-2 justify-content-center align-content-center">
                 <div class="col-1">
