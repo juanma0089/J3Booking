@@ -1,74 +1,253 @@
 @extends('templates.template')
 
 @section('body')
-    <div class="container">
+    <div id="mainPanel" class="container min-vh-100">
         <h1>Interior</h1>
         <div class="col-sm-3 col-md-12 d-flex mb-2 justify-content-center align-content-center">
             <img src="https://via.placeholder.com/120x50" alt="escenario" class="img-fluid">
         </div>
         <div class="row d-flex justify-content-center align-content-center">
-            <div class="col-md-9 d-flex mb-sm-2 justify-content-center align-content-center">
-                <div class="col-1 ">
-                    <button class="mesa-icon"><i class="bi bi-square bg-success"></i></button>
-                </div>
-                <div class="col-1">
-                    <button class="mesa-icon "><i class="bi bi-square"></i></button>
-                </div>
-                <div class="col-1">
-                    <div class="mesa-icon  ocupada"><i class="bi bi-square bg-danger"></i></div>
-                </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
-                </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
-                </div>
-                <div class="col-1">
-                    <div class="mesa-icon"><i class="bi bi-square"></i></div>
-                </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
             </div>
-            <div class="col-md-9 d-flex mb-sm-2 justify-content-center align-content-center">
-                <div class="col-1">
-                    <div type="button" class="mesa-icon"><i class="bi bi-square bg-success"></i></div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon  ocupada"><i class="bi bi-square bg-danger"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon"><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
+
             </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Sofás</h5>
+            </div>
+            <div class="col-12 justify-content-evenly align-content-center px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <span class="h5 m-0 p-0">1</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 ">
+                        <i class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <span class="h5 m-0 p-0">2</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <span class="h5 m-0 p-0">3</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+
+
+            </div>
+
         </div>
-        <h1>exterior</h1>
+        <hr class="col-12 text-white">
         <div class="row d-flex justify-content-center align-content-center">
-            <div class="col-md-9 d-flex mb-sm-2 justify-content-center align-content-center">
-                <div class="col-1">
-                    <div type="button" class="mesa-icon"><i class="bi bi-square bg-success"></i></div>
+            <h1>Exterior</h1>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
+            </div>
+              <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon  ocupada"><i class="bi bi-square bg-danger"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon "><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
-                <div class="col-1">
-                    <div class="mesa-icon"><i class="bi bi-square"></i></div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
+
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
+            </div>
+              <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Fila</h5>
+            </div>
+              <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-square-fill mesa-icon"></i></button>
+                </div>
+
+            </div>
+            <div class="col-12 px-0 d-flex mb-sm-2 px-2">
+                <h5>Sofás</h5>
+            </div>
+            <div class="col-12 justify-content-evenly align-content-center px-0 d-flex mb-sm-2 px-2">
+
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <span class="h5 m-0 p-0">1</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 ">
+                        <i class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center p-1">
+                    <span class="h5 m-0 p-0">2</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <span class="h5 m-0 p-0">3</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-content-center  p-1">
+                    <span class="h5 m-0 p-0">4</span>
+                    <button class="bg-transparent border-0 text-success m-0 p-0 "><i
+                            class="bi bi-displayport-fill mesa-icon"></i></button>
+                </div>
+
+
             </div>
         </div>
     </div>

@@ -13,14 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/template', function () {
+Route::get('/', function () {
     return view('/templates/template');
 })->name('template');
+
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+Route::post("/register", [UsersController::class, "create"])->name("user.create");
 
 Route::get('/index', function () {
     return view('index');
 })->name('index');
+
