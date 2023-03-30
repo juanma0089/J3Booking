@@ -20,3 +20,7 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('/templates/template');
 })->name('template');
+
+Route::get('/index', function () {
+    return view('index');
+})->name('index');
