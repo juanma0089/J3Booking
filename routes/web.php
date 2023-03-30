@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('/template', function () {
     return view('/templates/template');
 })->name('template');
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+Route::post("/register", [UsersController::class, "create"])->name("user.create");

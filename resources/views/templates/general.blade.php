@@ -20,6 +20,7 @@
     <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
     <script defer type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
+    <script defer type="text/javascript" src="@yield('javascript')"></script>
     <title>{{ config('app.name') }}</title>
 </head>
 

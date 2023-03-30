@@ -2,6 +2,10 @@ body {
     background-color: #111214 !important;
 }
 
+select {
+    border-color: white !important;
+}
+
 .bg-custom {
     background-color: #111214 !important;
 }
@@ -10,9 +14,18 @@ body {
     cursor: pointer;
 }
 
-.logo-login{
+.logo-login {
     margin-top: -180px;
 }
+
+.no-autofill:-webkit-autofill,
+.no-autofill:-webkit-autofill:hover, 
+.no-autofill:-webkit-autofill:focus,
+.no-autofill:-webkit-autofill:active {
+    transition: background-color 999999s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+
 
 /** MOBILE PARAMS  */
 

@@ -1,0 +1,104 @@
+@extends('templates.template')
+
+@section('javascript')
+    {{ asset('assets/js/register.js') }}
+@endsection
+
+@section('body')
+    <section class="vh-100 ">
+        <div class="container overflow-hidden">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+                    <div class="bg-custom text-white" style="border-radius: 1rem;">
+                        <div class="card-body text-center">
+                            <div>
+                                <h3 class="fw-bold my-5 text-uppercase">Registrar nuevo usuario</h3>
+
+                                <div class="alert alert-danger" role="alert" > HOLA</div>
+
+                                <form method="POST" action="" id='register'>
+                                    @csrf
+
+                                    <div class="d-grid ">
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="name" type="text"
+                                                class="form-control form-control-lg no-autofill @error('name') is-invalid @enderror"
+                                                name="name" value="{{ old('name') }}" required autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <label class="form-label" for="name">Nombre <span
+                                                    class="text-danger">*</span></label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="surname" type="text"
+                                                class="form-control form-control-lg no-autofill @error('surname') is-invalid @enderror"
+                                                name="surname" value="{{ old('surname') }}" required autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <label class="form-label" for="surname">Apellidos</label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="email" type="email"
+                                                class="form-control form-control-lg no-autofill @error('email') is-invalid @enderror"
+                                                name="email" value="{{ old('email') }}" required autocomplete="email"
+                                                autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <label class="form-label" for="email">Email <span
+                                                    class="text-danger">*</span></label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="phone" type="phone"
+                                                class="form-control form-control-lg no-autofill @error('phone') is-invalid @enderror"
+                                                name="phone" value="{{ old('phone') }}" required autofocus>
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <label class="form-label" for="phone">Teléfono</label>
+                                        </div>
+
+                                        <div class="form-outline text-white mb-4 col-3 col-md-4">
+                                            <select
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('jobtitle') is-invalid @enderror"
+                                                name="jobtitle" required>
+                                                <option value="" hidden selected>Puesto</option>
+                                                <option value="rrpp">Relaciones públicas</option>
+
+                                                @error('jobtitle')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    {{-- TODO Se puede poner el botón como iniciar sesión? --}}
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
+                                        {{ __('Registrar usuario') }}</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
