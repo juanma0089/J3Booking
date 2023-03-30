@@ -3,10 +3,19 @@
 @section('nav')
     <nav class="navbar sticky-top navbar-expand-lg bg-custom bg-body-tertiary border-light border-bottom">
         <div class="container-fluid">
-            <button class="navbar-toggler border-light border" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <i class="bi bi-list text-white fs-1"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+                <i class="bi bi-clock-history text-white fs-1"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+                <i class="bi bi-check-all text-white fs-1"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+                <i class="bi bi-brightness-high text-white fs-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
@@ -40,16 +49,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i
-                                class="fa-solid fa-house fa-xl bg-black" style="color: #ffffff;"></i></a>
+                        <a class="nav-link active text-white" aria-current="page" href="#"><i class="fa-solid fa-house fa-xl bg-black"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-plus-lg fa-xl"
-                                style="color: #ffffff;"></i></a>
+                        <a class="nav-link text-white" href="#"><i class="bi bi-plus-lg fa-xl"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-user fa-xl"
-                                style="color: #ffffff;"></i></a>
+                        <a class="nav-link text-white" href="#"><i class="fa-solid fa-user fa-xl"></i></a>
                     </li>
                 </ul>
             </div>

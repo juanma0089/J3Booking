@@ -30,6 +30,10 @@ select {
     font-size: 3rem;
 }
 
+.navbar-toggler-icon{
+    color: white !important;
+}
+
 
 
 /** MOBILE PARAMS  */
