@@ -34,6 +34,7 @@
 
 @section('footer')
     <nav class="navbar sticky-bottom navbar-expand bg-custom bg-body-tertiary border-light border-top ">
+
         <div class="container-fluid">
 
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -50,7 +51,6 @@
                         <a class="nav-link" href="#"><i class="fa-solid fa-user fa-xl"
                                 style="color: #ffffff;"></i></a>
                     </li>
-
                 </ul>
             </div>
         </div>
