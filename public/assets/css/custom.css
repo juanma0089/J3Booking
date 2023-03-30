@@ -2,6 +2,10 @@ body {
     background-color: #111214 !important;
 }
 
+select {
+    border-color: white !important;
+}
+
 .bg-custom {
     background-color: #111214 !important;
 }
@@ -14,13 +18,18 @@ body {
     margin-top: -180px;
 }
 
-   /* Estilos personalizados */
+.no-autofill:-webkit-autofill,
+.no-autofill:-webkit-autofill:hover,
+.no-autofill:-webkit-autofill:focus,
+.no-autofill:-webkit-autofill:active {
+    transition: background-color 999999s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
 
-  .mesa-icon i {
-    
+.mesa-icon i {
     font-size: 3rem;
     color: #ffffff;
-  }
+}
 
 /** MOBILE PARAMS  */
 
@@ -30,10 +39,10 @@ body {
         height: auto;
         margin-top: -120px;
     }
+
     .mesa-icon i {
         font-size: 2rem;
         color: #ffffff;
-      }
-
-
+    }
+    
 }

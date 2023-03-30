@@ -21,6 +21,14 @@ Route::get('/', function () {
     return view('/templates/template');
 })->name('template');
 
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+
+Route::post("/register", [UsersController::class, "create"])->name("user.create");
+
 Route::get('/index', function () {
     return view('index');
 })->name('index');
+

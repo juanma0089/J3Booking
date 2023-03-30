@@ -2,7 +2,7 @@
 
 @section('body')
     <section class="vh-100 ">
-        <div class="container py-5 h-100">
+        <div class="container py-5 h-100 ">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-10 col-md-8 col-lg-6 col-xl-5">
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
@@ -18,7 +18,7 @@
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
-                                                class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill @error('email') is-invalid @enderror"
                                                 name="email" value="{{ old('email') }}" required autocomplete="email"
                                                 autofocus>
                                             @error('email')
@@ -32,7 +32,7 @@
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">
                                                 <input id="password" type="password"
-                                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                                    class="form-control form-control-lg no-autofill @error('password') is-invalid @enderror"
                                                     name="password" required autocomplete="current-password">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
