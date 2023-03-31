@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +29,4 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
+Route::get('/index', [TablesController::class, "createTable"])->name('table.generate');
