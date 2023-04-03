@@ -19,7 +19,7 @@ class UsersController extends Controller
             return $this->getAllUsers();
         }
 
-        return view('users');
+        return view('users.users');
     }
 
     public function getAllUsers()
