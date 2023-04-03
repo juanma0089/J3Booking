@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
-
 /**
  * Summary of CreateNewUser
  */
@@ -25,7 +24,6 @@ class CreateNewUser implements CreatesNewUsers
     {
 
         Validator::make($input, [
-
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'surname' =>  ['string', 'min:2', 'max:255'],
             'email' => [
@@ -37,18 +35,20 @@ class CreateNewUser implements CreatesNewUsers
                 'regex:/(.*)@(.*)\.(es|com|org)/i',
                 Rule::unique(User::class),
             ],
-            'password' => ['required', 'string', 'min:8', 'max:8']
+            'password' => [],
+            'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
+            'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],
+            'phone' => []
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
-            'surname' => $input['surname'],
+            'surname' => $input['surname'] ?? '',
             'email' => $input['email'],
-            'phone' => $input['phone'],
-
-
-            'password' => Hash::make($input['password']),
-            // 'address_id' => $address->id
+            'password' => $this->generatePassword(),
+            'jobtitle' => $input['jobtitle'],
+            'role' => $input['role'],
+            'phone' => $input['phone']  ?? '',
         ]);
     }
 
@@ -57,14 +57,15 @@ class CreateNewUser implements CreatesNewUsers
      * @param mixed $length
      * @return string
      */
-    function generatePassword($length)
+    function generatePassword()
     {
-        $key = "";
-        $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
-        $max = strlen($pattern) - 1;
-        for ($i = 0; $i < $length; $i++) {
-            $key .= substr($pattern, mt_rand(0, $max), 1);
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Caracteres posibles
+        $password = ''; // Inicializar la contraseña
+
+        for ($i = 0; $i < 8; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
         }
-        return $key;
+
+        return $password;
     }
 }

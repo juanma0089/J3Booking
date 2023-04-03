@@ -85,6 +85,23 @@
                                             </select>
                                         </div>
 
+                                        <div class="form-outline text-white mb-4 col-3 col-md-4">
+                                            <select
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('role') is-invalid @enderror"
+                                                name="role" id='role' required>
+                                                <option value="" hidden selected>Permisos</option>
+                                                <option value="normal">Normal</option>
+                                                <option value="moderator">Moderador</option>
+                                                <option value="admin">Admin</option>
+
+                                                @error('role')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </select>
+                                        </div>
+
                                     </div>
 
                                     {{-- TODO Se puede poner el botón como iniciar sesión? --}}
