@@ -34,8 +34,14 @@ Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->midd
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
 
+Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
+
+Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
+
 Route::get('/booking', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
+
+

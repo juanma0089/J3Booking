@@ -13,21 +13,6 @@ class UsersController extends Controller
 {
     use PasswordValidationRules;
 
-    public function index(Request $request)
-    {
-        if ($request->input('action') == 'get_all_users') {
-            return $this->getAllUsers();
-        }
-
-        return view('users.users');
-    }
-
-    public function getAllUsers()
-    {
-        $users = DB::table('users')->get();
-        return response()->json($users);
-    }
-
     /**
      * Validate and create a newly registered user.
      *
@@ -89,5 +74,31 @@ class UsersController extends Controller
         }
 
         return $password;
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->input('action') == 'get_all_users') {
+            return $this->getAllUsers();
+        }
+
+        return view('users.users');
+    }
+
+    public function getAllUsers()
+    {
+        $users = DB::table('users')->get();
+        return response()->json($users);
+    }
+
+    public function editUser($id)
+    {
+        $user = User::find($id);
+        return view('users.edituser', ['user' => $user]);
+    }
+
+    public function updateUser($id)
+    {
+        // TODO validate + update users
     }
 }

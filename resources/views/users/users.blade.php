@@ -8,7 +8,16 @@
     <section id="mainPanel" class="container-fluid mt-4">
         <div class="card-body text-center">
             <div>
-                <h3 class="fw-bold my-2 text-uppercase">Usuarios</h3>
+                <h3 class="fw-bold my-2 text-light text-uppercase">Usuarios</h3>
+                @auth 
+                    @if (Auth::user()->role == 'admin')
+                        <a href="{{ route('register') }}"><button type="button" class="mx-2 btn btn-sm btn-success">
+                            <i class="bi bi-plus-lg"></i>
+                            Usuario
+                        </button>
+                    </a>
+                    @endif
+                @endauth
             </div>
         </div>
 
@@ -37,6 +46,7 @@
 
                 <div
                     class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-4 col-md-2 d-flex justify-content-center">
+
                     <p class="align-self-lg-center p-0 m-0">Acciones</p>
                 </div>
 
