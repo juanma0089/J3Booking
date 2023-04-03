@@ -29,6 +29,10 @@ Route::get('/books', function () {
     return view('books');
 })->name('books');
 
+Route::get('/history', function () {
+    return view('history');
+})->name('history');
+
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
