@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BooksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TablesController;
@@ -20,7 +21,7 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
 
-    return view('register');
+    return view('auth.register');
 })->name('register')->middleware('admin');
 
 Route::post('/register', [UsersController::class, 'create'])->name('user.create');
@@ -33,7 +34,12 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
+Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
 
+Route::get('/booking', function () {
+    return view('createbooking');
+})->name('booking')->middleware('auth');
+
+Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');

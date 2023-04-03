@@ -17,9 +17,10 @@ return new class extends Migration
             $table->integer('diners');
             $table->enum('booking', ['phone', 'instagram']);
             $table->string('contact', 256)->nullable();
-            $table->string('description', 1024)->nullable();
+            $table->date('date');
+            $table->enum('time', ['afternoon', 'night']);
             $table->enum('status', ['waiting', 'canceled', 'accepted']);
-            $table->foreignId('table_id')->references('id')->on('tables');
+            $table->foreignId('table_id')->references('id')->on('tables')->unsigned();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

@@ -48,7 +48,14 @@ select {
     max-width: 80vw;
 }
 
-
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--text-white);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.9);
+}
 
 /** MOBILE PARAMS  */
 
