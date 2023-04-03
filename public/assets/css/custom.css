@@ -30,6 +30,12 @@ select {
     font-size: 4rem;
 }
 
+.navbar-toggler-icon{
+    color: white !important;
+}
+
+
+
 /** MOBILE PARAMS  */
 
 @media screen and (max-width: 767px) {
