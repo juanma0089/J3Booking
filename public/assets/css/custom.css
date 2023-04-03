@@ -29,6 +29,9 @@ select {
 .mesa-icon{
     font-size: 4rem;
 }
+  .mesa-cruz {
+        font-size: 3rem;
+    }
 
 .navbar-toggler-icon{
     color: white !important;
@@ -46,6 +49,9 @@ select {
     }
 
     .mesa-icon {
+        font-size: 2.5rem;
+    }
+    .mesa-cruz {
         font-size: 2rem;
     }
 
