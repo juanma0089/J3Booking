@@ -30,4 +30,8 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
-Route::get('/index', [TablesController::class, "tableGenerate"])->name('table.generate');
+Route::get('/books', function () {
+    return view('books');
+})->name('books');
+
+// Route::get('/index', [TablesController::class, "tableGenerate"])->name('table.generate');
