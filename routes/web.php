@@ -26,6 +26,4 @@ Route::post('/register', [UsersController::class, 'create'])->name('user.create'
 
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
 
-Route::get('/users', function () {
-    return view('users');
-})->name('users');
+Route::get('/users', [UsersController::class, "index"])->name('users');
