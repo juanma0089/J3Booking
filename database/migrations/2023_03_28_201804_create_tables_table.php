@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('numtable');
             $table->enum('position', ['in', 'out']);
-            $table->enum('type', ['sofa', 'normal', 'cruzcampo']);
+            $table->enum('type', ['sofa', 'normal', 'cruzcampo', 'opcional']);
             $table->timestamps();
         });
     }

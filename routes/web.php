@@ -18,21 +18,13 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/', function () {
-    return view('/templates/template');
-})->name('template');
-
 Route::get('/register', function () {
     return view('register');
 })->name('register')->middleware('admin');
 
 Route::post('/register', [UsersController::class, 'create'])->name('user.create');
 
-Route::get('/index', function () {
-    return view('index');
-})->name('index');
-
-Route::get('/index', [TablesController::class, "tableGenerate"])->name('table.generate');
+Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
 
 Route::get('/users', function () {
     return view('users');

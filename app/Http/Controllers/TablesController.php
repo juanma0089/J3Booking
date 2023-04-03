@@ -9,7 +9,9 @@ class TablesController extends Controller
 {
     public function tableGenerate()
     {
-        // $num_table = DB::table('tables')->count();
+       $num_table = DB::table('tables')->count();
+
+       $table = DB::table('tables');
         // $table_x_row = 7;
         // // ceil es una función que redondea hacia arriba un número decimal a su entero más cercano.
         // $num_rows = ceil($num_table / $table_x_row);
@@ -33,6 +35,6 @@ class TablesController extends Controller
 
         // }
         $prueba = 2;
-        return view('index', @compact(' prueba'));
+        return view('index', @compact('prueba', 'num_table', 'table'));
     }
 }
