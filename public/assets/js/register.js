@@ -8,7 +8,7 @@ $(function () {
         var email = $('#email').val();
         var phone = $('#phone').val();
         var jobtitle = $('#jobtitle').val();
-        console.log(jobtitle);
+        var role = $('#role').val();
 
         var errors = [];
         var ok = true;
@@ -35,6 +35,14 @@ $(function () {
             ok = false;
         } else if (jobtitle != 'rrpp') {
             errors.push('El usuario debe tener un puesto de Relaciones públicas')
+            ok = false;
+        }
+
+        if (!role) {
+            errors.push('Por favor, seleccione un rol de permisos.');
+            ok = false;
+        } else if (role != 'normal' && role != 'moderator' && role != 'admin') {
+            errors.push('El usuario debe tener un rol válido')
             ok = false;
         }
 
@@ -66,11 +74,17 @@ $(function () {
                     'surname': surname,
                     'email': email,
                     'phone': phone,
-                    'jobtitle': jobtitle
+                    'jobtitle': jobtitle,
+                    'role' : role
                 },
                 success: function (data) {
-                    alert('Se ha creado el usuario con éxito.');
-                    window.location.href = '{{ route("index") }}';
+                    // alert('Se ha creado el usuario con éxito.');
+                    $('#alertErrors').addClass('alert-success');
+                    $('#alertErrors').removeClass('alert-danger');
+                    $('#alertErrors').prepend('Usuario creado con éxito');
+                    $('#alertErrors').removeAttr('hidden');
+
+                    console.log(email);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert('Hubo un error al crear el usuario: ' + textStatus);
