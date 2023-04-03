@@ -2,6 +2,12 @@ body {
     background-color: #111214 !important;
 }
 
+#mainPanel{
+    height: 83vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 select {
     border-color: white !important;
 }
@@ -26,15 +32,20 @@ select {
     -webkit-text-fill-color: white !important;
 }
 
-.mesa-icon{
+.mesa-icon {
     font-size: 4rem;
 }
-  .mesa-cruz {
-        font-size: 3rem;
-    }
 
-.navbar-toggler-icon{
+.mesa-cruz {
+    font-size: 3rem;
+}
+
+.navbar-toggler-icon {
     color: white !important;
+}
+
+.usertable {
+    max-width: 80vw;
 }
 
 
@@ -51,8 +62,13 @@ select {
     .mesa-icon {
         font-size: 2.5rem;
     }
+
     .mesa-cruz {
         font-size: 2rem;
+    }
+
+    .usertable {
+        max-width: 95vw;
     }
 
 }
