@@ -5,7 +5,7 @@
 
 
         <h1 class="text-center">Interior</h1>
-        {{-- <p>Hay {{ $prueba }} mesas disponibles para reservar.</p> --}}
+        <p>Hay {{ $num_table}} mesas disponibles para reservar.</p>
 
         <div class="row ">
             <div class="d-flex justify-content-center align-items-center p-0">
@@ -30,7 +30,7 @@
                             class="bi bi-square-fill mesa-icon"></i></button>
                 </div>
                 <div class="col-2 d-flex justify-content-center align-content-center  p-1">
-                    <span class="h5 m-0 p-0">2</span>
+                    <span class="h5 m-0 p-0">1</span>
                     <button class="bg-transparent border-0 text-success m-0 p-0 ">
                         <i class="bi bi-displayport-fill mesa-icon"></i></button>
                 </div>

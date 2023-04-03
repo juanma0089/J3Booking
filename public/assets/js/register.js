@@ -3,12 +3,12 @@ $(function () {
         e.preventDefault();
 
         // Obtener los valores de los campos de entrada
-        var name = $('#name').val();
-        var surname = $('#surname').val();
-        var email = $('#email').val();
-        var phone = $('#phone').val();
-        var jobtitle = $('#jobtitle').val();
-        var role = $('#role').val();
+        var name = $('#name').val() ? $('#name').val() : '';
+        var surname = $('#surname').val() ? $('#surname').val() : '';
+        var email = $('#email').val() ? $('#email').val() : '';
+        var phone = $('#phone').val() ? $('#phone').val() : '';
+        var jobtitle = $('#jobtitle').val() ? $('#jobtitle').val() : '';
+        var role = $('#role').val() ? $('#role').val() : '';
 
         var errors = [];
         var ok = true;
