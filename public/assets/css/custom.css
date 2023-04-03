@@ -38,6 +38,10 @@ select {
     color: white !important;
 }
 
+.usertable {
+    max-width: 80vw;
+}
+
 
 
 /** MOBILE PARAMS  */
@@ -57,13 +61,8 @@ select {
         font-size: 2rem;
     }
 
-    .role-head-usertable,
-    .jobtitle-head-usertable,
-    .phone-head-usertable, 
-    .role-usertable,
-    .jobtitle-usertable,
-    .phone-usertable {
-        visibility: inherit;
+    .usertable {
+        max-width: 95vw;
     }
 
 }

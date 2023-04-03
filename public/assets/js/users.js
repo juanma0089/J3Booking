@@ -17,7 +17,7 @@ $(function () {
             }
         });
     });
-
+    
 })
 
 function pintarTabla(users) {
@@ -28,13 +28,13 @@ function pintarTabla(users) {
         html += '<tr><td><div class="d-flex align-items-center">' +
         '<div class="">' +
         `<p class="fw-bold mb-1">${user.name} ${user.surname ? user.surname : ''}</p>` +
-        `<p class="text-muted mb-0">${user.email ? user.email : ''}</p>` +
+        `<p class="text-muted mb-0 text-truncate">${user.email}</p>` +
         '</div></div></td>' +
-        `<td class="jobtitle-usertable"><p class="fw-normal mb-1">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
+        `<td class="jobtitle-usertable d-none d-md-table-cell"><p class="fw-normal mb-1">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
         '</td>' +
-        `<td class="role-usertable"><span class="badge badge-success rounded-pill d-inline jobtitle-usertable">` +
+        `<td class="role-usertable d-none d-md-table-cell"><span class="badge badge-success rounded-pill d-inline jobtitle-usertable">` +
         `${user.role.substr(0,1).toUpperCase()+user.role.substr(1)}</span></td>` + // Capitaliza el role poniendo la priimera mayúscula
-        `<td class="phone-usertable">${user.phone ? user.phone : ''}</td>` +
+        `<td class="phone-usertable d-none d-md-table-cell">${user.phone ? user.phone : ''}</td>` +
         '<td><button type="button" class="btn btn-link btn-sm btn-rounded">Editar' +
         '</button></td></tr>';
 
