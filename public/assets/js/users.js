@@ -17,7 +17,7 @@ $(function () {
             }
         });
     });
-    
+
 })
 
 function pintarTabla(users) {
@@ -25,21 +25,21 @@ function pintarTabla(users) {
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
 
-        html += '<tr><td><div class="d-flex align-items-center">' +
-        '<div class="">' +
-        `<p class="fw-bold mb-1">${user.name} ${user.surname ? user.surname : ''}</p>` +
-        `<p class="text-muted mb-0 text-truncate">${user.email}</p>` +
-        '</div></div></td>' +
-        `<td class="jobtitle-usertable d-none d-md-table-cell"><p class="fw-normal mb-1">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
-        '</td>' +
-        `<td class="role-usertable d-none d-md-table-cell"><span class="badge badge-success rounded-pill d-inline jobtitle-usertable">` +
-        `${user.role.substr(0,1).toUpperCase()+user.role.substr(1)}</span></td>` + // Capitaliza el role poniendo la priimera mayúscula
-        `<td class="phone-usertable d-none d-md-table-cell">${user.phone ? user.phone : ''}</td>` +
-        '<td><button type="button" class="btn btn-link btn-sm btn-rounded">Editar' +
-        '</button></td></tr>';
+        html += '<div class="p-0 d-flex justify-content-around row  border-bottom text-white">' +
+        '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-8 col-md-3 p-lg-3 ">' +
+        `<p class="mb-0 opacity-75 text-truncate">${user.name} ${user.surname ? user.surname : ''}</p>` +
+        `<p class="mb-0 opacity-75 text-truncate text-muted">${user.email}</p>` +
+        '</div><div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-2 d-flex justify-content-center d-none d-md-flex">' +
+        `<p class="align-self-lg-center p-0 m-0">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
+        '</div><div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-2 d-flex justify-content-center d-none d-md-flex">' +
+        `<p class="align-self-lg-center p-0 m-0">` +
+        `${user.role.substr(0,1).toUpperCase()+user.role.substr(1)}</p></div>div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-4 col-md-2 d-flex justify-content-evenly bg-transparent">` + // Capitaliza el role poniendo la priimera mayúscula
+        `<p class="align-self-lg-center p-0 m-0">${user.phone ? user.phone : ''}</p></div><div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-4 col-md-2 d-flex justify-content-evenly bg-transparent">` +
+        '<button type="submit" class="align-self-lg-center p-0 m-0 bi bi-pen text-warning bg-transparent border-0"></button>' +
+        '<button type="submit" class="align-self-lg-center p-0 m-0 bi bi-x-lg text-danger bg-transparent border-0"></button></div> </div>';
 
         // TODO ENLACE EDITAR CON ID DEL USER
-        
+
     }
 
     return html;
