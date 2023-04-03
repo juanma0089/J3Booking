@@ -33,3 +33,7 @@ Route::get('/index', function () {
 })->name('index');
 
 Route::get('/index', [TablesController::class, "tableGenerate"])->name('table.generate');
+
+Route::get('/users', function () {
+    return view('users');
+})->name('users');
