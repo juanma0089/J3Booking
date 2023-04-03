@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class TablesController extends Controller
 {
-    public function createTable()
+    public function tableGenerate()
     {
         // $num_table = DB::table('tables')->count();
-        // $table_x_row = 6;
+        // $table_x_row = 7;
         // // ceil es una función que redondea hacia arriba un número decimal a su entero más cercano.
         // $num_rows = ceil($num_table / $table_x_row);
         // $table_last_row = $num_table % $table_x_row;
