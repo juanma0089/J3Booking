@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->enum('time', ['afternoon', 'night']);
             $table->enum('status', ['waiting', 'canceled', 'accepted']);
-            $table->foreignId('table_id')->references('id')->on('tables');
+            $table->foreignId('table_id')->references('id')->on('tables')->unsigned();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
