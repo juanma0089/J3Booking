@@ -33,4 +33,4 @@ Route::get('/index', function () {
     return view('index');
 })->name('index');
 
-Route::get('/index', [TablesController::class, "createTable"])->name('table.generate');
+Route::get('/index', [TablesController::class, "tableGenerate"])->name('table.generate');

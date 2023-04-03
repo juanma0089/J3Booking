@@ -27,10 +27,8 @@ select {
 }
 
 .mesa-icon{
-    font-size: 3rem;
+    font-size: 4rem;
 }
-
-
 
 /** MOBILE PARAMS  */
 
@@ -41,9 +39,8 @@ select {
         margin-top: -120px;
     }
 
-    .mesa-icon i {
+    .mesa-icon {
         font-size: 2rem;
-        color: #ffffff;
     }
 
 }
