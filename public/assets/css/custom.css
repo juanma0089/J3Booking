@@ -2,6 +2,12 @@ body {
     background-color: #111214 !important;
 }
 
+#mainPanel{
+    height: 83vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 select {
     border-color: white !important;
 }
