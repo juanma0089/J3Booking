@@ -20,8 +20,12 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
     return view('register');
-})->name('register');
+})->name('register')->middleware('admin');
 
-
+Route::post('/register', [UsersController::class, 'create'])->name('user.create');
 
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
+
+Route::get('/users', function () {
+    return view('users');
+})->name('users');
