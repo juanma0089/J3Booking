@@ -15,15 +15,21 @@ use App\Http\Controllers\TablesController;
 */
 
 Route::get('/login', function () {
-    return view('login');
+    return view('/auth/login');
 })->name('login');
 
 Route::get('/register', function () {
+
     return view('register');
 })->name('register')->middleware('admin');
 
 Route::post('/register', [UsersController::class, 'create'])->name('user.create');
 
+Route::get('/books', function () {
+    return view('books');
+})->name('books');
+
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index');
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
+
