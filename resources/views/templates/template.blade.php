@@ -42,7 +42,7 @@
 
 
 @section('footer')
-    <nav class="navbar sticky-bottom navbar-expand bg-custom bg-body-tertiary border-light border-top ">
+    <nav class="container position-fixed navbar sticky-bottom navbar-expand bg-custom bg-body-tertiary border-light border-top ">
 
         <div class="container-fluid">
 

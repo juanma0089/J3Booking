@@ -5,12 +5,28 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
     use PasswordValidationRules;
+
+    public function index(Request $request)
+    {
+        if ($request->input('action') == 'get_all_users') {
+            return $this->getAllUsers();
+        }
+
+        return view('users');
+    }
+
+    public function getAllUsers()
+    {
+        $users = DB::table('users')->get();
+        return response()->json($users);
+    }
 
     /**
      * Validate and create a newly registered user.
