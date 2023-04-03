@@ -4,7 +4,7 @@
     <div id="mainPanel" class="container-fluid mt-4">
 
         <div>
-            <h1 class="text-center">Reservas</h1>
+            <h1 class="text-center">Historial de Reservas</h1>
 
             <div class="container">
                 <form method="" action="" class="row d-flex justify-content-center align-items-center p-3">
@@ -13,9 +13,18 @@
                     <div class="col-12">
                         <label for="">Tramo</label>
                         <select class="form-select bg-custom text-white border-0" aria-label="horario">
-                            <option value="all">Todos</option>
+                            <option value="all">Noche/Tarde</option>
                             <option value="night">Noche</option>
                             <option value="afternoon">Tarde</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="">Estado</label>
+                        <select class="form-select bg-custom text-white border-0" aria-label="status">
+                            <option value="all">Todos</option>
+                            <option value="cancelled">cancelled</option>
+                            <option value="waiting">waiting</option>
+                            <option value="accepted">accepted</option>
                         </select>
                     </div>
                     <div class="col-10">
@@ -34,7 +43,7 @@
         <div id="lista_ac">
 
 
-            <div class="p-0 d-flex justify-content-around p-lg-4 row  border-bottom">
+            <div class="p-0 d-flex justify-content-around row  border-bottom">
 
                 <div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-3 col-lg-4 p-lg-3 ">
                     <p class="mb-0 opacity-75">Cliente
@@ -52,12 +61,9 @@
                     class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">
                     <p class="align-self-lg-center p-0 m-0">Botellas</p>
                 </div>
-                <div
-                    class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-none d-md-flex justify-content-center">
-                    <p class="align-self-lg-center p-0 m-0">Acciones</p>
-                </div>
 
             </div>
+
 
             <div class="p-0 d-flex justify-content-around row py-1 text-white border-bottom">
 
@@ -80,8 +86,9 @@
                 </div>
                 <div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-1">
                     <a class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">
-                        <i class="bi bi-x-lg text-danger fs-2"></i>
-                        <i class="bi bi-clipboard-check text-success fs-2"></i>
+                        {{-- <span class="text-danger"><i class="bi bi-x-square fs-2"></i> Cancelled</span> --}}
+                        {{-- <span class="text-warning"><i class="bi bi-hourglass-split fs-2"></i> Waiting</span> --}}
+                        <span class="text-success"><i class="bi bi-check-square fs-2"></i> Accepted</span>
                     </a>
                 </div>
             </div>
@@ -106,8 +113,9 @@
                 </div>
                 <div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-1">
                     <a class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">
-                        <i class="bi bi-x-lg text-danger fs-2"></i>
-                        <i class="bi bi-clipboard-check text-success fs-2"></i>
+                        {{-- <span class="text-danger"><i class="bi bi-x-square fs-2"></i> Cancelled</span> --}}
+                        <span class="text-warning"><i class="bi bi-hourglass-split fs-2"></i> Waiting</span>
+                        {{-- <span class="text-success"><i class="bi bi-check-square fs-2"></i> Accepted</span> --}}
                     </a>
                 </div>
             </div>
@@ -132,11 +140,13 @@
                 </div>
                 <div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-1">
                     <a class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">
-                        <i class="bi bi-x-lg text-danger fs-2"></i>
-                        <i class="bi bi-clipboard-check text-success fs-2"></i>
+                        <span class="text-danger"><i class="bi bi-x-square fs-2"></i> Cancelled</span>
+                        {{-- <span class="text-warning"><i class="bi bi-hourglass-split fs-2"></i> Waiting</span> --}}
+                        {{-- <span class="text-success"><i class="bi bi-check-square fs-2"></i> Accepted</span> --}}
                     </a>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection
