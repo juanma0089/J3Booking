@@ -30,12 +30,22 @@ Route::get('/books', function () {
     return view('books');
 })->name('books');
 
+Route::get('/history', function () {
+    return view('history');
+})->name('history');
+
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
+
+Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
+
+Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
 
 Route::get('/booking', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
+
+

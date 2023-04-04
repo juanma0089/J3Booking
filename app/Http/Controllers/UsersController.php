@@ -13,21 +13,6 @@ class UsersController extends Controller
 {
     use PasswordValidationRules;
 
-    public function index(Request $request)
-    {
-        if ($request->input('action') == 'get_all_users') {
-            return $this->getAllUsers();
-        }
-
-        return view('users');
-    }
-
-    public function getAllUsers()
-    {
-        $users = DB::table('users')->get();
-        return response()->json($users);
-    }
-
     /**
      * Validate and create a newly registered user.
      *
@@ -35,23 +20,7 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'min:2', 'max:255'],
-            'surname' =>  ['string', 'min:2', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'min:5',
-                'max:255',
-                'regex:/(.*)@(.*)\.(es|com|org)/i',
-                Rule::unique(User::class),
-            ],
-            'password' => [],
-            'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
-            'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],
-            'phone' => []
-        ]);
+        $request->validate($this->validationRules());
 
         $errors = $request->has('errors');
 
@@ -89,5 +58,83 @@ class UsersController extends Controller
         }
 
         return $password;
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->input('action') == 'get_all_users') {
+            return $this->getAllUsers();
+        }
+
+        return view('users.users');
+    }
+
+    public function getAllUsers()
+    {
+        $users = DB::table('users')->get();
+        return response()->json($users);
+    }
+
+    public function editUser($id)
+    {
+        $user = User::find($id);
+        return view('users.edituser', ['user' => $user]);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+
+        $user = User::find($id);
+        $sameEmail = $user->email == $request->email ? true : false;
+
+
+
+        $request->validate($this->validationRules($sameEmail));
+
+        $errors = $request->has('errors');
+
+        if (!$errors) {
+
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->email = $request->email;
+            $user->password = Hash::make($this->generatePassword());
+            $user->jobtitle = $request->jobtitle;
+            $user->role = $request->role;
+            $user->phone = $request->phone ?? '';
+
+            $user->save();
+
+            return back()->with('message', 'Usuario editado correctamente');
+        } else {
+            $errors = $request->errors();
+            return back()->with('errors', $errors);
+        }
+    }
+
+    public function validationRules($sameEmail = false)
+    {
+        $validation = [
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'surname' =>  ['string', 'min:2', 'max:255'],
+            'password' => [],
+            'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
+            'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],
+            'phone' => ['regex:/^[0-9]{9}$/i'],
+        ];
+
+        if (!$sameEmail) {
+            $validation['email'] = [
+                'required',
+                'string',
+                'email',
+                'min:5',
+                'max:255',
+                'regex:/(.*)@(.*)\.(es|com|org)/i',
+                Rule::unique(User::class),
+            ];
+        };
+
+        return $validation;
     }
 }

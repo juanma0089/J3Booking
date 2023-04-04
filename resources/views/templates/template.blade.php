@@ -15,7 +15,7 @@
                 <i class="bi bi-check-all text-white fs-1"></i>
             </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                <i class="bi bi-brightness-high text-white fs-1"></i>
+                <i class="bi bi-arrow-clockwise text-white fs-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
@@ -49,13 +49,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="#"><i class="fa-solid fa-house fa-xl bg-black"></i></a>
+                        <a class="nav-link active text-white" aria-current="page" href="{{route('index')}}"><i class="fa-solid fa-house fa-xl bg-black"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#"><i class="bi bi-plus-lg fa-xl"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#"><i class="fa-solid fa-user fa-xl"></i></a>
+                        <a class="nav-link text-white" href="{{route('users')}}"><i class="fa-solid fa-user fa-xl"></i></a>
                     </li>
                 </ul>
             </div>

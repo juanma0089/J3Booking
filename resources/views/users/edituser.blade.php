@@ -1,7 +1,7 @@
 @extends('templates.template')
 
 @section('javascript')
-    {{ asset('assets/js/register.js') }}
+    {{ asset('assets/js/users.js') }}
 @endsection
 
 @section('body')
@@ -12,7 +12,7 @@
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
                         <div class="card-body text-center">
                             <div>
-                                <h3 class="fw-bold my-5 text-uppercase">Registrar nuevo usuario</h3>
+                                <h3 class="fw-bold my-5 text-uppercase">Editar usuario</h3>
 
                                 @if (session('message'))
                                     <div class="alert alert-success">
@@ -32,37 +32,37 @@
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="{{ route('user.create') }}" id='register'>
+                                <form action="{{ route('updateuser', $user->id) }}" method="POST" id='edituser'>
                                     @csrf
-                                    {{-- TODO -> La contraseña está required y no hay campo inútí  --}}
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="name" value="{{ old('name') }}" required autofocus>
+                                                class="form-control form-control-lg no-autofill" name="name"
+                                                value="{{ $user->name ? $user->name : '' }}" required autofocus>
                                             <label class="form-label" for="name">Nombre <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="surname" value="{{ old('surname') }}">
+                                                class="form-control form-control-lg no-autofill" name="surname"
+                                                value="{{ $user->surname ? $user->surname : '' }}">
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="email" value="{{ old('email') }}" required autocomplete="email">
+                                                class="form-control form-control-lg no-autofill" name="email"
+                                                value="{{ $user->email ? $user->email : '' }}" required
+                                                autocomplete="email">
                                             <label class="form-label" for="email">Email <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="phone" value="{{ old('phone') }}">
+                                                class="form-control form-control-lg no-autofill" name="phone"
+                                                value="{{ $user->phone ? $user->phone : '' }}">
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
@@ -70,8 +70,10 @@
                                             <select
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="jobtitle" id='jobtitle' required>
-                                                <option value="" hidden selected>Puesto</option>
-                                                <option value="rrpp">Relaciones públicas</option>
+                                                <option value="" hidden {{ $user->jobtitle == '' ? 'selected' : '' }}>
+                                                    Puesto</option>
+                                                <option value="rrpp" {{ $user->jobtitle == 'rrpp' ? 'selected' : '' }}>
+                                                    Relaciones públicas</option>
                                             </select>
                                         </div>
 
@@ -79,17 +81,30 @@
                                             <select
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="role" id='role' required>
-                                                <option value="" hidden selected>Permisos</option>
-                                                <option value="normal">Normal</option>
-                                                <option value="moderator">Moderador</option>
-                                                <option value="admin">Admin</option>
+                                                <option value="" hidden {{ $user->role == '' ? 'selected' : '' }}>
+                                                    Permisos</option>
+                                                <option value="normal" {{ $user->role == 'normal' ? 'selected' : '' }}>
+                                                    Normal</option>
+                                                <option value="moderator"
+                                                    {{ $user->role == 'moderator' ? 'selected' : '' }}>Moderador</option>
+                                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>
+                                                    Admin</option>
                                             </select>
                                         </div>
 
                                     </div>
-                                    
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
-                                        {{ __('Registrar usuario') }}</button>
+
+                                    <div class='container col-12 text-center'>
+                                        <button class="btn btn-outline-light btn-lg px-5 mx-1 col-10 col-md-4 text-center"
+                                            type="submit" id='editBtn'>
+                                            {{ __('Editar usuario') }}</button>
+
+                                        <button
+                                            class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center"
+                                            type="button" id='passwordBtn'>
+                                            {{ __('Cambiar contraseña') }}</button>
+                                    </div>
+
 
                                 </form>
 
