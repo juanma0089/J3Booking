@@ -34,6 +34,10 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
+Route::get('/modal', function () {
+    return view('modal');
+})->name('modal');
+
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
 
 Route::get('/users', [UsersController::class, "index"])->name('users');
