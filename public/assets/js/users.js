@@ -46,7 +46,7 @@ function pintarTabla(users) {
             `<button type="button" data-id="${user.id}" class="align-self-lg-center p-0 m-0 bi bi-pen text-warning bg-transparent border-0 edit-btn"></button>` +
             `<button type="button" data-id="${user.id}" class="align-self-lg-center p-0 m-0 bi bi-x-lg text-danger bg-transparent border-0 delete-btn"></button></div></div>`;
 
-        // TODO ENLACE EDITAR CON ID DEL USER
+        // TODO DELETE USER
 
     }
 

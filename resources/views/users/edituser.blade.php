@@ -18,7 +18,6 @@
 
                                 <form action="{{ route('updateuser', $user->id) }}" method="POST" id='edituser'>
                                     @csrf
-                                    {{-- TODO -> La contraseña está required y no hay campo inútí  --}}
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
@@ -104,9 +103,14 @@
 
                                     </div>
 
-                                    {{-- TODO Se puede poner el botón como iniciar sesión? --}}
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit" id='editBtn'>
-                                        {{ __('Editar usuario') }}</button>
+                                    <div class='container col-12 text-center'> 
+                                       <button class="btn btn-outline-light btn-lg px-5 mx-1 col-10 col-md-4 text-center" type="submit" id='editBtn'>
+                                        {{ __('Editar usuario') }}</button> 
+
+                                       <button class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center" type="submit" id='passwordBtn'>
+                                        {{ __('Cambiar contraseña') }}</button> 
+                                    </div>
+                                    
 
                                 </form>
 
