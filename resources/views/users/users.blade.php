@@ -9,19 +9,19 @@
         <div class="card-body text-center">
             <div>
                 <h3 class="fw-bold my-2 text-light text-uppercase">Usuarios</h3>
-                @auth 
+                @auth
                     @if (Auth::user()->role == 'admin')
                         <a href="{{ route('register') }}"><button type="button" class="mx-2 btn btn-sm btn-success">
-                            <i class="bi bi-plus-lg"></i>
-                            Usuario
-                        </button>
-                    </a>
+                                <i class="bi bi-plus-lg"></i>
+                                Usuario
+                            </button>
+                        </a>
                     @endif
                 @endauth
             </div>
         </div>
 
-        <div id="lista_ac" class="p-2">
+        <div id="usersList" class="p-2">
 
             <section class="p-0 d-flex justify-content-around row  border-bottom">
 
@@ -52,5 +52,26 @@
 
             </section>
 
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-custom text-white">
+                        <div class="modal-header border-0">
+                            <h5>Eliminar usuario</h5>
+                            <button id="btnClose1" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body border-0">
+                            <p id="messageModal"></p>
+                        </div>
+                        <div class="modal-footer border-0 text-center p-4">
+                            <button id="btnClose2" type="button" data-bs-dismiss="modal" aria-label="Close"
+                                class="btn btn-outline-light btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Volver</button>
+                            <button id="btnDelete" type="submit"
+                                class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
 @endsection

@@ -1,5 +1,5 @@
 $(function () {
-    $('#register').submit(function (e) {
+    $('#edituser').submit(function (e) {
         e.preventDefault();
 
         // Obtener los valores de los campos de entrada
@@ -12,6 +12,7 @@ $(function () {
 
         errors = validateFields(name, surname, email, phone, jobtitle, role);
 
+        console.log(errors)
         if (errors.length !== 0) {
             $('#alertErrors').empty();
             $('#alertErrors').removeAttr('hidden');
@@ -27,7 +28,7 @@ $(function () {
             $('#alertErrors').attr('hidden', 'true');
 
             var csrfToken = $('input[name="_token"]').val();
-            var route = $('#register').attr('action')
+            var route = $('#edituser').attr('action')
 
             $.ajax({
                 url: route,
@@ -47,7 +48,7 @@ $(function () {
                     // alert('Se ha creado el usuario con éxito.');
                     $('#alertErrors').addClass('alert-success');
                     $('#alertErrors').removeClass('alert-danger');
-                    $('#alertErrors').prepend('Usuario creado con éxito');
+                    $('#alertErrors').prepend('Usuario editado con éxito');
                     $('#alertErrors').removeAttr('hidden');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -62,7 +63,7 @@ $(function () {
                             );
                         });
                     } else {
-                        alert('Hubo un error al crear el usuario: ' + textStatus);
+                        alert('Hubo un error al editar el usuario: ' + textStatus);
                     }
                 }
             });

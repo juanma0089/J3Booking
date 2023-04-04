@@ -1,7 +1,7 @@
 @extends('templates.template')
 
 @section('javascript')
-    {{ asset('assets/js/users.js') }}
+    {{ asset('assets/js/edituser.js') }}
 @endsection
 
 @section('body')
@@ -39,14 +39,13 @@
                                             <input id="name" type="text"
                                                 class="form-control form-control-lg no-autofill" name="name"
                                                 value="{{ $user->name ? $user->name : '' }}" required autofocus>
-                                            <label class="form-label" for="name">Nombre <span
-                                                    class="text-danger">*</span></label>
+                                            <label class="form-label" for="name">Nombre</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
                                                 class="form-control form-control-lg no-autofill" name="surname"
-                                                value="{{ $user->surname ? $user->surname : '' }}">
+                                                value="{{ $user->surname ? $user->surname : '' }}" required>
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
 
@@ -62,7 +61,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
                                                 class="form-control form-control-lg no-autofill" name="phone"
-                                                value="{{ $user->phone ? $user->phone : '' }}">
+                                                value="{{ $user->phone ? $user->phone : '' }}" required>
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
@@ -104,7 +103,6 @@
                                             type="button" id='passwordBtn'>
                                             {{ __('Cambiar contraseña') }}</button>
                                     </div>
-
 
                                 </form>
 
