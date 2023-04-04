@@ -38,31 +38,29 @@
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="name" value="{{ old('name') }}" required autofocus>
-                                            <label class="form-label" for="name">Nombre <span
-                                                    class="text-danger">*</span></label>
+                                                class="form-control form-control-lg no-autofill" name="name"
+                                                value="{{ old('name') }}" required autofocus>
+                                            <label class="form-label" for="name">Nombre</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="surname" value="{{ old('surname') }}">
+                                                class="form-control form-control-lg no-autofill" name="surname"
+                                                value="{{ old('surname') }}" required>
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="email" value="{{ old('email') }}" required autocomplete="email">
-                                            <label class="form-label" for="email">Email <span
-                                                    class="text-danger">*</span></label>
+                                                class="form-control form-control-lg no-autofill" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email">
+                                            <label class="form-label" for="email">Email</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="phone" value="{{ old('phone') }}">
+                                                class="form-control form-control-lg no-autofill" name="phone"
+                                                value="{{ old('phone') }}" required>
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
@@ -87,7 +85,7 @@
                                         </div>
 
                                     </div>
-                                    
+
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
                                         {{ __('Registrar usuario') }}</button>
 
