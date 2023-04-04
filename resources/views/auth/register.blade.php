@@ -14,97 +14,80 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Registrar nuevo usuario</h3>
 
+                                @if (session('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
+                                    </div>
+                                @endif
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="{{route('user.create')}}" id='register'>
+                                <form method="POST" action="{{ route('user.create') }}" id='register'>
                                     @csrf
                                     {{-- TODO -> La contraseña está required y no hay campo inútí  --}}
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill @error('name') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill"
                                                 name="name" value="{{ old('name') }}" required autofocus>
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                             <label class="form-label" for="name">Nombre <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
-                                                class="form-control form-control-lg no-autofill @error('surname') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill"
                                                 name="surname" value="{{ old('surname') }}">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
-                                                class="form-control form-control-lg no-autofill @error('email') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill"
                                                 name="email" value="{{ old('email') }}" required autocomplete="email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                             <label class="form-label" for="email">Email <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
-                                                class="form-control form-control-lg no-autofill @error('phone') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill"
                                                 name="phone" value="{{ old('phone') }}">
-                                            @error('phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('jobtitle') is-invalid @enderror"
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="jobtitle" id='jobtitle' required>
                                                 <option value="" hidden selected>Puesto</option>
                                                 <option value="rrpp">Relaciones públicas</option>
-
-                                                @error('jobtitle')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </select>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('role') is-invalid @enderror"
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="role" id='role' required>
                                                 <option value="" hidden selected>Permisos</option>
                                                 <option value="normal">Normal</option>
                                                 <option value="moderator">Moderador</option>
                                                 <option value="admin">Admin</option>
-
-                                                @error('role')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </select>
                                         </div>
 
                                     </div>
-
-                                    {{-- TODO Se puede poner el botón como iniciar sesión? --}}
+                                    
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
                                         {{ __('Registrar usuario') }}</button>
 

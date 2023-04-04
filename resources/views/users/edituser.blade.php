@@ -14,6 +14,22 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Editar usuario</h3>
 
+                                @if (session('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
+                                    </div>
+                                @endif
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
                                 <form action="{{ route('updateuser', $user->id) }}" method="POST" id='edituser'>
@@ -21,96 +37,74 @@
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill @error('name') is-invalid @enderror"
-                                                name="name" value="{{$user->name ? $user->name : ''}}" required autofocus>
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill" name="name"
+                                                value="{{ $user->name ? $user->name : '' }}" required autofocus>
                                             <label class="form-label" for="name">Nombre <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="surname" type="text"
-                                                class="form-control form-control-lg no-autofill @error('surname') is-invalid @enderror"
-                                                name="surname" value="{{$user->surname ? $user->surname : ''}}">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill" name="surname"
+                                                value="{{ $user->surname ? $user->surname : '' }}">
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="email" type="email"
-                                                class="form-control form-control-lg no-autofill @error('email') is-invalid @enderror"
-                                                name="email" value="{{$user->email ? $user->email : ''}}" required autocomplete="email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill" name="email"
+                                                value="{{ $user->email ? $user->email : '' }}" required
+                                                autocomplete="email">
                                             <label class="form-label" for="email">Email <span
                                                     class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="phone" type="phone"
-                                                class="form-control form-control-lg no-autofill @error('phone') is-invalid @enderror"
-                                                name="phone" value="{{$user->phone ? $user->phone : ''}}">
-                                            @error('phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill" name="phone"
+                                                value="{{ $user->phone ? $user->phone : '' }}">
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('jobtitle') is-invalid @enderror"
-                                                name="jobtitle" id='jobtitle' required >
-                                                <option value="" hidden {{ ($user->jobtitle == '') ? 'selected' : '' }}>Puesto</option>
-                                                <option value="rrpp" {{ ($user->jobtitle == 'rrpp') ? 'selected' : '' }}>Relaciones públicas</option>
-
-                                                @error('jobtitle')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
+                                                name="jobtitle" id='jobtitle' required>
+                                                <option value="" hidden {{ $user->jobtitle == '' ? 'selected' : '' }}>
+                                                    Puesto</option>
+                                                <option value="rrpp" {{ $user->jobtitle == 'rrpp' ? 'selected' : '' }}>
+                                                    Relaciones públicas</option>
                                             </select>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('role') is-invalid @enderror"
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="role" id='role' required>
-                                                <option value="" hidden {{ ($user->role == '') ? 'selected' : '' }}>Permisos</option>
-                                                <option value="normal" {{ ($user->role == 'normal') ? 'selected' : '' }}>Normal</option>
-                                                <option value="moderator" {{ ($user->role == 'moderator') ? 'selected' : '' }}>Moderador</option>
-                                                <option value="admin" {{ ($user->role == 'admin') ? 'selected' : '' }}>Admin</option>
-
-                                                @error('role')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <option value="" hidden {{ $user->role == '' ? 'selected' : '' }}>
+                                                    Permisos</option>
+                                                <option value="normal" {{ $user->role == 'normal' ? 'selected' : '' }}>
+                                                    Normal</option>
+                                                <option value="moderator"
+                                                    {{ $user->role == 'moderator' ? 'selected' : '' }}>Moderador</option>
+                                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>
+                                                    Admin</option>
                                             </select>
                                         </div>
 
                                     </div>
 
-                                    <div class='container col-12 text-center'> 
-                                       <button class="btn btn-outline-light btn-lg px-5 mx-1 col-10 col-md-4 text-center" type="submit" id='editBtn'>
-                                        {{ __('Editar usuario') }}</button> 
+                                    <div class='container col-12 text-center'>
+                                        <button class="btn btn-outline-light btn-lg px-5 mx-1 col-10 col-md-4 text-center"
+                                            type="submit" id='editBtn'>
+                                            {{ __('Editar usuario') }}</button>
 
-                                       <button class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center" type="submit" id='passwordBtn'>
-                                        {{ __('Cambiar contraseña') }}</button> 
+                                        <button
+                                            class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center"
+                                            type="submit" id='passwordBtn'>
+                                            {{ __('Cambiar contraseña') }}</button>
                                     </div>
-                                    
+
 
                                 </form>
 
