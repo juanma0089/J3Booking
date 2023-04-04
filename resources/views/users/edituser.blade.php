@@ -101,7 +101,7 @@
 
                                         <button
                                             class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center"
-                                            type="submit" id='passwordBtn'>
+                                            type="button" id='passwordBtn'>
                                             {{ __('Cambiar contraseña') }}</button>
                                     </div>
 

@@ -87,7 +87,19 @@ $(function () {
                     console.log(email);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Hubo un error al crear el usuario: ' + textStatus);
+                    // alert('Hubo un error al crear el usuario: ' + textStatus);
+                    if (jqXHR.status === 422) {
+                        var errors = jqXHR.responseJSON.errors;
+                        $('#alertErrors').empty();
+                        $('#alertErrors').removeAttr('hidden');
+                        $.each(errors, function (index, value) {
+                            $('#alertErrors').prepend(
+                                `<li>${value}</li>`
+                            );
+                        });
+                    } else {
+                        alert('Hubo un error al crear el usuario: ' + textStatus);
+                    }
                 }
             });
         }
