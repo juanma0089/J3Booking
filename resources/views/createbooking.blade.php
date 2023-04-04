@@ -14,16 +14,31 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Registrar nueva reserva</h3>
 
+                                @if (session('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
+                                    </div>
+                                @endif
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="{{route('bookingForm.create')}}" id='booking'>
+                                <form method="POST" action="{{ route('bookingForm.create') }}" id='booking'>
                                     @csrf
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill @error('name') is-invalid @enderror"
+                                                class="form-control form-control-lg no-autofill "
                                                 name="name" value="{{ old('name') }}" required autofocus>
-
                                             <label class="form-label" for="name">Nombre cliente<span
                                                     class="text-danger">*</span></label>
                                         </div>
@@ -31,55 +46,35 @@
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="diners" type="number"
-                                                class="form-control form-control-lg no-autofill @error('diners') is-invalid @enderror"
-                                                name="diners" value="{{ old('diners') }}">
-                                            @error('diners')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill"
+                                                name="diners" value="{{ old('diners') }}" required>
                                             <label class="form-label" for="diners">Nº de clientes</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="date" type="date"
-                                                class="form-control form-control-lg no-autofill @error('date') is-invalid @enderror"
-                                                name="date" value="{{ old('date') }}">
-                                            @error('date')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                class="form-control form-control-lg no-autofill"
+                                                name="date" value="{{ old('date') }}" required>
                                             <label class="form-label" for="date">Fecha</label>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('time') is-invalid @enderror"
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="time" id='time' required>
                                                 <option value="" hidden selected>Turno</option>
                                                 <option value="afternoon">Tarde</option>
                                                 <option value="night">Noche</option>
-                                                @error('time')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </select>
                                         </div>
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border @error('booking') is-invalid @enderror"
+                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="booking" id='booking' required>
                                                 <option value="" hidden selected>Tipo reserva</option>
                                                 <option value="phone">Teléfono</option>
                                                 <option value="instagram">Instagram</option>
-                                                @error('booking')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </select>
                                         </div>
 
