@@ -13,7 +13,7 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
         errors.push('El nombre introducido no es válido')
         ok = false;
     }
-    
+
     if (!surname) {
         errors.push('Por favor, introduzca los apellidos.')
         ok = false;

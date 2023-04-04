@@ -1,6 +1,6 @@
 $(function () {
 
-    $('#lista_ac').ready(function () {
+    $('#usersList').ready(function () {
         $.ajax({
             url: '/users',
             type: 'GET',
@@ -10,11 +10,17 @@ $(function () {
             success: function (response) {
                 console.log(response); // hacer algo con la respuesta del servidor
                 var html = pintarTabla(response)
-                $('#lista_ac').append(html)
+                $('#usersList').append(html)
 
                 $('.edit-btn').on('click', function () {
                     let userId = $(this).attr('data-id');
                     window.location.href = 'edituser/' + userId;
+                })
+
+                $('.delete-btn').on('click', function () {
+                    let userName = $(this).attr('data-name')
+                    let userId = $(this).attr('data-id');
+                    completeModal(userId, userName)
                 })
             },
             error: function () {
@@ -23,6 +29,9 @@ $(function () {
         });
     });
 
+    $("#btnClose1, #btnClose2, #btnDelete").on('click', function () {
+        $('#messageModal').empty();
+    })
 
 })
 
@@ -44,7 +53,7 @@ function pintarTabla(users) {
             `<p class="align-self-lg-center p-0 m-0">${user.phone ? user.phone : ''}</p></div>` +
             `<div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-4 col-md-2 d-flex justify-content-evenly bg-transparent">` +
             `<button type="button" data-id="${user.id}" class="align-self-lg-center p-0 m-0 bi bi-pen text-warning bg-transparent border-0 edit-btn"></button>` +
-            `<button type="button" data-id="${user.id}" class="align-self-lg-center p-0 m-0 bi bi-x-lg text-danger bg-transparent border-0 delete-btn"></button></div></div>`;
+            `<button type="button" data-id="${user.id}" data-name="${user.name}" class="align-self-lg-center p-0 m-0 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button></div></div>`;
 
         // TODO DELETE USER
 
@@ -53,3 +62,6 @@ function pintarTabla(users) {
     return html;
 }
 
+function completeModal(userId, userName) {
+    $('#messageModal').append(`¿Está seguro que desea eliminar el usuario ${userName}?`);
+}
