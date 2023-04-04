@@ -15,15 +15,6 @@ class BooksController extends Controller
     public function create(Request $request)
     {
 
-
-        $fecha_reserva = $this->validatedate($request->date);
-
-        if (!$fecha_reserva) {
-            $errors = new MessageBag();
-            $errors->add('date', 'La fecha introducida es anterior al día actual.');
-            return redirect()->back()->withErrors($errors)->withInput();
-        }
-
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'regex:/^[a-zA-Z ]{2,254}$/i', 'min:2', 'max:255'],
             'diners' => ['int', 'min:1'],
@@ -36,18 +27,26 @@ class BooksController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-            $newBook = new Book;
-            $newBook->name = $request->name;
-            $newBook->diners = $request->diners;
-            $newBook->booking = $request->booking;
-            $newBook->date = $request->date;
-            $newBook->time = $request->time;
-            $newBook->user_id = Auth::id();
 
-            $newBook->save();
+        $fecha_reserva = $this->validatedate($request->date);
 
-            return back()->with('message', 'Reserva registrada correctamente');
+        if (!$fecha_reserva) {
+            $errors = new MessageBag();
+            $errors->add('date', 'La fecha introducida es anterior al día actual.');
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
 
+        $newBook = new Book;
+        $newBook->name = $request->name;
+        $newBook->diners = $request->diners;
+        $newBook->booking = $request->booking;
+        $newBook->date = $request->date;
+        $newBook->time = $request->time;
+        $newBook->user_id = Auth::id();
+
+        $newBook->save();
+
+        return back()->with('message', 'Reserva registrada correctamente');
     }
 
     public function validatedate($request)
