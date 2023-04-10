@@ -64,6 +64,8 @@ class UsersController extends Controller
     {
         if ($request->input('action') == 'get_all_users') {
             return $this->getAllUsers();
+        } else if ($request->input('action') == 'delete_user') {
+            return $this->deleteUser($request->input('id'));
         }
 
         return view('users.users');
@@ -110,6 +112,12 @@ class UsersController extends Controller
             $errors = $request->errors();
             return back()->with('errors', $errors);
         }
+    }
+
+    public function deleteUser($id) {
+        User::find($id)->delete();
+
+        return view('users.users');
     }
 
     public function validationRules($sameEmail = false)

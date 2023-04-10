@@ -67,7 +67,7 @@
                         <div class="modal-footer border-0 text-center p-4">
                             <button id="btnClose2" type="button" data-bs-dismiss="modal" aria-label="Close"
                                 class="btn btn-outline-light btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Volver</button>
-                            <button id="btnDelete" type="submit"
+                            <button id="btnDeleteUser" type="button"
                                 class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Eliminar</button>
                         </div>
                     </div>
