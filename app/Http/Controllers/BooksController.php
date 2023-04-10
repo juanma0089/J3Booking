@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 
 class BooksController extends Controller
@@ -63,4 +64,17 @@ class BooksController extends Controller
             return true;
         }
     }
+
+    public function index(Request $request){
+        if($request->input('action') == 'getallbook'){
+            return $this->getAllBooks();
+        }
+        return view('books');
+    }
+
+    public function getAllBooks(){
+        $books = DB::table('books')->get();
+        return response()->json($books);
+    }
+
 }
