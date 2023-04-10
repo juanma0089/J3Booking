@@ -26,9 +26,6 @@ Route::get('/register', function () {
 
 Route::post('/register', [UsersController::class, 'create'])->name('user.create');
 
-Route::get('/books', function () {
-    return view('books');
-})->name('books');
 
 Route::get('/history', function () {
     return view('history');
@@ -52,4 +49,5 @@ Route::get('/booking', function () {
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
 
+Route::get('/books', [BooksController::class, "index"])->name('books');
 

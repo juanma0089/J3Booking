@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
-                        <a class="nav-link active text-danger" aria-current="page" href="#">Reservas</a>
+                        <a class="nav-link active text-danger" aria-current="page" href="{{route('books')}}">Reservas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="#">Mesas</a>
@@ -52,7 +52,7 @@
                         <a class="nav-link active text-white" aria-current="page" href="{{route('index')}}"><i class="fa-solid fa-house fa-xl bg-black"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#"><i class="bi bi-plus-lg fa-xl"></i></a>
+                        <a class="nav-link text-white"href="{{route('booking')}}"><i class="bi bi-plus-lg fa-xl"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{route('users')}}"><i class="fa-solid fa-user fa-xl"></i></a>
