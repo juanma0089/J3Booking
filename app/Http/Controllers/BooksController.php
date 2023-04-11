@@ -82,12 +82,14 @@ class BooksController extends Controller
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.date','=', $date)
+                ->where('books.status','=', 'waiting')
                 ->get();
         } else if (!$date) {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time', '=', $time)
+                ->where('books.status','=', 'waiting')
                 ->get();
         } else{
             $books = DB::table('books')
@@ -95,6 +97,7 @@ class BooksController extends Controller
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time','=', $time)
                 ->where('books.date','=', $date)
+                ->where('books.status','=', 'waiting')
                 ->get();
         }
         
