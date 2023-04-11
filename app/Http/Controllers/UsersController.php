@@ -62,13 +62,14 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->input('action') == 'get_all_users') {
-            return $this->getAllUsers();
-        } else if ($request->input('action') == 'delete_user') {
-            return $this->deleteUser($request->input('id'));
+        switch ($request->input('action')) {
+            case 'get_all_users':
+                return $this->getAllUsers();
+            case 'delete_user':
+                return $this->deleteUser($request->input('id'));
+            default:
+                return view('users.users');
         }
-
-        return view('users.users');
     }
 
     public function getAllUsers()
@@ -114,7 +115,8 @@ class UsersController extends Controller
         }
     }
 
-    public function deleteUser($id) {
+    public function deleteUser($id)
+    {
         User::find($id)->delete();
 
         return view('users.users');

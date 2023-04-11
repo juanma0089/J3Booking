@@ -67,7 +67,6 @@ class BooksController extends Controller
 
     public function index(Request $request)
     {
-
         switch ($request->input('action')) {
             case 'getallbook':
                 return $this->getAllBooks();
@@ -78,13 +77,6 @@ class BooksController extends Controller
             default:
                 return view('books');
         }
-
-        // if($request->input('action') == 'getallbook'){
-        //     return $this->getAllBooks();
-        // } else if ($request->input('action') == 'getpendingbooks') {
-        //     return $this->getPendingBooks($request->input('time'), $request->input('date'));
-        // }
-        // return view('books');
     }
 
     public function getPendingBooks($time, $date)
