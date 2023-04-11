@@ -8,12 +8,16 @@
                 aria-label="Toggle navigation">
                 <i class="bi bi-list text-white fs-1"></i>
             </button>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                <i class="bi bi-clock-history text-white fs-1"></i>
-            </button>
+            <a href="{{route('history')}}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
+                    <i class="bi bi-clock-history text-white fs-1"></i>
+                </button>
+            </a>
+            <a href="{{route('books')}}">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
                 <i class="bi bi-check-all text-white fs-1"></i>
             </button>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
                 <i class="bi bi-arrow-clockwise text-white fs-1"></i>
             </button>
