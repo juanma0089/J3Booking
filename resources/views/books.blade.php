@@ -38,7 +38,6 @@
         </div>
         <div id="lista_ac">
 
-
             <div class="p-0 d-flex justify-content-around p-lg-3 row  border-bottom">
 
                 <div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-5 p-lg-3 ">
@@ -63,7 +62,27 @@
 
             </div>
 
-
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-custom text-white">
+                <div class="modal-header border-0">
+                    <h5>Cancelar Reserva</h5>
+                    <button id="btnClose1" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body border-0">
+                    <p id="messageModal"></p>
+                </div>
+                <div class="modal-footer border-0 text-center p-4">
+                    <button id="btnClose2" type="button" data-bs-dismiss="modal" aria-label="Close"
+                        class="btn btn-outline-light btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Volver</button>
+                    <button id="btnCancelBook" type="button"
+                        class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

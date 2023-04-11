@@ -35,7 +35,6 @@ $(function () {
 
     $("#btnDeleteUser").on('click', function () {
         let userId = $(this).attr('user-id');
-        console.log(userId);
 
         $.ajax({
             url: '/users',

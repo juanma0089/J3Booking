@@ -65,48 +65,71 @@ class BooksController extends Controller
         }
     }
 
-    public function index(Request $request){
-        if($request->input('action') == 'getallbook'){
-            return $this->getAllBooks();
-        } else if ($request->input('action') == 'getpendingbooks') {
-            return $this->getPendingBooks($request->input('time'), $request->input('date'));
+    public function index(Request $request)
+    {
+
+        switch ($request->input('action')) {
+            case 'getallbook':
+                return $this->getAllBooks();
+            case 'getpendingbooks':
+                return $this->getPendingBooks($request->input('time'), $request->input('date'));
+            case 'cancelbook':
+                return $this->cancelBook($request->input('id'));
+            default:
+                return view('books');
         }
-        return view('books');
+
+        // if($request->input('action') == 'getallbook'){
+        //     return $this->getAllBooks();
+        // } else if ($request->input('action') == 'getpendingbooks') {
+        //     return $this->getPendingBooks($request->input('time'), $request->input('date'));
+        // }
+        // return view('books');
     }
 
-    public function getPendingBooks($time, $date) {
+    public function getPendingBooks($time, $date)
+    {
 
 
         if ($time === 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
-                ->where('books.date','=', $date)
-                ->where('books.status','=', 'waiting')
+                ->where('books.date', '=', $date)
+                ->where('books.status', '=', 'waiting')
                 ->get();
         } else if (!$date) {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time', '=', $time)
-                ->where('books.status','=', 'waiting')
+                ->where('books.status', '=', 'waiting')
                 ->get();
-        } else{
+        } else {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
-                ->where('books.time','=', $time)
-                ->where('books.date','=', $date)
-                ->where('books.status','=', 'waiting')
+                ->where('books.time', '=', $time)
+                ->where('books.date', '=', $date)
+                ->where('books.status', '=', 'waiting')
                 ->get();
         }
-        
+
         return response()->json($books);
     }
 
-    public function getAllBooks(){
+    public function getAllBooks()
+    {
         $books = DB::table('books')->get();
         return response()->json($books);
     }
 
+    public function cancelBook($id)
+    {
+        $book = DB::table('books')
+            ->where('id', $id)
+            ->update(['status' => 'canceled']);
+
+        return response()->json($book);
+    }
 }
