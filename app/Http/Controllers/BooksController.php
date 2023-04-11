@@ -68,8 +68,37 @@ class BooksController extends Controller
     public function index(Request $request){
         if($request->input('action') == 'getallbook'){
             return $this->getAllBooks();
+        } else if ($request->input('action') == 'getpendingbooks') {
+            return $this->getPendingBooks($request->input('time'), $request->input('date'));
         }
         return view('books');
+    }
+
+    public function getPendingBooks($time, $date) {
+
+
+        if ($time === 'all') {
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp')
+                ->where('books.date','=', $date)
+                ->get();
+        } else if (!$date) {
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp')
+                ->where('books.time', '=', $time)
+                ->get();
+        } else{
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp')
+                ->where('books.time','=', $time)
+                ->where('books.date','=', $date)
+                ->get();
+        }
+        
+        return response()->json($books);
     }
 
     public function getAllBooks(){
