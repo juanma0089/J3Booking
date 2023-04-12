@@ -39,9 +39,11 @@
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="{{route('history')}}">Historial</a>
                     </li>
+                    @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{route('users')}}">Usuarios</a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>
