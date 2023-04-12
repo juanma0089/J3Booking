@@ -101,7 +101,6 @@ class UsersController extends Controller
             $user->name = $request->name;
             $user->surname = $request->surname;
             $user->email = $request->email;
-            $user->password = Hash::make($this->generatePassword());
             $user->jobtitle = $request->jobtitle;
             $user->role = $request->role;
             $user->phone = $request->phone ?? '';

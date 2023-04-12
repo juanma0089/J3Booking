@@ -18,9 +18,13 @@
                 <i class="bi bi-check-all text-white fs-1"></i>
             </button>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                <i class="bi bi-arrow-clockwise text-white fs-1"></i>
-            </button>
+            <a class="navbar-toggler" type="button" data-bs-toggle="collapse" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-in-right text-white fs-1"></i>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
