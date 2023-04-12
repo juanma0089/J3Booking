@@ -64,33 +64,37 @@
                                                 value="{{ $user->phone ? $user->phone : '' }}" required>
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
+                                        @if (Auth::user()->role == 'admin')
+                                            <div class="form-outline text-white mb-4 col-3 col-md-4">
+                                                <select
+                                                    class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
+                                                    name="jobtitle" id='jobtitle' required>
+                                                    <option value="" hidden
+                                                        {{ $user->jobtitle == '' ? 'selected' : '' }}>
+                                                        Puesto</option>
+                                                    <option value="rrpp"
+                                                        {{ $user->jobtitle == 'rrpp' ? 'selected' : '' }}>
+                                                        Relaciones públicas</option>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-outline text-white mb-4 col-3 col-md-4">
-                                            <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
-                                                name="jobtitle" id='jobtitle' required>
-                                                <option value="" hidden {{ $user->jobtitle == '' ? 'selected' : '' }}>
-                                                    Puesto</option>
-                                                <option value="rrpp" {{ $user->jobtitle == 'rrpp' ? 'selected' : '' }}>
-                                                    Relaciones públicas</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-outline text-white mb-4 col-3 col-md-4">
-                                            <select
-                                                class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
-                                                name="role" id='role' required>
-                                                <option value="" hidden {{ $user->role == '' ? 'selected' : '' }}>
-                                                    Permisos</option>
-                                                <option value="normal" {{ $user->role == 'normal' ? 'selected' : '' }}>
-                                                    Normal</option>
-                                                <option value="moderator"
-                                                    {{ $user->role == 'moderator' ? 'selected' : '' }}>Moderador</option>
-                                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>
-                                                    Admin</option>
-                                            </select>
-                                        </div>
-
+                                            <div class="form-outline text-white mb-4 col-3 col-md-4">
+                                                <select
+                                                    class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
+                                                    name="role" id='role' required>
+                                                    <option value="" hidden
+                                                        {{ $user->role == '' ? 'selected' : '' }}>
+                                                        Permisos</option>
+                                                    <option value="normal" {{ $user->role == 'normal' ? 'selected' : '' }}>
+                                                        Normal</option>
+                                                    <option value="moderator"
+                                                        {{ $user->role == 'moderator' ? 'selected' : '' }}>Moderador
+                                                    </option>
+                                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>
+                                                        Admin</option>
+                                                </select>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class='container col-12 text-center'>
