@@ -29,7 +29,7 @@ class UsersController extends Controller
             $newUser->name = $request->name;
             $newUser->surname = $request->surname;
             $newUser->email = $request->email;
-            $newUser->password = Hash::make($this->generatePassword());
+            $newUser->password = Hash::make($request->email);
             $newUser->jobtitle = $request->jobtitle;
             $newUser->role = $request->role;
             $newUser->phone = $request->phone ?? '';
@@ -47,18 +47,21 @@ class UsersController extends Controller
      * Summary of generatePassword
      * @param mixed $length
      * @return string
+     * 
+     * ? Esta función actualmente no está implementada, pero está planteada para en un futuro
+     * ? generar una contraseña aleatoria al crear un usuario y enviarla por email al usuario creado.     
      */
-    function generatePassword()
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Caracteres posibles
-        $password = ''; // Inicializar la contraseña
+    //* function generatePassword()
+    // {
+    //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Caracteres posibles
+    //     $password = ''; // Inicializar la contraseña
 
-        for ($i = 0; $i < 8; $i++) {
-            $password .= $characters[rand(0, strlen($characters) - 1)];
-        }
+    //     for ($i = 0; $i < 8; $i++) {
+    //         $password .= $characters[rand(0, strlen($characters) - 1)];
+    //     }
 
-        return $password;
-    }
+    //     return $password;
+    // }
 
     public function index(Request $request)
     {
