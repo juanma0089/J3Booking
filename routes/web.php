@@ -37,7 +37,7 @@ Route::get('/modal', function () {
 
 Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
 
-Route::get('/users', [UsersController::class, "index"])->name('users');
+Route::get('/users', [UsersController::class, "index"])->name('users')->middleware('admin');;
 
 Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
 
