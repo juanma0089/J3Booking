@@ -63,7 +63,7 @@
                         <a class="nav-link text-white"href="{{route('booking')}}"><i class="bi bi-plus-lg fa-xl"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('users')}}"><i class="fa-solid fa-user fa-xl"></i></a>
+                        <a class="nav-link text-white" href="{{route('edituser', (Auth::user()->id))}}"><i class="fa-solid fa-user fa-xl"></i></a>
                     </li>
                 </ul>
             </div>

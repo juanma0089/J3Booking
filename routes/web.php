@@ -15,33 +15,31 @@ use App\Http\Controllers\TablesController;
 |
 */
 
+// AUTH ROUTES
+
 Route::get('/login', function () {
     return view('/auth/login');
 })->name('login');
 
 Route::get('/register', function () {
-
     return view('auth.register');
 })->name('register')->middleware('admin');
 
 Route::post('/register', [UsersController::class, 'create'])->name('user.create');
 
+// USERS ROUTES
+
+Route::get('/users', [UsersController::class, "index"])->name('users');
+
+Route::get('/edituser/{id?}', [UsersController::class, "editUser"])->name('edituser');
+
+Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
+
+// BOOKS ROUTES
 
 Route::get('/history', function () {
     return view('history');
 })->name('history');
-
-Route::get('/modal', function () {
-    return view('modal');
-})->name('modal');
-
-Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
-
-Route::get('/users', [UsersController::class, "index"])->name('users');
-
-Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
-
-Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
 
 Route::get('/booking', function () {
     return view('createbooking');
@@ -51,3 +49,10 @@ Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.c
 
 Route::get('/books', [BooksController::class, "index"])->name('books');
 
+// OTHER ROUTES
+
+Route::get('/modal', function () {
+    return view('modal');
+})->name('modal');
+
+Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
