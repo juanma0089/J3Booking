@@ -8,8 +8,7 @@ $(function () {
                 action: 'get_all_users'
             },
             success: function (response) {
-                console.log(response); // hacer algo con la respuesta del servidor
-                var html = pintarTabla(response)
+                let html = pintarTabla(response)
                 $('#usersList').append(html)
 
                 $('.edit-btn').on('click', function () {
@@ -19,8 +18,8 @@ $(function () {
 
                 $('.delete-btn').on('click', function () {
                     let userName = $(this).attr('data-name')
-                    let userId = $(this).attr('data-id');
-                    completeModal(userId, userName)
+                    $("#btnDeleteUser").attr('user-id', $(this).attr('data-id'));
+                    completeModal(userName)
                 })
             },
             error: function () {
@@ -29,14 +28,34 @@ $(function () {
         });
     });
 
-    $("#btnClose1, #btnClose2, #btnDelete").on('click', function () {
+    $("#btnClose1, #btnClose2").on('click', function () {
         $('#messageModal').empty();
-    })
+        $("#btnDeleteUser").removeAttr('user-id');
+    });
+
+    $("#btnDeleteUser").on('click', function () {
+        let userId = $(this).attr('user-id');
+
+        $.ajax({
+            url: '/users',
+            type: 'GET',
+            data: {
+                action: 'delete_user',
+                id: userId
+            },
+            success: function (response) {
+                location.reload();
+            },
+            error: function () {
+                alert('Ha ocurrido un error al eliminar el usuario.');
+            }
+        });
+    });
 
 })
 
 function pintarTabla(users) {
-    html = '';
+    let html = '';
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
 
@@ -55,13 +74,11 @@ function pintarTabla(users) {
             `<button type="button" data-id="${user.id}" class="align-self-lg-center p-0 m-0 bi bi-pen text-warning bg-transparent border-0 edit-btn"></button>` +
             `<button type="button" data-id="${user.id}" data-name="${user.name}" class="align-self-lg-center p-0 m-0 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button></div></div>`;
 
-        // TODO DELETE USER
-
     }
 
     return html;
 }
 
-function completeModal(userId, userName) {
+function completeModal(userName) {
     $('#messageModal').append(`¿Está seguro que desea eliminar el usuario ${userName}?`);
 }
