@@ -18,25 +18,29 @@
                 <i class="bi bi-check-all text-white fs-1"></i>
             </button>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                <i class="bi bi-arrow-clockwise text-white fs-1"></i>
-            </button>
+            <a class="navbar-toggler" type="button" data-bs-toggle="collapse" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bi bi-box-arrow-in-right text-white fs-1"></i>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
-                        <a class="nav-link active text-danger" aria-current="page" href="{{route('books')}}">Reservas</a>
+                        <a class="nav-link text-white" href="{{route('index')}}">Mesas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="#">Mesas</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{{route('booking')}}">Crear reserva</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="#">Usuarios</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{{route('books')}}">Reservas</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-danger dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{{route('history')}}">Historial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{route('users')}}">Usuarios</a>
                     </li>
                 </ul>
             </div>
