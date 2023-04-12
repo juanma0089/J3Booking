@@ -57,4 +57,4 @@ Route::get('/modal', function () {
     return view('modal');
 })->name('modal');
 
-Route::get('/', [TablesController::class, "tableGenerate"])->name('index')->middleware('auth');
+Route::get('/', [TablesController::class, "index"])->name('index')->middleware('auth');

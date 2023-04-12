@@ -5,13 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class TablesController extends Controller
 {
+    public function index(Request $request)
+    {
+        switch ($request->input('action')) {
+            case 'get_all_tables':
+                return $this->getAllTables();
+            default:
+                return view('index');
+        }
+    }
+
     public function tableGenerate()
     {
-       $num_table = DB::table('tables')->count();
+        $num_table = DB::table('tables')->count();
 
-       $table = DB::table('tables');
+        $table = DB::table('tables');
         // $table_x_row = 7;
         // // ceil es una función que redondea hacia arriba un número decimal a su entero más cercano.
         // $num_rows = ceil($num_table / $table_x_row);
@@ -36,5 +47,10 @@ class TablesController extends Controller
         // }
         $prueba = 2;
         return view('index', @compact('prueba', 'num_table', 'table'));
+    }
+
+    public function getAllTables(){
+        $tables = DB::table('tables')->get();
+        return response()->json($tables);
     }
 }
