@@ -41,7 +41,11 @@ Route::get('/users', [UsersController::class, "index"])->name('users');
 
 Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
 
+
 Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
+
+// Route::get('/editpass', [UsersController::class, "editUser"])->name('passworduser');
+Route::get('/editpass',function () {return view('/users.passworduser');})->name("cambiarPassword");
 
 Route::get('/booking', function () {
     return view('createbooking');
