@@ -29,7 +29,7 @@ Route::post('/register', [UsersController::class, 'create'])->name('user.create'
 
 // USERS ROUTES
 
-Route::get('/users', [UsersController::class, "index"])->name('users');
+Route::get('/users', [UsersController::class, "index"])->name('users')->middleware('admin');;
 
 Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
 
