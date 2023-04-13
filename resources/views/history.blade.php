@@ -1,5 +1,9 @@
 @extends('templates.template')
 
+@section('javascript')
+    {{ asset('assets/js/history.js') }}
+@endsection
+
 @section('body')
     <div id="mainPanel" class="container-fluid mt-4">
 
@@ -32,7 +36,7 @@
                         <input class="form-control form-control-md bg-custom border-0 text-white border-dark" type="date" name="datepicker" id="datepicker"
                             value="2023-04-04">
                     </div>
-                    <div class="col-2 p-0">
+                    <div class="col-2 p-0 d-flex align-self-end">
                         <button class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0"
                             type="submit">
                     </div>

@@ -39,9 +39,7 @@ Route::get('/editpass',function () {return view('/users.passworduser');})->name(
 
 // BOOKS ROUTES
 
-Route::get('/history', function () {
-    return view('history');
-})->name('history');
+Route::get('/history', [BooksController::class, "history"])->name('history');
 
 Route::get('/booking', function () {
     return view('createbooking');
