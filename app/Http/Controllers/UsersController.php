@@ -49,9 +49,9 @@ class UsersController extends Controller
      * Summary of generatePassword
      * @param mixed $length
      * @return string
-     * 
+     *
      * ? Esta función actualmente no está implementada, pero está planteada para en un futuro
-     * ? generar una contraseña aleatoria al crear un usuario y enviarla por email al usuario creado.     
+     * ? generar una contraseña aleatoria al crear un usuario y enviarla por email al usuario creado.
      */
     //* function generatePassword()
     // {
@@ -133,8 +133,8 @@ class UsersController extends Controller
     public function validationRules($sameEmail = false)
     {
         $validation = [
-            'name' => ['required', 'string', 'regex:/^[a-zA-Z ]{2,254}$/i', 'min:2', 'max:255'],
-            'surname' =>  ['string', 'regex:/^[a-zA-Z ]{2,254}$/i', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'surname' =>  ['string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'password' => [],
             'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
             'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],

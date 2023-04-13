@@ -9,16 +9,16 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
     if (!name) {
         errors.push('Por favor, introduzca un nombre.')
         ok = false;
-    } else if (!name.match(/^[a-zA-Z ]{2,}$/)) {
-        errors.push('El nombre introducido no es válido')
+    } else if (!name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/)) {
+        errors.push('El nombre introducido no es válido, contiene más de un espacio o carácteres especiales')
         ok = false;
     }
 
     if (!surname) {
         errors.push('Por favor, introduzca los apellidos.')
         ok = false;
-    } else if (!surname.match(/^[a-zA-Z ]{2,}$/)) {
-        errors.push('Los apellidos introducidos no son válidos')
+    } else if (!surname.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/)) {
+        errors.push('Los apellidos introducidos no son válidos, contiene más de un espacio o carácteres especiales')
         ok = false;
     }
 
@@ -57,4 +57,47 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
     return !ok ? errors : '';
 }
 
+function validateFieldsBooking(name = '', diners = '', date = '', time = '', booking = '') {
+    let errors = [];
+    let ok;
 
+    if (!name) {
+        errors.push('Por favor, introduzca un nombre.')
+        ok = false;
+    } else if (!name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+)?$/)) {
+        errors.push('El nombre introducido no es válido')
+        ok = false;
+    }
+
+    if (!diners) {
+        errors.push('Por favor, introduzca el número de clientes.')
+        ok = false;
+    } else if (isNaN(diners) || diners < 1) {
+        errors.push('Por favor, introduzca un número válido para el nº de clientes (mínimo 1).')
+        ok = false;
+    }
+
+    if (!date) {
+        errors.push('Por favor, introduzca una fecha.');
+        ok = false;
+    } else {
+        const inputDate = new Date(date);
+        const currentDate = new Date();
+        if (inputDate.getTime() < currentDate.getTime()) {
+          errors.push('La fecha introducida es anterior al día de hoy.');
+          ok = false;
+        }
+      }
+
+    if (!time) {
+        errors.push('Por favor, introduzca un turno.');
+        ok = false;
+    }
+
+    if (!booking) {
+        errors.push('Por favor, seleccione un tipo de reserva');
+        ok = false;
+    }
+
+    return !ok ? errors : '';
+}
