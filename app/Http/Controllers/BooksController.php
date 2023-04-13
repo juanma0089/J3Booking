@@ -17,7 +17,7 @@ class BooksController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'regex:/^[a-zA-Z ]{2,254}$/i', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]{2,254}$/i', 'min:2', 'max:255'],
             'diners' => ['int', 'min:1'],
             'date' => ['required', 'date_format:Y-m-d'],
             'time' => Rule::in(['afternoon', 'night']),

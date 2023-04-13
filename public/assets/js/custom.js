@@ -9,7 +9,7 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
     if (!name) {
         errors.push('Por favor, introduzca un nombre.')
         ok = false;
-    } else if (!name.match(/^[a-zA-Z ]{2,}$/)) {
+    } else if (!name.match(/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]{2,}$/)) {
         errors.push('El nombre introducido no es válido')
         ok = false;
     }
@@ -17,7 +17,7 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
     if (!surname) {
         errors.push('Por favor, introduzca los apellidos.')
         ok = false;
-    } else if (!surname.match(/^[a-zA-Z ]{2,}$/)) {
+    } else if (!surname.match(/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]{2,}$/)) {
         errors.push('Los apellidos introducidos no son válidos')
         ok = false;
     }
