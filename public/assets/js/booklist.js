@@ -49,7 +49,7 @@ function ajaxQuery() {
         url: '/books',
         type: 'GET',
         data: {
-            action: 'getpendingbooks',
+            action: 'getbooks',
             date: $("input[name='datepicker']").val(),
             time: $("select[name='time']").val()
         },
@@ -96,7 +96,9 @@ function pintarTabla(books) {
             '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
             '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">' +
             `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>` +
+            `@if(Auth::user()->role == "admin")` +
             `<button type="button" data-id="${book.id}" class="fs-2 bi bi-clipboard-check text-success bg-transparent border-0 edit-btn"></button>` +
+            '@endif' +
             '</div></div></div>';
     }
 
