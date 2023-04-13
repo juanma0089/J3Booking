@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -83,8 +85,12 @@ class UsersController extends Controller
 
     public function editUser($id)
     {
-        $user = User::find($id);
-        return view('users.edituser', ['user' => $user]);
+        if (Auth::user()->id ==  $id || Auth::user()->role == 'admin') {
+            $user = User::find($id);
+            return view('users.edituser', ['user' => $user]);
+        } else {
+           return redirect()->route('index');
+        }
     }
 
     public function updateUser(Request $request, $id)
