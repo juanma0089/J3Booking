@@ -102,10 +102,10 @@
                                             type="submit" id='editBtn'>
                                             {{ __('Editar usuario') }}</button>
                                         @if ($user->id === Auth::user()->id)
-                                        <button
-                                            class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center"
-                                            type="button" id='passwordBtn'>
-                                            {{ __('Cambiar contraseña') }}</button>
+                                            <a href="{{ route('cambiarPassword') }}"><button
+                                                    class="btn btn-outline-light btn-lg col-10 mx-1 my-3 my-md-0 col-md-4 text-center"
+                                                    type="button" id='passwordBtn'>
+                                                    {{ __('Cambiar contraseña') }}</button></a>
                                         @endif
                                     </div>
 
