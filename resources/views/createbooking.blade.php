@@ -2,6 +2,7 @@
 
 @section('javascript')
     {{ asset('assets/js/register.js') }}
+    {{ asset('assets/js/createbooking.js') }}
 @endsection
 
 @section('body')
@@ -32,7 +33,7 @@
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
-                                <form method="POST" action="{{ route('bookingForm.create') }}" id='booking'>
+                                <form method="POST" action="{{ route('bookingForm.create') }}" id='createbooking'>
                                     @csrf
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">

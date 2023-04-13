@@ -17,7 +17,7 @@ class BooksController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'regex:/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]{2,254}$/i', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'diners' => ['int', 'min:1'],
             'date' => ['required', 'date_format:Y-m-d'],
             'time' => Rule::in(['afternoon', 'night']),
@@ -37,6 +37,8 @@ class BooksController extends Controller
             return redirect()->back()->withErrors($errors)->withInput();
         }
 
+        $errors = $request->has('errors');
+        if (!$errors) {
         $newBook = new Book;
         $newBook->name = $request->name;
         $newBook->diners = $request->diners;
@@ -48,7 +50,11 @@ class BooksController extends Controller
         $newBook->save();
 
         return back()->with('message', 'Reserva registrada correctamente');
+    } else {
+        $errors = $request->errors();
+        return back()->with('errors', $errors);
     }
+}
 
     public function validatedate($request)
     {
