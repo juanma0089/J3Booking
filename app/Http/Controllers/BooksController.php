@@ -88,6 +88,20 @@ class BooksController extends Controller
         }
     }
 
+    // ! NUEVA PARA BACKEND BUSQUEDA EN HISTORIAL
+    public function history(Request $request)
+    {
+        switch ($request->input('action')) {
+            case 'getallbook':
+                return $this->getAllBooks();
+            case 'getbooks':
+                $status = $request->input('status') ? $request->input('status') : 'waiting' ;
+                return $this->getBooks($request->input('time'), $request->input('date'), $status);
+            default:
+                return view('history');
+        }
+    }
+
     public function getBooks($time, $date, $status)
     {
 

@@ -26,9 +26,9 @@
                         <input class="form-control form-control-md bg-custom border-0 text-white border-dark" type="date"
                             name="datepicker" id="datepicker" value="">
                     </div>
-                    <div class="col-2 p-0">
+                    <div class="col-2 p-0 d-flex align-self-end">
                         <button id="search"
-                            class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0"
+                            class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0 "
                             type="button">
                     </div>
                 </form>
