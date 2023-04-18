@@ -105,7 +105,7 @@ class BooksController extends Controller
     public function getBooks($time, $date, $status)
     {
 
-        if ($time === 'all') {
+        if ($time === 'all' && $status != 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
@@ -119,7 +119,7 @@ class BooksController extends Controller
                 ->where('books.time', '=', $time)
                 ->where('books.status', '=', $status)
                 ->get();
-        } else if ($status == 'all') {
+        } else if ($status == 'all' && $time != 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
