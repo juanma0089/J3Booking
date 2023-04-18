@@ -39,22 +39,22 @@ class BooksController extends Controller
 
         $errors = $request->has('errors');
         if (!$errors) {
-        $newBook = new Book;
-        $newBook->name = $request->name;
-        $newBook->diners = $request->diners;
-        $newBook->booking = $request->booking;
-        $newBook->date = $request->date;
-        $newBook->time = $request->time;
-        $newBook->user_id = Auth::id();
+            $newBook = new Book;
+            $newBook->name = $request->name;
+            $newBook->diners = $request->diners;
+            $newBook->booking = $request->booking;
+            $newBook->date = $request->date;
+            $newBook->time = $request->time;
+            $newBook->user_id = Auth::id();
 
-        $newBook->save();
+            $newBook->save();
 
-        return back()->with('message', 'Reserva registrada correctamente');
-    } else {
-        $errors = $request->errors();
-        return back()->with('errors', $errors);
+            return back()->with('message', 'Reserva registrada correctamente');
+        } else {
+            $errors = $request->errors();
+            return back()->with('errors', $errors);
+        }
     }
-}
 
     public function validatedate($request)
     {
@@ -76,32 +76,48 @@ class BooksController extends Controller
         switch ($request->input('action')) {
             case 'getallbook':
                 return $this->getAllBooks();
-            case 'getpendingbooks':
-                return $this->getPendingBooks($request->input('time'), $request->input('date'));
+            case 'getbooks':
+                $status = $request->input('status') ? $request->input('status') : 'waiting';
+                return $this->getBooks($request->input('time'), $request->input('date'), $status);
             case 'cancelbook':
                 return $this->cancelBook($request->input('id'));
+            case 'acceptbook':
+                return $this->acceptBook($request->input('id'));
             default:
                 return view('books');
         }
     }
 
-    public function getPendingBooks($time, $date)
+    // ! NUEVA PARA BACKEND BUSQUEDA EN HISTORIAL
+    public function history(Request $request)
     {
+        switch ($request->input('action')) {
+            case 'getallbook':
+                return $this->getAllBooks();
+            case 'getbooks':
+                $status = $request->input('status') ? $request->input('status') : 'waiting' ;
+                return $this->getBooks($request->input('time'), $request->input('date'), $status);
+            default:
+                return view('history');
+        }
+    }
 
+    public function getBooks($time, $date, $status)
+    {
 
         if ($time === 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.date', '=', $date)
-                ->where('books.status', '=', 'waiting')
+                ->where('books.status', '=', $status)
                 ->get();
         } else if (!$date) {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time', '=', $time)
-                ->where('books.status', '=', 'waiting')
+                ->where('books.status', '=', $status)
                 ->get();
         } else {
             $books = DB::table('books')
@@ -109,12 +125,13 @@ class BooksController extends Controller
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time', '=', $time)
                 ->where('books.date', '=', $date)
-                ->where('books.status', '=', 'waiting')
+                ->where('books.status', '=', $status)
                 ->get();
         }
 
         return response()->json($books);
     }
+
 
     public function getAllBooks()
     {
@@ -124,10 +141,30 @@ class BooksController extends Controller
 
     public function cancelBook($id)
     {
-        $book = DB::table('books')
-            ->where('id', $id)
-            ->update(['status' => 'canceled']);
+        $book = Book::find($id);
 
-        return response()->json($book);
+        if (Auth::user()->id == $book->user_id || Auth::user()->role == 'admin') {
+            $book->status = 'canceled';
+            $book->save();
+
+            return response()->json($book);
+        } else {
+            // TODO section en el front para mostrar el mensaje
+            return back()->with('message', 'La reserva que desea cancelar no ha sido creada por usted');
+        }
+    }
+
+    public function acceptBook($id)
+    {
+        $book = Book::find($id);
+
+        if (Auth::user()->role == 'admin') {
+            $book->status = 'accepted';
+            $book->save();
+
+            return response()->json($book);
+        } else {
+            return back()->with('message', 'No tienes permisos para realizar esta acción');
+        }
     }
 }

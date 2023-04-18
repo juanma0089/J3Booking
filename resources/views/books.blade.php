@@ -13,7 +13,6 @@
             <div class="container">
                 <form method="" action="" class="row d-flex justify-content-center align-items-center p-3">
 
-
                     <div class="col-12">
                         <label for="">Tramo</label>
                         <select name="time" class="form-select bg-custom text-white border-0" aria-label="horario">
@@ -27,9 +26,9 @@
                         <input class="form-control form-control-md bg-custom border-0 text-white border-dark" type="date"
                             name="datepicker" id="datepicker" value="">
                     </div>
-                    <div class="col-2 p-0">
+                    <div class="col-2 p-0 d-flex align-self-end">
                         <button id="search"
-                            class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0"
+                            class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0 "
                             type="button">
                     </div>
                 </form>
@@ -63,6 +62,11 @@
             </div>
 
         </div>
+
+        @if ('auth')
+            <div id="roleuser" role='{{ Auth::user()->role }}' hidden></div>
+        @endif
+
     </div>
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
         tabindex="-1">
@@ -79,8 +83,8 @@
                 <div class="modal-footer border-0 text-center p-4">
                     <button id="btnClose2" type="button" data-bs-dismiss="modal" aria-label="Close"
                         class="btn btn-outline-light btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Volver</button>
-                    <button id="btnCancelBook" type="button"
-                        class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Cancelar</button>
+                    <button id="btnConfirmModal" type="button"
+                        class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Confirmar</button>
                 </div>
             </div>
         </div>
