@@ -95,7 +95,7 @@ class BooksController extends Controller
             case 'getallbook':
                 return $this->getAllBooks();
             case 'getbooks':
-                $status = $request->input('status') ? $request->input('status') : 'waiting' ;
+                $status = $request->input('status') ? $request->input('status') : 'all' ;
                 return $this->getBooks($request->input('time'), $request->input('date'), $status);
             default:
                 return view('history');
@@ -118,6 +118,20 @@ class BooksController extends Controller
                 ->select('books.*', 'users.name as rrpp')
                 ->where('books.time', '=', $time)
                 ->where('books.status', '=', $status)
+                ->get();
+        } else if ($status == 'all') {
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp')
+                ->where('books.time', '=', $time)
+                ->where('books.date', '=', $date)
+                ->get();
+
+        } else if ($status === 'all' && $time === 'all') {
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp')
+                ->where('books.date', '=', $date)
                 ->get();
         } else {
             $books = DB::table('books')
