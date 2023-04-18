@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('contact', 256)->nullable();
             $table->date('date');
             $table->enum('time', ['afternoon', 'night']);
-            $table->enum('status', ['waiting', 'canceled', 'accepted']);
+            $table->enum('status', ['waiting', 'cancelled', 'accepted']);
             $table->foreignId('table_id')->nullable()->references('id')->on('tables')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->nullOnDelete();
             $table->timestamps();
