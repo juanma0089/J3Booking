@@ -11,7 +11,9 @@ $(function () {
 })
 //TODO : HACER FUCION ↓
 function ajaxQuery() {
-    $('.book').remove()
+
+    $('.history').remove()
+
     $.ajax({
         url: '/history',
         type: 'GET',
@@ -46,28 +48,30 @@ function pintarTabla(books) {
     for (let i = 0; i < books.length; i++) {
         const book = books[i];
 
+            html += '<div class="p-0 d-flex justify-content-around row text-white border-bottom history">' +
 
-        html += '<div class="p-0 p-lg-3 d-flex justify-content-around row text-white border-bottom book">' +
-
-            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-5 p-lg-3 text-wrap">' +
+            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-3 col-lg-4 p-lg-3 text-wrap">' +
             `<p class="mb-0 opacity-75">${book.name}</p>` +
             '</div>' +
             '<div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">' +
             `<p class="align-self-lg-center p-0 m-0">${book.diners}</p>` +
             '</div>' +
-            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-3 d-flex justify-content-center">' +
+            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-3 col-lg-2 d-flex justify-content-center">' +
             `<p class="align-self-lg-center text-center  p-0 m-0">${book.rrpp}</p>` +
             '</div>' +
-            // '<div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">'+
-            // `<p class="align-self-lg-center p-0 m-0">pendiente</p>`+
-            // '</div>'+
-            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
-            '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">' +
-            `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>` +
-            `@if(Auth::user()->role == "admin")` +
-            `<button type="button" data-id="${book.id}" class="fs-2 bi bi-clipboard-check text-success bg-transparent border-0 edit-btn"></button>` +
-            '@endif' +
-            '</div></div></div>';
+            '<div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">'+
+            `<p class="align-self-lg-center p-0 m-0">pendiente</p>`+
+            '</div>'+
+            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-1">' +
+            ' <a class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">';
+            if (book.status == 'accepted') {
+                html += '<span class="text-success"><i class="bi bi-check-square fs-2"></i> Aceptada'
+            }else if (book.status == 'waiting') {
+                html += '<span class="text-warning"><i class="bi bi-hourglass-split fs-2"></i> En espera'
+            } else {
+                html += '<span class="text-danger"><i class="bi bi-x-square fs-2"></i> Cancelada'
+            }
+            html += '</span></a></div></div>';
     }
 
     return html;
