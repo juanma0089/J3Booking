@@ -18,7 +18,8 @@ function ajaxQuery() {
         data: {
             action: 'getbooks',
             date: $("input[name='datepicker']").val(),
-            time: $("select[name='time']").val()
+            time: $("select[name='time']").val(),
+            status: $("select[name='status']").val()
         },
         success: function (response) {
             var html = pintarTabla(response)
