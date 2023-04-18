@@ -1,7 +1,7 @@
 @extends('templates.general')
 
 @section('nav')
-    <nav class="navbar sticky-top navbar-expand-lg bg-custom bg-body-tertiary border-light border-bottom">
+    <nav class="navbar sticky-top bg-custom bg-body-tertiary border-light border-bottom">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

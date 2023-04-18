@@ -16,7 +16,7 @@
 
                     <div class="col-12">
                         <label for="">Tramo</label>
-                        <select class="form-select bg-custom text-white border-0" aria-label="horario">
+                        <select class="form-select bg-custom text-white border-0" aria-label="horario" name="time" id="time">
                             <option value="all">Noche/Tarde</option>
                             <option value="night">Noche</option>
                             <option value="afternoon">Tarde</option>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-12">
                         <label for="">Estado</label>
-                        <select class="form-select bg-custom text-white border-0" aria-label="status">
+                        <select class="form-select bg-custom text-white border-0" aria-label="status" name="status" id="status">
                             <option value="all">Todos</option>
                             <option value="cancelled">cancelled</option>
                             <option value="waiting">waiting</option>
@@ -37,8 +37,8 @@
                             value="2023-04-04">
                     </div>
                     <div class="col-2 p-0 d-flex align-self-end">
-                        <button class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0"
-                            type="submit">
+                        <button id="search" class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0"
+                            type="button">
                     </div>
                 </form>
 
