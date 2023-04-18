@@ -28,7 +28,7 @@ function printTables(tables) {
     let mesasPorFila = {
         in: [5, 7, 7, 7, 5, 5, 5],
         out: [6, 7, 6, 6, 4, 7],
-        // optionals: []
+        // optionals: [7] El 7 lo he añadido como las mesas de fuera, ya que en la bd solo hay in y out
     };
     let outRowNumber = 1; // Número de fila para la zona exterior
     let firstout = true;
@@ -69,7 +69,6 @@ function printTables(tables) {
                     // Se completó la fila actual
                     html += '</div></div>';
                     if (posicion === 'out') {
-                        // Si estamos en la zona exterior, actualizar el número de fila correspondiente
                         outRowNumber++;
                     } else {
                         rowNumber++;
@@ -82,77 +81,6 @@ function printTables(tables) {
 
     return html;
 }
-
-
-// function printTables(tables) {
-
-//     let html = '<div class="row d-flex justify-content-center align-content-center">';
-//     let rowNumber = 1;
-//     let maxTables;
-//     let newRow = false;
-//     let lastMaxTables ;
-
-//     let arrayMesasXFila = {
-//         in: [5, 7, 7, 7, 5, 5, 5],
-//         out: [6, 7, 6, 6, 4],
-//         optionals: [7]
-//     };
-
-//     for (let i = 0; i < tables.length; i++) {
-//         const table = tables[i];
-
-//         switch (rowNumber) {
-//             case 1:
-//                 if (i == rowNumber - 1) {
-//                     maxTables = 5;
-//                     lastMaxTables = i + maxTables;
-//                     newRow = true;
-//                 }
-//                 break;
-//             case 2:
-//                 if (i == lastMaxTables) {
-//                     maxTables = lastMaxTables + 7;
-//                     lastMaxTables = i + maxTables;
-//                     newRow = true;
-//                  }
-//                  break;
-//             case 3:
-//                 if (i == lastMaxTables) {
-//                     maxTables = lastMaxTables + 7;
-//                     lastMaxTables = i + maxTables;
-//                     newRow = true;
-//                  }
-//                  break;
-//         }
-
-//         // console.log('last' + lastMaxTables)
-
-//         if (i < maxTables) {
-//             if (newRow) {
-//                 // Div de cada fila
-//                 html += 
-//                     `<div class="col-12 px-0 d-flex mb-sm-2 px-2"><h5>Fila ${rowNumber}</h5>` +
-//                     '</div><div class="row row-cols-7">'
-
-//                 newRow = false;
-//             }
-
-//             html += htmlTypeTable(table.type, table.id)
-
-//             if (i == maxTables - 1)  {
-//                 html += '</div>';
-//                 rowNumber++;
-//             }
-
-//             // console.log('row ' + rowNumber)
-//         } 
-
-//     }
-
-//     html += '</div>'
-
-//     return html
-// }
 
 function htmlTypeTable(table, id) {
 
