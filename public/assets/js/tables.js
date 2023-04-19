@@ -44,17 +44,17 @@ function printTables(tables) {
             if (table.position == posicion) {
                 if (posicion === 'out') {
                     // Si estamos en la zona exterior, usar el número de fila correspondiente
-                    
+
                     if (firstout) {
                         html += '<hr class="col-12 text-white">' +
                         '<div class="row d-flex justify-content-center align-content-center mt-4">' +
                         '<h1 class="text-center">Exterior</h1>';
 
-                        firstout = false; 
+                        firstout = false;
                     }
 
                     rowNumber = outRowNumber;
-                        
+
                 }
                 if (mesasIndex == 0) {
                     // Se necesita una nueva fila
@@ -87,17 +87,17 @@ function htmlTypeTable(table, id) {
     switch (table) {
         case 'normal':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
                 '</div>'
 
         case 'cruzcampo':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
                 '</div>'
 
         case 'sofa':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
                 '</div>'
     }
 
