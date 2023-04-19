@@ -14,38 +14,19 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Actualizar contraseña</h3>
 
-                                @if (session('message'))
-                                    <div class="alert alert-success">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
-
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
                                 <form action={{ route('user-password.update') }} method="POST" id='-'>
                                     @method('PUT')
                                     @csrf
                                     @if ($errors->updatePassword->any())
-                                        <div class="alert alert-danger text-start">
-                                            @foreach ($errors->updatePassword->all() as $error)
-                                                <li class="p-1">{{ $error }}</li>
-                                            @endforeach
-                                        </div>
+                                        @foreach ($errors->updatePassword->all() as $error)
+                                            <?php
+                                            toastr($error, 'error', 'Ops, ¡Error!');
+                                            ?>
+                                        @endforeach
                                     @endif
-                                    {{-- TODO: IMPLEMENTAR MENSAJE SUCCESS --}}
-                                    @if (session('mensaje'))
-                                        <div class="alert alert-success">{{ session('mensaje') }}</div>
-                                    @endif
+
                                     <div class="d-grid ">
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">

@@ -29,6 +29,8 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'password' => Hash::make($input['password']),
         ])->save();
 
-        return back()->with('message', 'La contraseña ha sido modificada correctamente');
+        toastr('La contraseña ha sido modificada correctamente', 'success', '¡Listo!');
+
+        return back();
     }
 }

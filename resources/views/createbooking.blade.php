@@ -15,20 +15,12 @@
                             <div>
                                 <h3 class="fw-bold my-5 text-uppercase">Registrar nueva reserva</h3>
 
-                                @if (session('message'))
-                                    <div class="alert alert-success">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
-
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                    @foreach ($errors->all() as $error)
+                                        <?php
+                                        toastr($error, 'error', 'Ops, ¡Error!');
+                                        ?>
+                                    @endforeach
                                 @endif
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
@@ -38,8 +30,8 @@
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
-                                                class="form-control form-control-lg no-autofill "
-                                                name="name" value="{{ old('name') }}" required autofocus>
+                                                class="form-control form-control-lg no-autofill " name="name"
+                                                value="{{ old('name') }}" required autofocus>
                                             <label class="form-label" for="name">Nombre cliente<span
                                                     class="text-danger">*</span></label>
                                         </div>
@@ -47,15 +39,15 @@
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="diners" type="number"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="diners" value="{{ old('diners') }}" required>
+                                                class="form-control form-control-lg no-autofill" name="diners"
+                                                value="{{ old('diners') }}" required>
                                             <label class="form-label" for="diners">Nº de clientes</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="date" type="date"
-                                                class="form-control form-control-lg no-autofill"
-                                                name="date" value="{{ old('date') }}" required>
+                                                class="form-control form-control-lg no-autofill" name="date"
+                                                value="{{ old('date') }}" required>
                                             <label class="form-label" for="date">Fecha</label>
                                         </div>
 

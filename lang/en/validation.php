@@ -167,7 +167,7 @@ return [
     |
     */
 
-    //Mostramos errores concretos: 
+    //Mostramos errores concretos:
     'custom' => [
         'img' => [
             'regex' => 'El formato de la imagen debe ser "producto(id).jpg"',

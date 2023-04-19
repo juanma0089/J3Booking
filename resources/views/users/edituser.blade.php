@@ -21,13 +21,11 @@
                                 @endif
 
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                            <?php
+                                            toastr($error, 'error', 'Ops, ¡Error!');
+                                            ?>
                                             @endforeach
-                                        </ul>
-                                    </div>
                                 @endif
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>

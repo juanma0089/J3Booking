@@ -115,7 +115,7 @@ class UsersController extends Controller
             $user->phone = $request->phone ?? '';
 
             $user->save();
-
+            // toastr('Usuario editado correctamente', 'success', '¡Listo!');
             return back()->with('message', 'Usuario editado correctamente');
         } else {
             $errors = $request->errors();
