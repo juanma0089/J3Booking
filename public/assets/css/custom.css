@@ -79,3 +79,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
 }
+
+/** TOASTR NOTIFICATiON**/
+
+/* #toast-container > div {
+    opacity:1 !important;
+} */
