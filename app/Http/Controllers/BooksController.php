@@ -48,8 +48,8 @@ class BooksController extends Controller
             $newBook->user_id = Auth::id();
 
             $newBook->save();
-
-            return back()->with('message', 'Reserva registrada correctamente');
+            toastr('Se ha creado una nueva reserva', "success", '¡Listo!');
+            return back();
         } else {
             $errors = $request->errors();
             return back()->with('errors', $errors);
@@ -160,11 +160,12 @@ class BooksController extends Controller
         if (Auth::user()->id == $book->user_id || Auth::user()->role == 'admin') {
             $book->status = 'canceled';
             $book->save();
-
+            // toastr('La reserva se ha cancelado', 'warning', '¡Cancelada!');
             return response()->json($book);
         } else {
             // TODO section en el front para mostrar el mensaje
-            return back()->with('message', 'La reserva que desea cancelar no ha sido creada por usted');
+            toastr('La reserva que desea cancelar no ha sido creada por usted', 'error', 'Ops, ¡Error!');
+            return back();
         }
     }
 
@@ -175,10 +176,11 @@ class BooksController extends Controller
         if (Auth::user()->role == 'admin') {
             $book->status = 'accepted';
             $book->save();
-
+            // toastr('La reserva se ha aceptado', 'success', '¡Aceptada!');
             return response()->json($book);
         } else {
-            return back()->with('message', 'No tienes permisos para realizar esta acción');
+            toastr('No tienes permisos para realizar esta acción', 'error', 'Ops, ¡Error!');
+            return back();
         }
     }
 }

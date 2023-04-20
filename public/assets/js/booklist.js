@@ -23,7 +23,7 @@ $(function () {
 
         let action = $(this).attr('action')
         let bookId = $(this).attr('book-id');
-        
+
         $.ajax({
             url: '/books',
             type: 'GET',
@@ -135,16 +135,16 @@ function completeModal(bookname, func) {
 }
 
 function createAlert(action, bookName) {
-    
+
     html = '<div class="alert alert-success text-center" role="alert">';
 
     if (action == 'acceptbook') {
-        html += `La reserva ha sido aceptada.` 
+        html += `La reserva ha sido aceptada.`
     } else if (action == 'cancelbook') {
         html += `La reserva ha sido cancelada.`
     }
 
     html += '</div>'
-    
+
     $('#lista_ac').prepend(html);
 }

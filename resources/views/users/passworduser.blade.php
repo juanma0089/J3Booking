@@ -5,30 +5,14 @@
 @endsection
 
 @section('body')
-    <section class="vh-100 ">
+    <section id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
         <div class="container overflow-hidden">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6 col-xl-5">
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
                         <div class="card-body text-center">
                             <div>
-                                <h3 class="fw-bold my-5 text-uppercase">Actualizar contraseña</h3>
-
-                                @if (session('message'))
-                                    <div class="alert alert-success">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
-
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+                                <h3 class="fw-bold my-3 mt-2 text-uppercase">Actualizar contraseña</h3>
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
 
@@ -36,16 +20,13 @@
                                     @method('PUT')
                                     @csrf
                                     @if ($errors->updatePassword->any())
-                                        <div class="alert alert-danger text-start">
-                                            @foreach ($errors->updatePassword->all() as $error)
-                                                <li class="p-1">{{ $error }}</li>
-                                            @endforeach
-                                        </div>
+                                        @foreach ($errors->updatePassword->all() as $error)
+                                            <?php
+                                            toastr($error, 'error', 'Ops, ¡Error!');
+                                            ?>
+                                        @endforeach
                                     @endif
-                                    {{-- TODO: IMPLEMENTAR MENSAJE SUCCESS --}}
-                                    @if (session('mensaje'))
-                                        <div class="alert alert-success">{{ session('mensaje') }}</div>
-                                    @endif
+
                                     <div class="d-grid ">
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">
