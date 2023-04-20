@@ -15,22 +15,20 @@
                                 <h3 class="fw-bold my-5 text-uppercase">Registrar nuevo usuario</h3>
 
                                 @if (session('message'))
-                                    <div class="alert alert-success">
-                                        {{ session('message') }}
-                                    </div>
+                                <?php
+                                toastr('Usuario creado con éxito', 'success', '¡Listo!');
+                                ?>
                                 @endif
 
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                            <?php
+                                            toastr($error, 'error', 'Ops, ¡Error!');
+                                            ?>
                                             @endforeach
-                                        </ul>
-                                    </div>
                                 @endif
 
-                                <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
+                                {{-- <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div> --}}
 
                                 <form method="POST" action="{{ route('user.create') }}" id='register'>
                                     @csrf

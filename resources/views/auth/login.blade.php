@@ -11,20 +11,12 @@
 
                                 <img src="{{ asset('assets/img/logo.png') }}" class="pb-3 logo-login" alt="logo J3">
 
-                                @if (session('message'))
-                                    <div class="alert alert-success">
-                                        {{ session('message') }}
-                                    </div>
-                                @endif
-
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                    @foreach ($errors->all() as $error)
+                                        <?php
+                                        toastr($error, 'error', 'Ops, ¡Error!');
+                                        ?>
+                                    @endforeach
                                 @endif
 
                                 <h2 class="fw-bold my-5 text-uppercase">Iniciar sesión</h2>

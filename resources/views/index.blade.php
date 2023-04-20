@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-    <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden mt-4">
+    <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
 
 
         <h1 class="text-center">Interior</h1>

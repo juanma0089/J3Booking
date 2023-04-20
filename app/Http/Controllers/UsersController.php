@@ -115,8 +115,8 @@ class UsersController extends Controller
             $user->phone = $request->phone ?? '';
 
             $user->save();
-
-            return back()->with('message', 'Usuario editado correctamente');
+            toastr('Usuario editado correctamente', 'success', '¡Listo!');
+            return back();
         } else {
             $errors = $request->errors();
             return back()->with('errors', $errors);
@@ -126,7 +126,7 @@ class UsersController extends Controller
     public function deleteUser($id)
     {
         User::find($id)->delete();
-
+        toastr('El suario ha sido eliminado', 'warning', '¡Borrado!');
         return view('users.users');
     }
 

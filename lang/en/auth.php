@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'El usuario no existe ó la contraseña es incorrecta.',
+    'failed' => 'El usuario no existe o la contraseña es incorrecta.',
     'password' => 'Contraseña incorrecta.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => 'Demasiados intentos. Intentalo de nuevo en :seconds segundos.',
 
 ];
