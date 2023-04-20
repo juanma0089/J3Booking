@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-    <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden mt-4">
+    <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
 
 
         <h1 class="text-center">Interior</h1>
@@ -254,10 +254,10 @@
                     <button class="bg-transparent border-0 text-success m-0 p-0 "><i
                             class="bi bi-displayport-fill mesa-icon"></i></button>
                 </div>
-            </div> 
+            </div>
     </div> --}}
 
-        {{-- 
+        {{--
             <hr class="col-12 text-white">
 
 

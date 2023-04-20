@@ -2,8 +2,13 @@ body {
     background-color: #111214 !important;
 }
 
+#navbar_footer{
+    height: 50px !important;
+}
+
 #mainPanel{
-    height: 83vh;
+    height: calc(100vh - 100px) !important;
+    top: 50px !important;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -79,3 +84,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
 }
+
+/** TOASTR NOTIFICATiON**/
+
+/* #toast-container > div {
+    opacity:1 !important;
+} */
