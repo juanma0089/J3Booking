@@ -14,7 +14,7 @@
         <div class="row ">
             <div class="d-flex justify-content-center align-items-center p-0">
                 <div class="mesa-rectangulo">
-                    <img src="https://via.placeholder.com/120x50" alt="escenario" class="img-fluid">
+                    <img src="assets/img/dj.png" alt="escenario" class="img-fluid">
                 </div>
             </div>
 
@@ -457,7 +457,7 @@
         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
             tabindex="-1">
             <div class="modal-dialog">
-                <form action="" method="get">
+                <form action="" method="">
                     <div class="modal-content bg-custom text-white">
                         <div class="modal-header">
                             <h1 class="modal-title fs-2" id="exampleModalToggleLabel">Gestionar mesa</h1>
@@ -475,41 +475,53 @@
                                 <option value="3">Three</option> --}}
                             </select>
                             <label for="" class="mt-4 fs-3">Añadir botellas</i></label>
-                            <div class="">
+                            <div class="normalbottle">
                                 <label for="" class="mt-4 fs-5"><i class="mx-2 bi bi-star"></i>Botellas
                                     normal</label>
                                 <div class="d-flex justify-content-evenly align-items-center my-2">
-                                    <i class="bi bi-dash-lg text-danger fs-3"></i>
-                                    <input class="form-control bg-transparent border-0 text-center w-25 text-light"
-                                        type="num" value="0" readonly>
-                                    <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                        <i class="bi bi-dash-lg text-danger fs-3"></i>
+                                    </span>
+                                    <input id="normalInput" class="form-control bg-transparent border-0 text-center w-25 text-light"
+                                        type="number" min="0" value="0" name="quantityNormalBottle" readonly>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                        <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    </span>
                                 </div>
                             </div>
                             <div class="">
-                                <label for="" class="mt-4 fs-5"><i class="mx-2 bi bi-star-half"></i>Botellas
+                                <label for="superbottle" class="mt-4 fs-5"><i class="mx-2 bi bi-star-half"></i>Botellas
                                     superior</label>
                                 <div class="d-flex justify-content-evenly align-items-center my-2">
-                                    <i class="bi bi-dash-lg text-danger fs-3"></i>
-                                    <input class="form-control bg-transparent border-0 text-center w-25 text-light"
-                                        type="num" value="0" readonly>
-                                    <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                        <i class="bi bi-dash-lg text-danger fs-3"></i>
+                                    </span>
+                                    <input id="superInput" class="form-control bg-transparent border-0 text-center w-25 text-light"
+                                        type="number" min="0" value="0" name="quantitySuperBottle" readonly>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                        <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    </span>
                                 </div>
                             </div>
                             <div class="">
-                                <label for="" class="mt-4 fs-5"><i class="mx-2 bi bi-star-fill"></i>Botellas
+                                <label for="premiumbottle" class="mt-4 fs-5"><i class="mx-2 bi bi-star-fill"></i>Botellas
                                     premium</label>
                                 <div class="d-flex justify-content-evenly align-items-center my-2">
-                                    <i class="bi bi-dash-lg text-danger fs-3"></i>
-                                    <input class="form-control bg-transparent border-0 text-center w-25 text-light"
-                                        type="num" value="0" readonly>
-                                    <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                        <i class="bi bi-dash-lg text-danger fs-3"></i>
+                                    </span>
+                                    <input id="premiumInput" class="form-control bg-transparent border-0 text-center w-25 text-light"
+                                        type="number" min="0" value="0" name="quantityPremiumBottle" readonly>
+                                    <span type="button" class="btn shadow-none py-0 px-2 m-0 bg-transparent border-0" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                        <i class="bi bi-plus-lg text-success fs-3"></i>
+                                    </span>
                                 </div>
                             </div>
 
                         </div>
                         <div class="modal-footer d-flex justify-content-evenly">
                             <p class="btn btn-outline-light" data-bs-dismiss="modal" aria-label="Close">Volver</p>
-                            <button type="submit"
+                            <button type="button"
                                 class="btn btn-outline-light text-success border-success">Asignar</button>
                         </div>
                     </div>
