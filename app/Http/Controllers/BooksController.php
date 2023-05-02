@@ -84,7 +84,7 @@ class BooksController extends Controller
             case 'acceptbook':
                 return $this->acceptBook($request->input('id'));
             case 'getAcceptedBooks':
-                return $this->acceptedBooks($request->input('date'), $request->input('tramo'));
+                return $this->getAcceptedBooks($request->input('date'), $request->input('tramo'));
             default:
                 return view('books');
         }
@@ -188,7 +188,7 @@ class BooksController extends Controller
     public function getAcceptedBooks($date, $tramo)
     {
         if ($tramo) {
-            $books = DB::table('books')->where('date', $date)->where('time', $tramo);
+            $books = DB::table('books')->where('date', $date)->where('time', $tramo)->where('table_id', null)->get();
             return $books != '' ? response()->json($books) : '';
         }
     }

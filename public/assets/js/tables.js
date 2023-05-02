@@ -18,6 +18,7 @@ $(function () {
     });
 
 
+    // ! CAMBIAR SELECTOR, DEBE LEER EL CLICK POR MESA, NO DIRECTAMENTE POR EL MODAL
     $('#selectAcceptedBooks').ready(function () {
         $.ajax({
             url: "/books",
@@ -29,6 +30,8 @@ $(function () {
             },
             success: function (response) {
                 console.log(response)
+
+                $('#selectAcceptedBooks').append(printAcceptedBooks(response));
             }
         });
     })
@@ -119,6 +122,16 @@ function htmlTypeTable(table, id) {
 
 }
 
+function printAcceptedBooks(books) {
+    let html = '<option selected value="null" class="text-success">MESA LIBRE</option>';
+    for (const index in books) {
+        const book = books[index];
+        console.log(book);
+        html += `<option value="${book.id}">${book.name}</option>`;
+    }
+    return html;
+}
+
 function getActualDate() {
     let fechaHoraActual = new Date();
     let hora = fechaHoraActual.getHours();
@@ -156,9 +169,9 @@ function getTramo() {
 function convertDateFormat(fecha) {
     // Separar el día, mes y año usando el método split()
     let parts = fecha.split('/');
-    
+
     // Reconstruir la fecha en el formato "YYYY-mm-dd"
     let nuevaFecha = parts[2] + '-' + parts[1] + '-' + parts[0];
-    
+
     return nuevaFecha;
-  }
+}

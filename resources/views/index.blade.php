@@ -38,7 +38,7 @@
                             <label class="mb-2 fs-3" for="">Asignar reserva</label>
                             <select id='selectAcceptedBooks' class="form-select form-select bg-custom text-white"
                                 aria-label=".form-select-sm example" size="1">
-                                <option selected value="null" class="text-success">MESA LIBRE</option>
+                               
                                 {{-- <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option> --}}
