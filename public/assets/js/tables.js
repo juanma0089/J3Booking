@@ -1,23 +1,38 @@
 $(function () {
 
-    $('#mainPanel').ready(function () {
-        getActualDate();
+    getActualDate();
+    $.ajax({
+        url: '/',
+        type: 'GET',
+        data: {
+            action: 'get_all_tables'
+        },
+        success: function (response) {
+            let html = printTables(response)
+            $('#mainPanel').append(html)
+
+        },
+        error: function () {
+            alert('Ha ocurrido un error al obtener los usuarios.');
+        }
+    });
+
+
+    $('#selectAcceptedBooks').ready(function () {
         $.ajax({
-            url: '/',
-            type: 'GET',
+            url: "/books",
+            type: "GET",
             data: {
-                action: 'get_all_tables'
+                action: 'getAcceptedBooks',
+                date: getActualDate(),
+                tramo: getTramo()
             },
             success: function (response) {
-                let html = printTables(response)
-                $('#mainPanel').append(html)
-
-            },
-            error: function () {
-                alert('Ha ocurrido un error al obtener los usuarios.');
+                console.log(response)
             }
         });
-    });
+    })
+
 
 })
 
@@ -107,18 +122,43 @@ function htmlTypeTable(table, id) {
 function getActualDate() {
     let fechaHoraActual = new Date();
     let hora = fechaHoraActual.getHours();
-    let fecha = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
     let yesterday;
+    let eventDate;
 
     if (hora >= 0 && hora < 8) {
         yesterday = new Date(fechaHoraActual.getTime());
         yesterday.setDate(fechaHoraActual.getDate() - 1);
-        let eventDate = yesterday.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        eventDate = yesterday.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
         console.log('La fecha de ayer sin hora es: ' + eventDate);
     } else {
-        let eventDate = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        eventDate = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
         console.log('La fecha sin hora es: ' + eventDate);
     }
 
+    eventDate = convertDateFormat(eventDate);
     return eventDate;
 }
+
+function getTramo() {
+    let fechaHoraActual = new Date();
+    let hora = fechaHoraActual.getHours();
+    let tramo;
+
+    if (hora >= 22 && hora < 24 || hora >= 0 && hora < 8) {
+        tramo = 'night';
+    } else if (hora >= 15 && hora < 22) {
+        tramo = 'afternoon'
+    }
+
+    return tramo;
+}
+
+function convertDateFormat(fecha) {
+    // Separar el día, mes y año usando el método split()
+    let parts = fecha.split('/');
+    
+    // Reconstruir la fecha en el formato "YYYY-mm-dd"
+    let nuevaFecha = parts[2] + '-' + parts[1] + '-' + parts[0];
+    
+    return nuevaFecha;
+  }

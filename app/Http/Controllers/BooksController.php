@@ -83,6 +83,8 @@ class BooksController extends Controller
                 return $this->cancelBook($request->input('id'));
             case 'acceptbook':
                 return $this->acceptBook($request->input('id'));
+            case 'getAcceptedBooks':
+                return $this->acceptedBooks($request->input('date'), $request->input('tramo'));
             default:
                 return view('books');
         }
@@ -95,7 +97,7 @@ class BooksController extends Controller
             case 'getallbook':
                 return $this->getAllBooks();
             case 'getbooks':
-                $status = $request->input('status') ? $request->input('status') : 'all' ;
+                $status = $request->input('status') ? $request->input('status') : 'all';
                 return $this->getBooks($request->input('time'), $request->input('date'), $status);
             default:
                 return view('history');
@@ -126,7 +128,6 @@ class BooksController extends Controller
                 ->where('books.time', '=', $time)
                 ->where('books.date', '=', $date)
                 ->get();
-
         } else if ($status === 'all' && $time === 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
@@ -181,6 +182,14 @@ class BooksController extends Controller
         } else {
             toastr('No tienes permisos para realizar esta acción', 'error', 'Ops, ¡Error!');
             return back();
+        }
+    }
+
+    public function getAcceptedBooks($date, $tramo)
+    {
+        if ($tramo) {
+            $books = DB::table('books')->where('date', $date)->where('time', $tramo);
+            return $books != '' ? response()->json($books) : '';
         }
     }
 }
