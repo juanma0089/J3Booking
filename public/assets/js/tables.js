@@ -1,6 +1,7 @@
 $(function () {
 
     $('#mainPanel').ready(function () {
+        getActualDate();
         $.ajax({
             url: '/',
             type: 'GET',
@@ -47,8 +48,8 @@ function printTables(tables) {
 
                     if (firstout) {
                         html += '<hr class="col-12 text-white">' +
-                        '<div class="row d-flex justify-content-center align-content-center mt-4">' +
-                        '<h1 class="text-center">Exterior</h1>';
+                            '<div class="row d-flex justify-content-center align-content-center mt-4">' +
+                            '<h1 class="text-center">Exterior</h1>';
 
                         firstout = false;
                     }
@@ -101,4 +102,23 @@ function htmlTypeTable(table, id) {
                 '</div>'
     }
 
+}
+
+function getActualDate() {
+    let fechaHoraActual = new Date();
+    let hora = fechaHoraActual.getHours();
+    let fecha = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    let yesterday;
+
+    if (hora >= 0 && hora < 8) {
+        yesterday = new Date(fechaHoraActual.getTime());
+        yesterday.setDate(fechaHoraActual.getDate() - 1);
+        let eventDate = yesterday.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        console.log('La fecha de ayer sin hora es: ' + eventDate);
+    } else {
+        let eventDate = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        console.log('La fecha sin hora es: ' + eventDate);
+    }
+
+    return eventDate;
 }
