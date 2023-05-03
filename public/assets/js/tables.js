@@ -106,17 +106,17 @@ function htmlTypeTable(table, id) {
     switch (table) {
         case 'normal':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'cruzcampo':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'sofa':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
                 '</div>'
     }
 

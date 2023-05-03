@@ -79,7 +79,7 @@ class UsersController extends Controller
 
     public function getAllUsers()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->whereNot('id', Auth::user()->id )->get();
         return response()->json($users);
     }
 

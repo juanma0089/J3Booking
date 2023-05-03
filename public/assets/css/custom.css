@@ -108,7 +108,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #a32929;
+    background-color: #a3292900;
     border-radius: 0px;
     border: 0px none #ffffff;
   }
