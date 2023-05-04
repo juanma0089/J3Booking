@@ -8,8 +8,11 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Faker\Core\Barcode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
+
+use function Symfony\Component\String\b;
 
 class BooksController extends Controller
 {
@@ -85,6 +88,8 @@ class BooksController extends Controller
                 return $this->acceptBook($request->input('id'));
             case 'getAcceptedBooks':
                 return $this->getAcceptedBooks($request->input('date'), $request->input('tramo'));
+            case 'assignTable':
+                return $this->assignTable($request->input('bookid'), $request->input('tableid'), $request->input('date'), $request->input('tramo'));
             default:
                 return view('books');
         }
@@ -191,5 +196,27 @@ class BooksController extends Controller
             $books = DB::table('books')->where('date', $date)->where('time', $tramo)->where('status', 'accepted')->get();
             return $books != '' ? response()->json($books) : '';
         }
+    }
+
+    public function assignTable($bookid, $tableid, $date, $tramo) {
+
+        
+        if (!$bookid) {
+            $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
+           
+            if ($book) {
+                Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
+            }
+        } else {
+            $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
+
+            if (!$book) {
+                Book::where('id', $bookid)->update(['table_id' => $tableid]);
+            } else {
+                // TOASTR PRIMERO VACIAR LA MESA PARA AGREGAR OTRA
+            }
+        }
+        
+        return back();
     }
 }

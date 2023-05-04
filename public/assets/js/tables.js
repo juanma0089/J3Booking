@@ -11,9 +11,10 @@ $(function () {
             let html = printTables(response)
             $('#mainPanel').append(html)
 
-            
-            $('.mesa-icon').on('click', function () {
 
+            $('.mesa-icon, .mesa-cruz').on('click', function () {
+
+                let bookid = ''
                 let tableid = $(this).parent().attr('table-id');
                 console.log(tableid)
 
@@ -31,10 +32,32 @@ $(function () {
                     },
                     success: function (response) {
                         console.log(response)
-            
+
                         $('#selectAcceptedBooks').append(printAcceptedBooks(response, tableid));
+
+                        $('#assignTable').on('click', function () {
+                            bookid = $('#selectAcceptedBooks').val()
+
+                        })
                     }
                 });
+                
+                $.ajax({
+                    url: "/books",
+                    type: "GET",
+                    data: {
+                        action: 'assignTable',
+                        bookid: bookid,
+                        tableid: tableid,
+                        date: getActualDate(),
+                        tramo: getTramo()
+                    },
+                    success: function (response) {
+                        console.log(response)
+                    }
+                });
+
+
             })
         },
         error: function () {
@@ -131,13 +154,13 @@ function printAcceptedBooks(books, tableid) {
 
     $('option').remove();
 
-    let html = '<option selected value="null" class="text-success">MESA LIBRE</option>';
+    let html = '<option value="" class="text-success">MESA LIBRE</option>';
     for (const index in books) {
         const book = books[index];
         console.log(book.table_id);
         if (!book.table_id || book.table_id == tableid) {
-            
-            html += `<option value="${book.id}" ${book.table_id == tableid ? 'selected' : ''}>${book.name}</option>`;
+
+            html += `<option value="${book.id}" ${book.table_id == tableid ? 'selected' : ''}>${book.name} - ${book.diners} personas</option>`;
         }
     }
     return html;
