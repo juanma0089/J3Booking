@@ -11,31 +11,36 @@ $(function () {
             let html = printTables(response)
             $('#mainPanel').append(html)
 
+            
+            $('.mesa-icon').on('click', function () {
+
+                let tableid = $(this).parent().attr('table-id');
+                console.log(tableid)
+
+                $('#modal-table').attr('tableid', tableid)
+
+                $('#btn-modal').trigger('click');
+
+                $.ajax({
+                    url: "/books",
+                    type: "GET",
+                    data: {
+                        action: 'getAcceptedBooks',
+                        date: getActualDate(),
+                        tramo: getTramo()
+                    },
+                    success: function (response) {
+                        console.log(response)
+            
+                        $('#selectAcceptedBooks').append(printAcceptedBooks(response, tableid));
+                    }
+                });
+            })
         },
         error: function () {
             alert('Ha ocurrido un error al obtener los usuarios.');
         }
     });
-
-
-    // ! CAMBIAR SELECTOR, DEBE LEER EL CLICK POR MESA, NO DIRECTAMENTE POR EL MODAL
-    $('#selectAcceptedBooks').ready(function () {
-        $.ajax({
-            url: "/books",
-            type: "GET",
-            data: {
-                action: 'getAcceptedBooks',
-                date: getActualDate(),
-                tramo: getTramo()
-            },
-            success: function (response) {
-                console.log(response)
-
-                $('#selectAcceptedBooks').append(printAcceptedBooks(response));
-            }
-        });
-    })
-
 
 })
 
@@ -106,28 +111,34 @@ function htmlTypeTable(table, id) {
     switch (table) {
         case 'normal':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'cruzcampo':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'sofa':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
     }
 
 }
 
-function printAcceptedBooks(books) {
+function printAcceptedBooks(books, tableid) {
+
+    $('option').remove();
+
     let html = '<option selected value="null" class="text-success">MESA LIBRE</option>';
     for (const index in books) {
         const book = books[index];
-        console.log(book);
-        html += `<option value="${book.id}">${book.name}</option>`;
+        console.log(book.table_id);
+        if (!book.table_id || book.table_id == tableid) {
+            
+            html += `<option value="${book.id}" ${book.table_id == tableid ? 'selected' : ''}>${book.name}</option>`;
+        }
     }
     return html;
 }

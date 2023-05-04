@@ -20,16 +20,16 @@
 
         </div>
 
-        <button class="bg-transparent border-0 text-success m-0 p-0" data-bs-target="#exampleModalToggle"
-            data-bs-toggle="modal"><i class="bi bi-square-fill mesa-icon" hidden></i></button>
+        <button id='btn-modal' class="bg-transparent border-0 text-success m-0 p-0" data-bs-target="#modal-table"
+            data-bs-toggle="modal"></button>
 
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        <div class="modal fade" id="modal-table" aria-hidden="true" aria-labelledby="modal-table-label"
             tabindex="-1">
             <div class="modal-dialog">
                 <form action="" method="">
                     <div class="modal-content bg-custom text-white">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-2" id="exampleModalToggleLabel">Gestionar mesa</h1>
+                            <h1 class="modal-title fs-2" id="modal-table-label">Gestionar mesa</h1>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

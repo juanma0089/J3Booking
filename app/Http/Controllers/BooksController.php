@@ -188,7 +188,7 @@ class BooksController extends Controller
     public function getAcceptedBooks($date, $tramo)
     {
         if ($tramo) {
-            $books = DB::table('books')->where('date', $date)->where('time', $tramo)->where('table_id', null)->get();
+            $books = DB::table('books')->where('date', $date)->where('time', $tramo)->where('status', 'accepted')->get();
             return $books != '' ? response()->json($books) : '';
         }
     }
