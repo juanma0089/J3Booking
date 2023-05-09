@@ -4,7 +4,9 @@ $(function () {
         url: '/',
         type: 'GET',
         data: {
-            action: 'get_all_tables'
+            action: 'get_all_tables',
+            date: getActualDate(),
+            tramo: getTramo()
         },
         success: function (response) {
             let html = printTables(response)
@@ -120,7 +122,7 @@ function printTables(tables) {
                     html += `<div class="row d-flex justify-content-center align-content-center"><h5>Fila ${rowNumber}</h5><div class="row row-cols-${mesas[rowNumber - 1] || 1}">`;
                 }
 
-                html += htmlTypeTable(table.type, table.id);
+                html += htmlTypeTable(table.type, table.id, table.has_booking);
 
                 mesasIndex++;
 
@@ -141,22 +143,22 @@ function printTables(tables) {
     return html;
 }
 
-function htmlTypeTable(table, id) {
+function htmlTypeTable(table, id, has_booking = 0) {
 
     switch (table) {
         case 'normal':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'cruzcampo':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-cruz" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'sofa':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
     }
 
