@@ -22,9 +22,9 @@ class TablesController extends Controller
     {
 
         $tables = DB::table('tables')
-            ->leftJoin('books', function ($join) use ($tramo) {
+            ->leftJoin('books', function ($join) use ($tramo, $date) {
                 $join->on('tables.id', '=', 'books.table_id')
-                    ->where('books.date', '=', date('Y-m-d'))
+                    ->where('books.date', '=', $date)
                     ->where('books.time', '=', $tramo);
             })
             ->select('tables.*', DB::raw('CASE WHEN books.id IS NULL THEN 0 ELSE 1 END AS has_booking'))
