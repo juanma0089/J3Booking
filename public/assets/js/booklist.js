@@ -54,6 +54,7 @@ function ajaxQuery(action) {
 
     // Cuando entre en la página filtrará por el día actual directamente
     $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
+    $(`option[value=${getTramo()}]`).attr('selected', true)
 
     $.ajax({
         url: '/books',
