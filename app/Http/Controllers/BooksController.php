@@ -207,6 +207,8 @@ class BooksController extends Controller
             if ($book) {
                 Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
             }
+
+            return response()->json(['success' => false]);
         } else {
             $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
 
@@ -217,6 +219,6 @@ class BooksController extends Controller
             }
         }
         
-        return back();
+        return response()->json(['success' => true]);
     }
 }

@@ -1,5 +1,4 @@
 $(function () {
-
     getActualDate();
     $.ajax({
         url: '/',
@@ -11,11 +10,10 @@ $(function () {
             let html = printTables(response)
             $('#mainPanel').append(html)
 
-
             $('.mesa-icon, .mesa-cruz').on('click', function () {
-
-                let bookid = ''
+                let bookid = '';
                 let tableid = $(this).parent().attr('table-id');
+                let iconmesa = $(this);
                 console.log(tableid)
 
                 $('#modal-table').attr('tableid', tableid)
@@ -36,36 +34,50 @@ $(function () {
                         $('#selectAcceptedBooks').append(printAcceptedBooks(response, tableid));
 
                         $('#assignTable').on('click', function () {
+                            // Desactivar el botón de asignar mesa
+                            $('#assignTable').prop('disabled', true);
+
                             bookid = $('#selectAcceptedBooks').val()
 
+                            $.ajax({
+                                url: "/books",
+                                type: "GET",
+                                data: {
+                                    action: 'assignTable',
+                                    bookid: bookid,
+                                    tableid: tableid,
+                                    date: getActualDate(),
+                                    tramo: getTramo()
+                                },
+                                success: function (response) {
+                                    console.log(response)
+                                    response = response['success'];
+
+                                    if (!response) {
+                                        $(iconmesa).removeClass('text-danger');
+                                        $(iconmesa).addClass('text-success');
+                                    } else {
+                                        $(iconmesa).removeClass('text-success');
+                                        $(iconmesa).addClass('text-danger');
+                                    }
+                                },
+                                complete: function () {
+                                    // Activar el botón de asignar mesa después de que se haya completado la solicitud
+                                    $('#assignTable').prop('disabled', false);
+                                }
+                            });
+                            // Eliminar el manejador de eventos 'click' después de hacer clic en el botón para no ejecutar varias veces la función
+                            $('#assignTable').off('click');
                         })
                     }
                 });
-                
-                $.ajax({
-                    url: "/books",
-                    type: "GET",
-                    data: {
-                        action: 'assignTable',
-                        bookid: bookid,
-                        tableid: tableid,
-                        date: getActualDate(),
-                        tramo: getTramo()
-                    },
-                    success: function (response) {
-                        console.log(response)
-                    }
-                });
-
-
             })
         },
         error: function () {
             alert('Ha ocurrido un error al obtener los usuarios.');
         }
     });
-
-})
+});
 
 function printTables(tables) {
 
