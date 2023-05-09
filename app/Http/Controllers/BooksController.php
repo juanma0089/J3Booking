@@ -95,7 +95,7 @@ class BooksController extends Controller
         }
     }
 
-    // ! NUEVA PARA BACKEND BUSQUEDA EN HISTORIAL
+    //* BACKEND BUSQUEDA EN HISTORIAL *//
     public function history(Request $request)
     {
         switch ($request->input('action')) {
@@ -166,7 +166,6 @@ class BooksController extends Controller
         if (Auth::user()->id == $book->user_id || Auth::user()->role == 'admin') {
             $book->status = 'canceled';
             $book->save();
-            // toastr('La reserva se ha cancelado', 'warning', '¡Cancelada!');
             return response()->json($book);
         } else {
             // TODO section en el front para mostrar el mensaje
@@ -182,7 +181,6 @@ class BooksController extends Controller
         if (Auth::user()->role == 'admin') {
             $book->status = 'accepted';
             $book->save();
-            // toastr('La reserva se ha aceptado', 'success', '¡Aceptada!');
             return response()->json($book);
         } else {
             toastr('No tienes permisos para realizar esta acción', 'error', 'Ops, ¡Error!');
@@ -200,10 +198,10 @@ class BooksController extends Controller
 
     public function assignTable($bookid, $tableid, $date, $tramo) {
 
-        
+
         if (!$bookid) {
             $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
-           
+
             if ($book) {
                 Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
             }
@@ -218,7 +216,6 @@ class BooksController extends Controller
                 // TOASTR PRIMERO VACIAR LA MESA PARA AGREGAR OTRA
             }
         }
-        
         return response()->json(['success' => true]);
     }
 }

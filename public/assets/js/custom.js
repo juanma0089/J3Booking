@@ -1,6 +1,4 @@
 
-// Logo img login anim
-gsap.fromTo('#imgLogo', {opacity: 0,scale:0},{opacity: 1,scale:1, duration: 2})
 // Buttons map tables anim
 function animTable(icon){
     gsap.fromTo(icon, {opacity: 0,scale:0},{opacity: 1,scale:1, duration: 1})

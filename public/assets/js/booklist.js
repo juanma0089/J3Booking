@@ -136,15 +136,11 @@ function completeModal(bookname, func) {
 
 function createAlert(action, bookName) {
 
-    html = '<div class="alert alert-success text-center" role="alert">';
-
     if (action == 'acceptbook') {
-        html += `La reserva ha sido aceptada.`
+        toastr.success('La reserva se ha aceptado','¡Aceptada!');
     } else if (action == 'cancelbook') {
-        html += `La reserva ha sido cancelada.`
+        toastr.warning('La reserva ha sido cancelada.', '¡Cancelada!');
     }
-
-    html += '</div>'
-
-    $('#lista_ac').prepend(html);
 }
+
+
