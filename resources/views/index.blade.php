@@ -32,7 +32,7 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div id='modalBody' class="modal-body">
 
                             <label class="mb-2 fs-3" for="">Asignar reserva</label>
                             <select id='selectAcceptedBooks' class="form-select form-select bg-custom text-white"

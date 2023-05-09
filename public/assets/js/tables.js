@@ -55,12 +55,16 @@ $(function () {
                                     console.log(response)
                                     response = response['success'];
 
-                                    if (!response) {
+                                    if (response == 'deleted') {
                                         $(iconmesa).removeClass('text-danger');
                                         $(iconmesa).addClass('text-success');
-                                    } else {
+                                        toastr.info('Mesa liberada','¡Libre!');
+                                    } else if(response == 'assigned'){
                                         $(iconmesa).removeClass('text-success');
                                         $(iconmesa).addClass('text-danger');
+                                        toastr.success('Mesa asignada','¡Asignada!');
+                                    }else if(response == 'failed'){
+                                        toastr.warning('Antes debes vaciar la mesa','¡Vacía la mesa!');
                                     }
                                 },
                                 complete: function () {
@@ -163,6 +167,7 @@ function htmlTypeTable(table, id, has_booking = 0) {
     }
 
 }
+
 
 function printAcceptedBooks(books, tableid) {
 
