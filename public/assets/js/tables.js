@@ -1,21 +1,21 @@
 $(function () {
-
     getActualDate();
     $.ajax({
         url: '/',
         type: 'GET',
         data: {
-            action: 'get_all_tables'
+            action: 'get_all_tables',
+            date: getActualDate(),
+            tramo: getTramo()
         },
         success: function (response) {
             let html = printTables(response)
             $('#mainPanel').append(html)
 
-
             $('.mesa-icon, .mesa-cruz').on('click', function () {
-
-                let bookid = ''
+                let bookid = '';
                 let tableid = $(this).parent().attr('table-id');
+                let iconmesa = $(this);
                 console.log(tableid)
 
                 $('#modal-table').attr('tableid', tableid)
@@ -36,36 +36,50 @@ $(function () {
                         $('#selectAcceptedBooks').append(printAcceptedBooks(response, tableid));
 
                         $('#assignTable').on('click', function () {
+                            // Desactivar el botón de asignar mesa
+                            $('#assignTable').prop('disabled', true);
+
                             bookid = $('#selectAcceptedBooks').val()
 
+                            $.ajax({
+                                url: "/books",
+                                type: "GET",
+                                data: {
+                                    action: 'assignTable',
+                                    bookid: bookid,
+                                    tableid: tableid,
+                                    date: getActualDate(),
+                                    tramo: getTramo()
+                                },
+                                success: function (response) {
+                                    console.log(response)
+                                    response = response['success'];
+
+                                    if (!response) {
+                                        $(iconmesa).removeClass('text-danger');
+                                        $(iconmesa).addClass('text-success');
+                                    } else {
+                                        $(iconmesa).removeClass('text-success');
+                                        $(iconmesa).addClass('text-danger');
+                                    }
+                                },
+                                complete: function () {
+                                    // Activar el botón de asignar mesa después de que se haya completado la solicitud
+                                    $('#assignTable').prop('disabled', false);
+                                }
+                            });
+                            // Eliminar el manejador de eventos 'click' después de hacer clic en el botón para no ejecutar varias veces la función
+                            $('#assignTable').off('click');
                         })
                     }
                 });
-                
-                $.ajax({
-                    url: "/books",
-                    type: "GET",
-                    data: {
-                        action: 'assignTable',
-                        bookid: bookid,
-                        tableid: tableid,
-                        date: getActualDate(),
-                        tramo: getTramo()
-                    },
-                    success: function (response) {
-                        console.log(response)
-                    }
-                });
-
-
             })
         },
         error: function () {
             alert('Ha ocurrido un error al obtener los usuarios.');
         }
     });
-
-})
+});
 
 function printTables(tables) {
 
@@ -108,7 +122,7 @@ function printTables(tables) {
                     html += `<div class="row d-flex justify-content-center align-content-center"><h5>Fila ${rowNumber}</h5><div class="row row-cols-${mesas[rowNumber - 1] || 1}">`;
                 }
 
-                html += htmlTypeTable(table.type, table.id);
+                html += htmlTypeTable(table.type, table.id, table.has_booking);
 
                 mesasIndex++;
 
@@ -129,22 +143,22 @@ function printTables(tables) {
     return html;
 }
 
-function htmlTypeTable(table, id) {
+function htmlTypeTable(table, id, has_booking = 0) {
 
     switch (table) {
         case 'normal':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'cruzcampo':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-square-fill mesa-cruz" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-cruz" onclick="animTable(this)"></i></button>` +
                 '</div>'
 
         case 'sofa':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 text-success m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking == 1 ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
                 '</div>'
     }
 
