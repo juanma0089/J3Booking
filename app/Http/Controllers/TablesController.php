@@ -31,9 +31,5 @@ class TablesController extends Controller
             ->get();
 
         return response()->json($tables);
-
-
-        $tables = DB::table('tables')->get();
-        return response()->json($tables);
     }
 }

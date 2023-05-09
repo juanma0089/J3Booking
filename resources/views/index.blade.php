@@ -95,7 +95,7 @@
                         <div class="modal-footer d-flex justify-content-evenly">
                             <p class="btn btn-outline-light" data-bs-dismiss="modal" aria-label="Close">Volver</p>
                             <button type="button" id='assignTable'
-                                class="btn btn-outline-light text-success border-success">Asignar</button>
+                                class="btn btn-outline-light text-success border-success" data-bs-dismiss="modal">Asignar</button>
                         </div>
                     </div>
                 </form>
