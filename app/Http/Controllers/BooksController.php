@@ -204,18 +204,19 @@ class BooksController extends Controller
 
             if ($book) {
                 Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
+                return response()->json(['success' => 'deleted']);
             }
 
-            return response()->json(['success' => false]);
         } else {
             $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
 
             if (!$book) {
                 Book::where('id', $bookid)->update(['table_id' => $tableid]);
+                return response()->json(['success' => 'assigned']);
             } else {
-                // TOASTR PRIMERO VACIAR LA MESA PARA AGREGAR OTRA
+                return response()->json(['success' => 'failed']);
             }
         }
-        return response()->json(['success' => true]);
+        return response()->json(['success' => 'noChanges']);
     }
 }
