@@ -52,6 +52,9 @@ function ajaxQuery(action) {
 
     $('.book').remove()
 
+    // Cuando entre en la página filtrará por el día actual directamente
+    $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
+
     $.ajax({
         url: '/books',
         type: 'GET',

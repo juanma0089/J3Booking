@@ -180,46 +180,4 @@ function printAcceptedBooks(books, tableid) {
     return html;
 }
 
-function getActualDate() {
-    let fechaHoraActual = new Date();
-    let hora = fechaHoraActual.getHours();
-    let yesterday;
-    let eventDate;
 
-    if (hora >= 0 && hora < 8) {
-        yesterday = new Date(fechaHoraActual.getTime());
-        yesterday.setDate(fechaHoraActual.getDate() - 1);
-        eventDate = yesterday.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        console.log('La fecha de ayer sin hora es: ' + eventDate);
-    } else {
-        eventDate = fechaHoraActual.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        console.log('La fecha sin hora es: ' + eventDate);
-    }
-
-    eventDate = convertDateFormat(eventDate);
-    return eventDate;
-}
-
-function getTramo() {
-    let fechaHoraActual = new Date();
-    let hora = fechaHoraActual.getHours();
-    let tramo;
-
-    if (hora >= 22 && hora < 24 || hora >= 0 && hora < 8) {
-        tramo = 'night';
-    } else if (hora >= 15 && hora < 22) {
-        tramo = 'afternoon'
-    }
-
-    return tramo;
-}
-
-function convertDateFormat(fecha) {
-    // Separar el día, mes y año usando el método split()
-    let parts = fecha.split('/');
-
-    // Reconstruir la fecha en el formato "YYYY-mm-dd"
-    let nuevaFecha = parts[2] + '-' + parts[1] + '-' + parts[0];
-
-    return nuevaFecha;
-}
