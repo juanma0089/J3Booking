@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-    <section id="mainPanel" class="container-fluid mt-4">
+    <section id="mainPanel" class="container-fluid mt-4 position-relative">
         <div class="card-body text-center">
             <div>
                 <h3 class="fw-bold my-2 text-light text-uppercase">Usuarios</h3>

@@ -1,3 +1,25 @@
+function setCursorToEnd(el) {
+    el.focus();
+    if (typeof el.selectionStart == "number") {
+      el.selectionStart = el.selectionEnd = el.value.length;
+    } else if (typeof el.createTextRange != "undefined") {
+      el.focus();
+      var range = el.createTextRange();
+      range.collapse(false);
+      range.select();
+    }
+  }
+
+  document.querySelectorAll('.accordion-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+      var targetId = this.getAttribute('data-target');
+      let input = document.getElementById(targetId);
+      if (input) {
+        setCursorToEnd(input);
+      }
+    });
+  });
+
 // $(function () {
 //     $('#edituser').submit(function (e) {
 //         e.preventDefault();
