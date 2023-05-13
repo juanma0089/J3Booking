@@ -121,3 +121,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: font-size 0.5s ease-in-out;
 
 }
+.accordion-button:is(.collapsed){
+    background-color: transparent !important;
+    font-size: 0.65em;
+    transition: font-size 0.5s ease-in-out;
+
+}
