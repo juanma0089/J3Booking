@@ -18,13 +18,18 @@ class UpdateUserPassword implements UpdatesUserPasswords
      */
     public function update(User $user, array $input)
     {
-        Validator::make($input, [
+        $validator = Validator::make($input, [
             'current_password' => ['required', 'string', 'current_password:web'],
             'password' => $this->passwordRules(),
         ], [
             'current_password.current_password' => __('La contraseña actual es incorrecta'),
-        ])->validateWithBag('updatePassword');
+        ]);
 
+        if ($validator->fails()) {
+            toastr('La contraseña debe tener mínimo 8 caracteres incluyendo letras y números', 'error', 'Error');
+            return back();
+        }
+        
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
