@@ -95,11 +95,8 @@ class UsersController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-
         $user = User::find($id);
         $sameEmail = $user->email == $request->email ? true : false;
-
-
 
         $request->validate($this->validationRules($sameEmail));
 

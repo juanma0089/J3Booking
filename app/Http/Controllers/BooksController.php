@@ -164,7 +164,7 @@ class BooksController extends Controller
         $book = Book::find($id);
 
         if (Auth::user()->id == $book->user_id || Auth::user()->role == 'admin') {
-            $book->status = 'canceled';
+            $book->status = 'cancelled';
             $book->save();
             return response()->json($book);
         } else {
