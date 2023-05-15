@@ -52,6 +52,10 @@ function ajaxQuery(action) {
 
     $('.book').remove()
 
+    // Cuando entre en la página filtrará por el día actual directamente
+    $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
+    $(`option[value=${getTramo()}]`).attr('selected', true)
+
     $.ajax({
         url: '/books',
         type: 'GET',
@@ -136,15 +140,11 @@ function completeModal(bookname, func) {
 
 function createAlert(action, bookName) {
 
-    html = '<div class="alert alert-success text-center" role="alert">';
-
     if (action == 'acceptbook') {
-        html += `La reserva ha sido aceptada.`
+        toastr.success('La reserva se ha aceptado','¡Aceptada!');
     } else if (action == 'cancelbook') {
-        html += `La reserva ha sido cancelada.`
+        toastr.warning('La reserva ha sido cancelada.', '¡Cancelada!');
     }
-
-    html += '</div>'
-
-    $('#lista_ac').prepend(html);
 }
+
+

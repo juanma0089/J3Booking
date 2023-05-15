@@ -8,8 +8,11 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Faker\Core\Barcode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
+
+use function Symfony\Component\String\b;
 
 class BooksController extends Controller
 {
@@ -83,19 +86,23 @@ class BooksController extends Controller
                 return $this->cancelBook($request->input('id'));
             case 'acceptbook':
                 return $this->acceptBook($request->input('id'));
+            case 'getAcceptedBooks':
+                return $this->getAcceptedBooks($request->input('date'), $request->input('tramo'));
+            case 'assignTable':
+                return $this->assignTable($request->input('bookid'), $request->input('tableid'), $request->input('date'), $request->input('tramo'));
             default:
                 return view('books');
         }
     }
 
-    // ! NUEVA PARA BACKEND BUSQUEDA EN HISTORIAL
+    //* BACKEND BUSQUEDA EN HISTORIAL *//
     public function history(Request $request)
     {
         switch ($request->input('action')) {
             case 'getallbook':
                 return $this->getAllBooks();
             case 'getbooks':
-                $status = $request->input('status') ? $request->input('status') : 'all' ;
+                $status = $request->input('status') ? $request->input('status') : 'all';
                 return $this->getBooks($request->input('time'), $request->input('date'), $status);
             default:
                 return view('history');
@@ -126,7 +133,6 @@ class BooksController extends Controller
                 ->where('books.time', '=', $time)
                 ->where('books.date', '=', $date)
                 ->get();
-
         } else if ($status === 'all' && $time === 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
@@ -158,9 +164,8 @@ class BooksController extends Controller
         $book = Book::find($id);
 
         if (Auth::user()->id == $book->user_id || Auth::user()->role == 'admin') {
-            $book->status = 'canceled';
+            $book->status = 'cancelled';
             $book->save();
-            // toastr('La reserva se ha cancelado', 'warning', '¡Cancelada!');
             return response()->json($book);
         } else {
             // TODO section en el front para mostrar el mensaje
@@ -176,11 +181,42 @@ class BooksController extends Controller
         if (Auth::user()->role == 'admin') {
             $book->status = 'accepted';
             $book->save();
-            // toastr('La reserva se ha aceptado', 'success', '¡Aceptada!');
             return response()->json($book);
         } else {
             toastr('No tienes permisos para realizar esta acción', 'error', 'Ops, ¡Error!');
             return back();
         }
+    }
+
+    public function getAcceptedBooks($date, $tramo)
+    {
+        if ($tramo) {
+            $books = DB::table('books')->where('date', $date)->where('time', $tramo)->where('status', 'accepted')->get();
+            return $books != '' ? response()->json($books) : '';
+        }
+    }
+
+    public function assignTable($bookid, $tableid, $date, $tramo) {
+
+
+        if (!$bookid) {
+            $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
+
+            if ($book) {
+                Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
+                return response()->json(['success' => 'deleted']);
+            }
+
+        } else {
+            $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
+
+            if (!$book) {
+                Book::where('id', $bookid)->update(['table_id' => $tableid]);
+                return response()->json(['success' => 'assigned']);
+            } else {
+                return response()->json(['success' => 'failed']);
+            }
+        }
+        return response()->json(['success' => 'noChanges']);
     }
 }

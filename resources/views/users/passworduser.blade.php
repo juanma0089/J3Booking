@@ -8,7 +8,7 @@
     <section id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
         <div class="container overflow-hidden">
             <div class="row d-flex justify-content-center align-items-center">
-                <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
                         <div class="card-body text-center">
                             <div>
@@ -40,7 +40,7 @@
 
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">
-                                                <input id="password" type="password"
+                                                <input id="new_password" type="password"
                                                     class="form-control form-control-lg no-autofill" name="password"
                                                     required>
                                                 <label class="form-label" for="password">Nueva contraseña</label>
@@ -49,7 +49,7 @@
 
                                         <div class="form-group d-flex">
                                             <div class="form-outline form-white mb-4 col-3 col-md-4">
-                                                <input id="password" type="password"
+                                                <input id="password_confirmation" type="password"
                                                     class="form-control form-control-lg no-autofill"
                                                     name="password_confirmation" required>
                                                 <label class="form-label" for="password">Confirmar contraseña</label>

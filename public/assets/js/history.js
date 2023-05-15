@@ -14,6 +14,8 @@ function ajaxQuery() {
 
     $('.history').remove()
 
+    $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
+
     $.ajax({
         url: '/history',
         type: 'GET',

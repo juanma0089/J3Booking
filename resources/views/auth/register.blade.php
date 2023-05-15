@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-    <section class="vh-100 ">
+    <section id='mainPanel' class="position-relative">
         <div class="container overflow-hidden">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6 col-xl-5">

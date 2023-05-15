@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 256);
             $table->integer('diners');
             $table->enum('booking', ['phone', 'instagram']);
-            $table->string('contact', 256)->nullable();
             $table->date('date');
             $table->enum('time', ['afternoon', 'night']);
             $table->enum('status', ['waiting', 'cancelled', 'accepted']);

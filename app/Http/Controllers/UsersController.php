@@ -79,7 +79,7 @@ class UsersController extends Controller
 
     public function getAllUsers()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->whereNot('id', Auth::user()->id )->get();
         return response()->json($users);
     }
 
@@ -95,11 +95,8 @@ class UsersController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-
         $user = User::find($id);
         $sameEmail = $user->email == $request->email ? true : false;
-
-
 
         $request->validate($this->validationRules($sameEmail));
 

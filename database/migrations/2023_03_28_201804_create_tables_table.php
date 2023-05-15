@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->integer('numtable');
             $table->enum('position', ['in', 'out']);
             $table->enum('type', ['sofa', 'normal', 'cruzcampo', 'opcional']);
             $table->timestamps();

@@ -12,45 +12,24 @@ class TablesController extends Controller
     {
         switch ($request->input('action')) {
             case 'get_all_tables':
-                return $this->getAllTables();
+                return $this->getAllTables($request->input('date'), $request->input('tramo'));
             default:
                 return view('index');
         }
     }
 
-    public function tableGenerate()
+    public function getAllTables($date, $tramo)
     {
-        $num_table = DB::table('tables')->count();
 
-        $table = DB::table('tables');
-        // $table_x_row = 7;
-        // // ceil es una función que redondea hacia arriba un número decimal a su entero más cercano.
-        // $num_rows = ceil($num_table / $table_x_row);
-        // $table_last_row = $num_table % $table_x_row;
+        $tables = DB::table('tables')
+            ->leftJoin('books', function ($join) use ($tramo, $date) {
+                $join->on('tables.id', '=', 'books.table_id')
+                    ->where('books.date', '=', $date)
+                    ->where('books.time', '=', $tramo);
+            })
+            ->select('tables.*', DB::raw('CASE WHEN books.id IS NULL THEN 0 ELSE 1 END AS has_booking'))
+            ->get();
 
-        // $table_generate = [];
-
-        // for ($i = 0; $i < $num_rows; $i++) {
-        //     $num_table_row = $table_x_row;
-        //     if ($i == $num_rows - 1 && $table_last_row > 0) {
-        //         $num_table_row = $table_last_row;
-        //     }
-        //     $table_row = [];
-        //     for ($j = 0; $j < $num_table_row; $j++) {
-        //         $table = DB::table('tables')->skip($i * $table_x_row + $j)->first();
-
-        //         $table_row = $table;
-        //     }
-        //     $table_generate = $table_row;
-
-
-        // }
-        $prueba = 2;
-        return view('index', @compact('prueba', 'num_table', 'table'));
-    }
-
-    public function getAllTables(){
-        $tables = DB::table('tables')->get();
         return response()->json($tables);
     }
 }

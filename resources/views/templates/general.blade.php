@@ -22,6 +22,11 @@
     <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery-3.6.4.min.js') }}"></script>
     <script defer type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
     <script defer type="text/javascript" src="@yield('javascript')"></script>
+    {{-- GSAP --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- TOASTR JS--}}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <title>{{ config('app.name') }}</title>
 </head>
 
