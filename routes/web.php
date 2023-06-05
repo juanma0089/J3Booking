@@ -29,17 +29,17 @@ Route::post('/register', [UsersController::class, 'create'])->name('user.create'
 
 // USERS ROUTES
 
-Route::get('/users', [UsersController::class, "index"])->name('users')->middleware('admin');;
+Route::get('/users', [UsersController::class, "index"])->name('users')->middleware('admin');
 
-Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser');
+Route::get('/edituser/{id}', [UsersController::class, "editUser"])->name('edituser')->middleware('auth');
 
-Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser');
+Route::post('/updateuser/{id}',  [UsersController::class, "updateUser"])->name('updateuser')->middleware('auth');
 
-Route::get('/editpass',function () {return view('/users.passworduser');})->name("cambiarPassword");
+Route::get('/editpass',function () {return view('/users.passworduser');})->name("cambiarPassword")->middleware('auth');
 
 // BOOKS ROUTES
 
-Route::get('/history', [BooksController::class, "history"])->name('history');
+Route::get('/history', [BooksController::class, "history"])->name('history')->middleware('auth');
 
 Route::get('/booking', function () {
     return view('createbooking');
@@ -47,12 +47,12 @@ Route::get('/booking', function () {
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
 
-Route::get('/books', [BooksController::class, "index"])->name('books');
+Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
 
 // OTHER ROUTES
 
 Route::get('/modal', function () {
     return view('modal');
-})->name('modal');
+})->name('modal')->middleware('auth');
 
 Route::get('/', [TablesController::class, "index"])->name('index')->middleware('auth');
