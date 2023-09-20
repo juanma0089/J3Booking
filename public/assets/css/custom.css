@@ -127,3 +127,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: font-size 0.5s ease-in-out;
 
 }
+.img-event{
+    max-height: 300px ;
+}
+
+.card-container{
+    justify-content: space-between;
+}
