@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 256);
-            $table->string('surname', 256);
-            $table->string('email', 256)->unique();
-            $table->string('password', 256);
-            $table->enum('role', ['normal','moderator','admin']);
-            $table->string('phone', 128);
+            $table->string('name')->nullable();
+            $table->date('date');
+            $table->enum('time', ['tarde', 'noche']);
+            $table->integer('min_vip_esc')->nullable();
+            $table->integer('min_vip_mesa')->nullable();
+            $table->integer('min_vip_mesaalta')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('eliminado')->default(0);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('events');
     }
 };
