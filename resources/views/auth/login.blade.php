@@ -9,8 +9,8 @@
                         <div class="card-body text-center">
                             <div>
 
-                                <img id="imgLogo" src="{{ asset('assets/img/logo.png') }}" class="pb-3 logo-login"
-                                    alt="logo J3">
+                                <img id="imgLogo" src="{{ asset('assets/img/logo.svg') }}" class="py-3 logo-login img-fluid"
+                                    alt="logo La isla copas">
 
                                 @if ($errors->any())
                                     @foreach ($errors->all() as $error)
