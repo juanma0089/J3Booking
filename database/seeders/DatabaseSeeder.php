@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $sql = database_path(path: 'j3database.sql');
+        $sql = database_path(path: 'laisladb.sql');
         DB::unprepared(file_get_contents($sql));
     }
 }

@@ -17,6 +17,10 @@ class Book extends Model
         return $this->hasOne(User::class);
     }
 
+    public function events() {
+        return $this->hasOne(Event::class);
+    }
+
     public function bottles() {
         return $this->belongsToMany(Bottle::class)->withTimestamps()->withPivot('amount');
 
