@@ -56,3 +56,7 @@ Route::get('/modal', function () {
 })->name('modal')->middleware('auth');
 
 Route::get('/', [TablesController::class, "index"])->name('index')->middleware('auth');
+
+// Test
+
+Route::view('/test','createevent')->name('createevent');

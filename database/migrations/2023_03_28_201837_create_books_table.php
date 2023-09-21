@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name', 256);
             $table->integer('diners');
-            $table->enum('booking', ['phone', 'instagram']);
-            $table->date('date');
-            $table->enum('time', ['afternoon', 'night']);
+            // $table->date('date');
+            // $table->enum('time', ['afternoon', 'night']);
             $table->enum('status', ['waiting', 'cancelled', 'accepted']);
             $table->foreignId('table_id')->nullable()->references('id')->on('tables')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->nullOnDelete();
+            $table->foreignId('event_id')->references('id')->on('events');
             $table->timestamps();
         });
     }

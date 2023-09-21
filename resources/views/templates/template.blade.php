@@ -27,19 +27,21 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('index') }}">Mesas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="{{ route('booking') }}">Crear
-                            reserva</a>
+                        <a class="nav-link text-white" href="{{ route('index') }}">Eventos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="{{ route('books') }}">Reservas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page"
-                            href="{{ route('history') }}">Historial</a>
+                        href="{{ route('history') }}">Historial</a>
                     </li>
+                    @if (Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{{ route('booking') }}">Crear
+                            evento</a>
+                    </li>
+                    @endif
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('users') }}">Usuarios</a>
@@ -64,9 +66,11 @@
                         <a class="nav-link active text-white" aria-current="page" href="{{ route('index') }}"><i
                                 class="fa-solid fa-house fa-xl bg-black"></i></a>
                     </li>
+                    @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link text-white"href="{{ route('booking') }}"><i class="bi bi-plus-lg fa-xl"></i></a>
                     </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('edituser', Auth::user()->id) }}"><i
                                 class="fa-solid fa-user fa-xl"></i></a>

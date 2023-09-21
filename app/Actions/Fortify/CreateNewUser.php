@@ -36,7 +36,6 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => [],
-            'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
             'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],
             'phone' => []
         ])->validate();
