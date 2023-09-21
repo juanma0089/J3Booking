@@ -18,9 +18,12 @@
                     </div>
                     <div class="col-12 col-md-8 d-flex flex-column p-3 text-white card-container">
                         {{-- Date --}}
-                        <h4 class="m-0">12/11/23</h4>
+                        <div class='d-flex flex-row justify-content-between'>
+                            <h4 class="m-0">12/11/23</h4>
+                            <p class="m-0">Turno</p>
+                        </div>
                         {{-- Tittle --}}
-                        <h2 class="fw-bolder">Sábado noche: Open Day</h2>
+                        <h2 class="fw-bolder">Open Day</h2>
                         {{-- Buttons --}}
                         <div
                             class="col-12 bg-transparent border-0 align-self-lg-center text-dark d-flex justify-content-evenly align-self-end">
