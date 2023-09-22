@@ -4,6 +4,7 @@ use App\Http\Controllers\BooksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TablesController;
+use App\Http\Controllers\EventsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,8 +56,12 @@ Route::get('/modal', function () {
     return view('modal');
 })->name('modal')->middleware('auth');
 
-Route::get('/', [TablesController::class, "index"])->name('index')->middleware('auth');
+Route::get('/', [EventsController::class, "index"])->name('index')->middleware('auth');
 
 // Test
 
-Route::view('/test','createevent')->name('createevent');
+Route::get('/eventform', function () {
+    return view('createevent');
+})->name('create')->middleware('admin');
+
+Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');

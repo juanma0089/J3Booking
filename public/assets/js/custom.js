@@ -1,7 +1,7 @@
 
 // Buttons map tables anim
-function animTable(icon){
-    gsap.fromTo(icon, {opacity: 0,scale:0},{opacity: 1,scale:1, duration: 1})
+function animTable(icon) {
+    gsap.fromTo(icon, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 1 })
 }
 
 
@@ -64,6 +64,55 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
     return !ok ? errors : '';
 }
 
+function validateFieldsEvent(name = '', minvipesc = '', minvipmesa = '', minvipmesaalta = '', date = '', time = '') {
+    let errors = [];
+    let ok;
+
+    if (!minvipesc) {
+        errors.push('Por favor, introduzca el número mínimo de botellas para el escenario.')
+        ok = false;
+    } else if (isNaN(minvipesc) || minvipesc < 0) {
+        errors.push('Por favor, introduzca un número válido para el min de botellas escenario')
+        ok = false;
+    }
+
+    if (!minvipmesa) {
+        errors.push('Por favor, introduzca el número mínimo de botellas para las mesas.')
+        ok = false;
+    } else if (isNaN(minvipmesa) || minvipmesa < 0) {
+        errors.push('Por favor, introduzca un número válido para el min de botellas para las mesas')
+        ok = false;
+    }
+
+    if (!minvipmesaalta) {
+        errors.push('Por favor, introduzca el número mínimo de botellas para las mesas altas.')
+        ok = false;
+    } else if (isNaN(minvipmesaalta) || minvipmesaalta < 0) {
+        errors.push('Por favor, introduzca un número válido para el min de botellas para las mesas altas')
+        ok = false;
+    }
+
+    if (!date) {
+        errors.push('Por favor, introduzca una fecha.');
+        ok = false;
+    } else {
+        const inputDate = new Date(date);
+        const currentDate = new Date();
+        if (inputDate.getTime() < currentDate.getTime()) {
+            errors.push('La fecha introducida es anterior al día de hoy.');
+            ok = false;
+        }
+    }
+
+    if (!time) {
+        errors.push('Por favor, introduzca un turno.');
+        ok = false;
+    }
+
+    return !ok ? errors : '';
+}
+
+
 function validateFieldsBooking(name = '', diners = '', date = '', time = '', booking = '') {
     let errors = [];
     let ok;
@@ -91,10 +140,10 @@ function validateFieldsBooking(name = '', diners = '', date = '', time = '', boo
         const inputDate = new Date(date);
         const currentDate = new Date();
         if (inputDate.getTime() < currentDate.getTime()) {
-          errors.push('La fecha introducida es anterior al día de hoy.');
-          ok = false;
+            errors.push('La fecha introducida es anterior al día de hoy.');
+            ok = false;
         }
-      }
+    }
 
     if (!time) {
         errors.push('Por favor, introduzca un turno.');

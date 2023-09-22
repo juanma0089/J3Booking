@@ -52,7 +52,7 @@ class BooksController extends Controller
 
             $newBook->save();
             toastr('Se ha creado una nueva reserva', "success", '¡Listo!');
-            return back();
+            return view('index');
         } else {
             $errors = $request->errors();
             return back()->with('errors', $errors);

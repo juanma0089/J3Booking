@@ -1,8 +1,8 @@
 @extends('templates.template')
 
 @section('javascript')
-    {{ asset('assets/js/register.js') }}
-    {{ asset('assets/js/createbooking.js') }}
+    {{-- {{ asset('assets/js/register.js') }} --}}
+    {{ asset('assets/js/createevent.js') }}
 @endsection
 
 @section('body')
@@ -23,17 +23,43 @@
                                     @endforeach
                                 @endif
 
+
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
                                 {{-- Realizar ruta para action --}}
-                                <form method="POST" action="{{ route('bookingForm.create') }}" id='createebent'>
+                                <form method="POST" action="{{ route('eventForm.create') }}" enctype="multipart/form-data"
+                                    id='createevent'>
                                     @csrf
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
                                                 class="form-control form-control-lg no-autofill " name="name"
                                                 value="{{ old('name') }}" required autofocus>
-                                            <label class="form-label" for="name">Nombre evento<span
-                                                    class="text-danger">*</span></label>
+                                            <label class="form-label" for="name">Título</label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="min_vip_esc" type="number"
+                                                class="form-control form-control-lg no-autofill" name="min_vip_esc"
+                                                value="{{ old('min_vip_esc') ? old('min_vip_esc') : 2 }}" min="0"
+                                                required>
+                                            <label class="form-label" for="min_vip_esc">Mín. botellas VIP Escenario</label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="min_vip_mesa" type="number"
+                                                class="form-control form-control-lg no-autofill" name="min_vip_mesa"
+                                                value="{{ old('min_vip_mesa') ? old('min_vip_mesa') : 3 }}"min="0"
+                                                required>
+                                            <label class="form-label" for="min_vip_mesa">Mín. botellas VIP Mesas</label>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="min_vip_mesaalta" type="number"
+                                                class="form-control form-control-lg no-autofill" name="min_vip_mesaalta"
+                                                value="{{ old('min_vip_mesaalta') ? old('min_vip_mesaalta') : 1 }}"min="0"
+                                                required>
+                                            <label class="form-label" for="min_vip_mesaalta">Mín. botellas VIP Mesas
+                                                Altas</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
@@ -48,18 +74,20 @@
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="time" id='time' required>
                                                 <option value="" hidden selected>Turno</option>
-                                                <option value="afternoon">Tarde</option>
-                                                <option value="night">Noche</option>
+                                                <option value="tarde">Tarde</option>
+                                                <option value="noche">Noche</option>
                                             </select>
                                         </div>
+
                                         <div
                                             class="form-outline form-white border border-white rounded-top border-bottom-0 col-3 col-md-4">
-                                            <label for="border border-1 border-white" for="image">Imagen del evento</label>
+                                            <label class="" for="image">Imagen del evento</label>
                                         </div>
                                         <div
                                             class="form-outline form-white border border-white rounded-bottom mb-4 col-3 col-md-4">
                                             <input id="image" type="file"
-                                                class="form-control form-control-lg no-autofill" name="image" value="{{ old('image') }}"">
+                                                class="form-control form-control-lg no-autofill" name="image"
+                                                value="{{ old('image') }}">
                                         </div>
 
                                     </div>
