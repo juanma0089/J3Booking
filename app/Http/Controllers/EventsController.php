@@ -22,7 +22,7 @@ class EventsController extends Controller
             'min_vip_mesaalta' => ['int', 'min:0'],
             'date' => ['required', 'date_format:Y-m-d'],
             'time' => Rule::in(['tarde', 'noche']),
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['sometimes', 'nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         if ($validator->fails()) {
@@ -65,7 +65,7 @@ class EventsController extends Controller
 
             $newEvent->save();
             toastr('Se ha creado un nuevo evento', "success", '¡Listo!');
-            return back();
+            return redirect()->route('index');
         } else {
             $errors = $request->errors();
             return back()->with('errors', $errors);

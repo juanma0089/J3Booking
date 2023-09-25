@@ -62,6 +62,6 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 Route::get('/eventform', function () {
     return view('createevent');
-})->name('create')->middleware('admin');
+})->name('createEvent')->middleware('admin');
 
 Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');

@@ -38,7 +38,7 @@
                     </li>
                     @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="{{ route('booking') }}">Crear
+                        <a class="nav-link active text-white" aria-current="page" href="{{ route('createEvent') }}">Crear
                             evento</a>
                     </li>
                     @endif
