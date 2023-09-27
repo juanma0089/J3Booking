@@ -39,8 +39,8 @@
                                         data-bs-target="#exampleModalToggle-{{ $evento->id }}"
                                         data-bs-toggle="modal"></button>
 
-                                    <button type="button"
-                                        class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn"></button>
+                                    <a href="{{route('editevent', ['id' => $evento->id])}}"><button type="button"
+                                        class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn"></button></a>
 
                                     <button type="button"
                                         class="fs-2 bi bi-box-arrow-right text-success bg-transparent border-0 confirm-btn"></button>

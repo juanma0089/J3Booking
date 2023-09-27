@@ -11,7 +11,7 @@ $(function () {
         var time = $('#time').val() ? $('#time').val() : '';
 
         // Obtener el campo de imagen
-        
+
         var image = $('#image')[0].files[0]; // El primer archivo seleccionado
 
         errors = validateFieldsEvent(name, min_vip_esc, min_vip_mesa, min_vip_mesaalta, date, time);

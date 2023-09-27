@@ -58,6 +58,12 @@ Route::get('/eventform', function () {
 
 Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');
 
+// Route::get('/editevent/{id}', function () {
+//     return view('editevent');
+// })->name('editevent')->middleware('admin');
+Route::get('/editevent/{id}', [EventsController::class, "editEvent"])->name('editevent')->middleware('admin');
+
+Route::put('/editevent/{id}', [EventsController::class, 'edit'])->name('editEvent.edit')->middleware('admin');
 // Route::get('/events', [EventsController::class, "index"])->name('events')->middleware('auth');
 
 Route::get('/deleteevent/{id}', [EventsController::class, 'delete'])->name('deleteevent')->middleware('admin');
@@ -71,5 +77,5 @@ Route::get('/modal', function () {
 
 Route::get('/', [EventsController::class, "index"])->name('index')->middleware('auth');
 
-// Test
+
 

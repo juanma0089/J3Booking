@@ -2,7 +2,7 @@
 
 @section('javascript')
     {{-- {{ asset('assets/js/register.js') }} --}}
-    {{ asset('assets/js/createevent.js') }}
+    {{-- {{ asset('assets/js/createevent.js') }} --}}
 @endsection
 
 @section('body')
@@ -13,7 +13,7 @@
                     <div class="bg-custom text-white" style="border-radius: 1rem;">
                         <div class="card-body text-center">
                             <div>
-                                <h3 class="fw-bold my-3 mt-2 text-uppercase">Crear nuevo evento</h3>
+                                <h3 class="fw-bold my-3 mt-2 text-uppercase">Editando evento</h3>
 
                                 @if ($errors->any())
                                     @foreach ($errors->all() as $error)
@@ -24,29 +24,30 @@
                                 @endif
 
                                 {{-- Realizar ruta para action --}}
-                                <form method="POST" action="{{ route('eventForm.create') }}" enctype="multipart/form-data"
-                                    id='createevent'>
+                                <form method="POST" action="{{ route('editEvent.edit', ['id' => $event->id]) }}"
+                                    enctype="multipart/form-data" id='createevent'>
                                     @csrf
+                                    @method('PUT')
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="name" type="text"
                                                 class="form-control form-control-lg no-autofill " name="name"
-                                                value="{{ old('name') }}" required autofocus>
+                                                value="{{ old('name', $event->name) }}" required autofocus>
                                             <label class="form-label" for="name">Título</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_esc" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_esc"
-                                                value="{{ old('min_vip_esc') ? old('min_vip_esc') : 2 }}" min="0"
-                                                required>
+                                                value="{{ old('min_vip_esc') ? old('min_vip_esc', $event->min_vip_esc) : 2 }}"
+                                                min="0" required>
                                             <label class="form-label" for="min_vip_esc">Mín. botellas VIP Escenario</label>
                                         </div>
 
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_mesa" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_mesa"
-                                                value="{{ old('min_vip_mesa') ? old('min_vip_mesa') : 3 }}"min="0"
+                                                value="{{ old('min_vip_mesa') ? old('min_vip_mesa', $event->min_vip_mesa) : 3 }}"min="0"
                                                 required>
                                             <label class="form-label" for="min_vip_mesa">Mín. botellas VIP Mesas</label>
                                         </div>
@@ -54,7 +55,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_mesaalta" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_mesaalta"
-                                                value="{{ old('min_vip_mesaalta') ? old('min_vip_mesaalta') : 1 }}"min="0"
+                                                value="{{ old('min_vip_mesaalta') ? old('min_vip_mesaalta', $event->min_vip_mesaalta) : 1 }}"min="0"
                                                 required>
                                             <label class="form-label" for="min_vip_mesaalta">Mín. botellas VIP Mesas
                                                 Altas</label>
@@ -63,7 +64,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="date" type="date"
                                                 class="form-control form-control-lg no-autofill" name="date"
-                                                value="{{ old('date') }}" required>
+                                                value="{{ old('date', $event->date) }}" required>
                                             <label class="form-label" for="date">Fecha</label>
                                         </div>
 
@@ -72,8 +73,10 @@
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="time" id='time' required>
                                                 <option value="" hidden selected>Turno</option>
-                                                <option value="tarde">Tarde</option>
-                                                <option value="noche">Noche</option>
+                                                <option {{ $event->time == 'tarde' ? ('selected=true') : '' }}
+                                                    value="tarde">Tarde</option>
+                                                <option {{ $event->time == 'noche' ? ('selected=true') : '' }}
+                                                    value="noche">Noche</option>
                                             </select>
                                         </div>
 
@@ -85,13 +88,13 @@
                                             class="form-outline form-white border border-white rounded-bottom mb-4 col-3 col-md-4">
                                             <input id="image" type="file"
                                                 class="form-control form-control-lg no-autofill" name="image"
-                                                value="{{ old('image') }}">
+                                                value="{{ old('image', $event->image) }}">
                                         </div>
 
                                     </div>
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
-                                        {{ __('Registrar evento') }}</button>
+                                        {{ __('Confirmar cambios') }}</button>
 
                                 </form>
 

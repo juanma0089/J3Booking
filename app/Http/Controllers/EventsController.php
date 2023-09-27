@@ -96,8 +96,68 @@ class EventsController extends Controller
         }
     }
 
+    public function editEvent($id)
+    {
+        if (Event::find($id)) {
+            $event = Event::find($id);
+            return view('editevent', ['event' => $event]);
+        } else {
+           return redirect()->route('index');
+        }
+    }
+    public function edit(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'min_vip_esc' => ['int', 'min:0'],
+            'min_vip_mesa' => ['int', 'min:0'],
+            'min_vip_mesaalta' => ['int', 'min:0'],
+            'date' => ['required', 'date_format:Y-m-d'],
+            'time' => Rule::in(['tarde', 'noche']),
+            'image' => ['sometimes', 'nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
+        $fechaEvento = $this->validatedate($request->date);
 
+        if (!$fechaEvento) {
+            $errors = new MessageBag();
+            $errors->add('date', 'La fecha introducida es anterior al día actual.');
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
+        $errors = $request->has('errors');
+        if (!$errors) {
+
+            $event->min_vip_mesa = $request->min_vip_mesa;
+            $event->min_vip_mesaalta = $request->min_vip_mesaalta;
+            $event->date = $request->date;
+            $event->min_vip_esc = $request->min_vip_esc;
+            $event->time = $request->time;
+            $event->name = $request->name;
+
+            // Renombrar y guardar la imagen
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $extension = $image->getClientOriginalExtension();
+
+                $eventName = str_replace(' ', '_', strtolower($request->name));
+                $imageName = $eventName . '.' . $extension;
+                $image->move(public_path('assets/img/events'), $imageName);
+
+                $event->image = $imageName;
+            }
+
+            $event->save();
+            toastr('Se ha modificado el evento', "success", '¡Listo!');
+            return redirect()->route('index');
+        } else {
+            $errors = $request->errors();
+            return back()->with('errors', $errors);
+        }
+    }
 
     public function validatedate($request)
     {
