@@ -10,7 +10,7 @@
             @foreach ($eventos as $evento)
                 @if ($evento->eliminado == 0)
                     {{-- Inicio Card --}}
-                    <section id='evento-{{ $evento->id }}' class="col-md-6 d-flex mb-2 p-1">
+                    <section id='evento-{{ $evento->id }}' class="col-10 col-md-6 d-flex mb-2 p-1">
                         <div
                             class="container d-flex flex-column flex-md-row col-12 bg-black bg-opacity-50 border border-2 border-white p-0">
                             {{-- Img --}}
@@ -27,7 +27,9 @@
                                     <p class="m-0">{{ ucfirst($evento->time) }}</p>
                                 </div>
                                 {{-- Tittle --}}
-                                <h2 class="fw-bolder">{{ $evento->name }}</h2>
+                                <div class='d-flex'>
+                                    <h2 class="fw-bolder text-break">{{ $evento->name }}</h2>
+                                </div>
                                 {{-- Buttons --}}
                                 <div
                                     class="col-12 bg-transparent border-0 align-self-lg-center text-dark d-flex justify-content-evenly align-self-end">
@@ -59,7 +61,7 @@
                                 <div class="modal-body border-0" >
                                     <h6>¿Está seguro que desea eliminar el evento {{ $evento->name }} del día
                                         {{ $evento->date }} {{ $evento->time }}?</h6>
-                                    
+
                                 </div>
                                 <div class="modal-body border-0">
                                     <p id="messageModal"></p>
