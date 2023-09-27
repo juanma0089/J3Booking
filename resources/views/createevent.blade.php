@@ -23,8 +23,6 @@
                                     @endforeach
                                 @endif
 
-
-                                <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
                                 {{-- Realizar ruta para action --}}
                                 <form method="POST" action="{{ route('eventForm.create') }}" enctype="multipart/form-data"
                                     id='createevent'>
@@ -92,8 +90,8 @@
 
                                     </div>
 
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
-                                        {{ __('Registrar evento') }}</button>
+                                        <button class="btn btn-outline-light btn-lg px-5" type="submit" id='registerBtn'>
+                                            {{ __('Registrar evento') }}</button>
 
                                 </form>
 
