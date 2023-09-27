@@ -14,8 +14,8 @@ $(function () {
             type: 'GET',
             success: function () {
                 $("#btnClose1").click();
-                console.log(eventId);
-                // Resto del código
+                
+                window.location.href = '/';
             },
             error: function () {
                 alert('Ha ocurrido un error.');
