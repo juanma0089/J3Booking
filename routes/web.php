@@ -50,6 +50,19 @@ Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.c
 
 Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
 
+// EVENTS
+
+Route::get('/eventform', function () {
+    return view('createevent');
+})->name('createEvent')->middleware('admin');
+
+Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');
+
+// Route::get('/events', [EventsController::class, "index"])->name('events')->middleware('auth');
+
+Route::get('/deleteevent/{id}', [EventsController::class, 'delete'])->name('deleteevent')->middleware('admin');
+
+
 // OTHER ROUTES
 
 Route::get('/modal', function () {
@@ -60,8 +73,3 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 // Test
 
-Route::get('/eventform', function () {
-    return view('createevent');
-})->name('createEvent')->middleware('admin');
-
-Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');

@@ -13,6 +13,30 @@ use Illuminate\Support\MessageBag;
 
 class EventsController extends Controller
 {
+
+    // public function index(Request $request)
+    // {
+
+    //     switch ($request->input('action')) {
+    //         // case 'getbooks':
+    //         //     $status = $request->input('status') ? $request->input('status') : 'waiting';
+    //         //     return $this->getBooks($request->input('time'), $request->input('date'), $status);
+    //         case 'deleteevent':
+    //              die('AAAAAAAAAAAAAAA');
+    //             return $this->delete($request->input('id'));
+    //         case 'acceptbook':
+    //             return $this->acceptBook($request->input('id'));
+    //         case 'getAcceptedBooks':
+    //             return $this->getAcceptedBooks($request->input('date'), $request->input('tramo'));
+    //         case 'assignTable':
+    //             return $this->assignTable($request->input('bookid'), $request->input('tableid'), $request->input('date'), $request->input('tramo'));
+    //         default:
+    //             return $this->getAllEvents();
+    //     }
+    // }
+
+
+
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -72,12 +96,7 @@ class EventsController extends Controller
         }
     }
 
-    public function index()
-    {
-        $eventos = DB::table('events')->get();
 
-        return view('index', ['eventos' => $eventos]);
-    }
 
 
     public function validatedate($request)
@@ -93,5 +112,28 @@ class EventsController extends Controller
         } else {
             return true;
         }
+    }
+
+    public function delete($id)
+{
+    // Buscar el evento utilizando el modelo Event
+    $event = Event::find($id);
+
+    if (!$event) {
+        // Manejar el caso en el que no se encuentre el evento
+        return abort(404);
+    }
+
+    $event->eliminado = 1;
+
+    $event->save();
+
+    return $this->index();
+}
+    public function index()
+    {
+        $eventos = DB::table('events')->get();
+
+        return view('index', ['eventos' => $eventos]);
     }
 }
