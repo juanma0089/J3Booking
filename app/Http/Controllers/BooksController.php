@@ -20,11 +20,13 @@ class BooksController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
+            'event_id' => ['required', 'int', 'min:1'],
             'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'surname' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'diners' => ['int', 'min:1'],
-            'date' => ['required', 'date_format:Y-m-d'],
-            'time' => Rule::in(['afternoon', 'night']),
-            'booking' => Rule::in(['phone', 'instagram']),
+            // 'date' => ['required', 'date_format:Y-m-d'],
+            // 'time' => Rule::in(['afternoon', 'night']),
+            // 'booking' => Rule::in(['phone', 'instagram']),
         ]);
 
         if ($validator->fails()) {
@@ -32,27 +34,29 @@ class BooksController extends Controller
         }
 
 
-        $fecha_reserva = $this->validatedate($request->date);
+        // $fecha_reserva = $this->validatedate($request->date);
 
-        if (!$fecha_reserva) {
-            $errors = new MessageBag();
-            $errors->add('date', 'La fecha introducida es anterior al día actual.');
-            return redirect()->back()->withErrors($errors)->withInput();
-        }
+        // if (!$fecha_reserva) {
+        //     $errors = new MessageBag();
+        //     $errors->add('date', 'La fecha introducida es anterior al día actual.');
+        //     return redirect()->back()->withErrors($errors)->withInput();
+        // }
 
         $errors = $request->has('errors');
         if (!$errors) {
             $newBook = new Book;
+            $newBook->event_id = $request->event_id;
             $newBook->name = $request->name;
+            $newBook->surname = $request->surname;
             $newBook->diners = $request->diners;
-            $newBook->booking = $request->booking;
-            $newBook->date = $request->date;
-            $newBook->time = $request->time;
+            // $newBook->booking = $request->booking;
+            // $newBook->date = $request->date;
+            // $newBook->time = $request->time;
             $newBook->user_id = Auth::id();
 
             $newBook->save();
             toastr('Se ha creado una nueva reserva', "success", '¡Listo!');
-            return view('index');
+            return redirect()->route('index');
         } else {
             $errors = $request->errors();
             return back()->with('errors', $errors);

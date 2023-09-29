@@ -42,7 +42,7 @@ Route::get('/editpass',function () {return view('/users.passworduser');})->name(
 
 Route::get('/history', [BooksController::class, "history"])->name('history')->middleware('auth');
 
-Route::get('/booking', function () {
+Route::get('/booking/{id?}', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 

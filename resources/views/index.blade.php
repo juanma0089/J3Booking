@@ -34,16 +34,17 @@
                                 <div
                                     class="col-12 bg-transparent border-0 align-self-lg-center text-dark d-flex justify-content-evenly align-self-end">
 
+                                    @if (Auth::user()->role == 'admin')
+                                        <button type="button"
+                                            class="fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn"
+                                            data-bs-target="#exampleModalToggle-{{ $evento->id }}"
+                                            data-bs-toggle="modal"></button>
+                                        <a href="{{ route('editevent', ['id' => $evento->id]) }}"><button type="button"
+                                                class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn"></button></a>
+                                    @endif
+                                    <a href="{{ route('booking', ['id' => $evento->id]) }}">
                                     <button type="button"
-                                        class="fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn"
-                                        data-bs-target="#exampleModalToggle-{{ $evento->id }}"
-                                        data-bs-toggle="modal"></button>
-
-                                    <a href="{{route('editevent', ['id' => $evento->id])}}"><button type="button"
-                                        class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn"></button></a>
-
-                                    <button type="button"
-                                        class="fs-2 bi bi-box-arrow-right text-success bg-transparent border-0 confirm-btn"></button>
+                                        class="fs-2 bi bi-person-plus text-success bg-transparent border-0 confirm-btn"></button></a>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +59,7 @@
                                     <button id="btnClose1" type="button" class="btn-close btn-close-white"
                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body border-0" >
+                                <div class="modal-body border-0">
                                     <h6>¿Está seguro que desea eliminar el evento {{ $evento->name }} del día
                                         {{ $evento->date }} {{ $evento->time }}?</h6>
 
@@ -69,7 +70,7 @@
                                 <div class="modal-footer border-0 text-center p-4">
                                     <button id="btnClose2" type="button" data-bs-dismiss="modal" aria-label="Close"
                                         class="btn btn-outline-light btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Volver</button>
-                                    <button id="btnConfirmModal-{{$evento->id}}" data-id="{{ $evento->id }}"
+                                    <button id="btnConfirmModal-{{ $evento->id }}" data-id="{{ $evento->id }}"
                                         data-name="{{ $evento->name }}" action='deleteevent' type="button"
                                         class="btn btn-outline-danger btn-md col-5 mx-1 my-3 my-md-0 col-md-4 text-center">Confirmar</button>
                                 </div>

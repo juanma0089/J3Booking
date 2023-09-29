@@ -113,15 +113,29 @@ function validateFieldsEvent(name = '', minvipesc = '', minvipmesa = '', minvipm
 }
 
 
-function validateFieldsBooking(name = '', diners = '', date = '', time = '', booking = '') {
+function validateFieldsBooking(event_id = '', name = '', surname = '',  diners = '') {
     let errors = [];
     let ok;
 
+    if (!event_id) {
+        errors.push('Se ha producido un error al asignar el evento.')
+        ok = false;
+    } else if (!event_id.match(/^[0-9]+?$/)) {
+        errors.push('Se ha producido un error al asignar el evento.')
+        ok = false;
+    }
     if (!name) {
         errors.push('Por favor, introduzca un nombre.')
         ok = false;
     } else if (!name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+)?$/)) {
         errors.push('El nombre introducido no es válido')
+        ok = false;
+    }
+    if (!surname) {
+        errors.push('Por favor, introduzca apellidos.')
+        ok = false;
+    } else if (!surname.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+)?$/)) {
+        errors.push('Los apellidos introducido no es válido')
         ok = false;
     }
 
@@ -133,27 +147,27 @@ function validateFieldsBooking(name = '', diners = '', date = '', time = '', boo
         ok = false;
     }
 
-    if (!date) {
-        errors.push('Por favor, introduzca una fecha.');
-        ok = false;
-    } else {
-        const inputDate = new Date(date);
-        const currentDate = new Date();
-        if (inputDate.getTime() < currentDate.getTime()) {
-            errors.push('La fecha introducida es anterior al día de hoy.');
-            ok = false;
-        }
-    }
+    // if (!date) {
+    //     errors.push('Por favor, introduzca una fecha.');
+    //     ok = false;
+    // } else {
+    //     const inputDate = new Date(date);
+    //     const currentDate = new Date();
+    //     if (inputDate.getTime() < currentDate.getTime()) {
+    //         errors.push('La fecha introducida es anterior al día de hoy.');
+    //         ok = false;
+    //     }
+    // }
 
-    if (!time) {
-        errors.push('Por favor, introduzca un turno.');
-        ok = false;
-    }
+    // if (!time) {
+    //     errors.push('Por favor, introduzca un turno.');
+    //     ok = false;
+    // }
 
-    if (!booking) {
-        errors.push('Por favor, seleccione un tipo de reserva');
-        ok = false;
-    }
+    // if (!booking) {
+    //     errors.push('Por favor, seleccione un tipo de reserva');
+    //     ok = false;
+    // }
 
     return !ok ? errors : '';
 }
