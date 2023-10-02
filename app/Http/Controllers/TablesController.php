@@ -26,7 +26,8 @@ class TablesController extends Controller
                 $join->on('tables.id', '=', 'books.table_id')
                     ->where('books.event_id', '=', $idevent);
             })
-            ->select('tables.*', 'books.id as idbook', 'books.status as statusbook')  
+            ->select('tables.*', 'books.id as idbook', 'books.status as statusbook')
+            ->orderBy('tables.id', 'asc')
             ->orderBy('tables.type', 'asc')
             ->get();
 

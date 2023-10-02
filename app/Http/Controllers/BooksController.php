@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +24,7 @@ class BooksController extends Controller
             'event_id' => ['required', 'int', 'min:1'],
             'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'surname' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'type' => Rule::in(['pista', 'vip']),
             'diners' => ['int', 'min:1'],
             // 'date' => ['required', 'date_format:Y-m-d'],
             // 'time' => Rule::in(['afternoon', 'night']),
@@ -31,6 +33,11 @@ class BooksController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if(!empty($request->table_id)){
+            if(!Table::where('id', $request->table_id)->exists()){
+                return back()->with('errors', 'La mesa no se encuentra disponible.');
+            }
         }
 
 
@@ -49,8 +56,8 @@ class BooksController extends Controller
             $newBook->name = $request->name;
             $newBook->surname = $request->surname;
             $newBook->diners = $request->diners;
-            // $newBook->booking = $request->booking;
-            // $newBook->date = $request->date;
+            $newBook->type = $request->type;
+            $newBook->table_id = $request->table_id;
             // $newBook->time = $request->time;
             $newBook->user_id = Auth::id();
 

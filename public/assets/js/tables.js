@@ -1,7 +1,7 @@
+let idevent = $('#mainPanel').attr('idevent')
 $(function () {
     getActualDate();
 
-    let idevent = $('#mainPanel').attr('idevent')
 
     $.ajax({
         url: '/oldindex/' + idevent,
@@ -77,12 +77,12 @@ function htmlTypeTable(id, type, has_booking = null, status) {
 
         case 'mesaalta':
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking != null ? ((status == 'waiting') ? 'text-warning' : (status == 'accepted') ? 'text-danger' : 'text-success') : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<a ${(has_booking === null) ? "href=/booking/"+idevent+"/"+id : ''} table-id="${id}" class="bg-transparent border-0 ${(has_booking != null ? ((status == 'waiting') ? 'text-warning' : (status == 'accepted') ? 'text-danger' : 'text-success') : 'text-success')} m-0 p-0"><i class="bi bi-square-fill mesa-icon" onclick="animTable(this)"></i></a>` +
                 '</div>'
 
         default:
             return '<div class="col d-flex justify-content-center p-0">' +
-                `<button table-id="${id}" class="bg-transparent border-0 ${(has_booking != null ? 'text-danger' : 'text-success')} m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></button>` +
+                `<a ${(has_booking === null) ? "href=/booking/"+idevent+"/"+id : ''} table-id="${id}" class="bg-transparent border-0 ${(has_booking != null ? ((status == 'waiting') ? 'text-warning' : (status == 'accepted') ? 'text-danger' : 'text-success') : 'text-success')} m-0 p-0"><i class="bi bi-displayport-fill mesa-icon" onclick="animTable(this)"></i></a>` +
                 '</div>'
     }
 

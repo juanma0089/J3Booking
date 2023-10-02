@@ -113,7 +113,7 @@ function validateFieldsEvent(name = '', minvipesc = '', minvipmesa = '', minvipm
 }
 
 
-function validateFieldsBooking(event_id = '', name = '', surname = '',  diners = '') {
+function validateFieldsBooking(event_id = '',type='', name = '', surname = '',  diners = '') {
     let errors = [];
     let ok;
 
@@ -144,6 +144,13 @@ function validateFieldsBooking(event_id = '', name = '', surname = '',  diners =
         ok = false;
     } else if (isNaN(diners) || diners < 1) {
         errors.push('Por favor, introduzca un número válido para el nº de clientes (mínimo 1).')
+        ok = false;
+    }
+    if (!type) {
+        errors.push('Ha ocurrido un error con el tipo de reserva.')
+        ok = false;
+    } else if (type != 'pista' && type != 'vip') {
+        errors.push('Ha ocurrido un error con el tipo de reserva.')
         ok = false;
     }
 

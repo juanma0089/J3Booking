@@ -42,7 +42,10 @@ Route::get('/editpass',function () {return view('/users.passworduser');})->name(
 
 Route::get('/history', [BooksController::class, "history"])->name('history')->middleware('auth');
 
-Route::get('/booking/{id}', function () {
+// Route::get('/booking/{id}', function () {
+//     return view('createbooking');
+// })->name('booking')->middleware('auth');
+Route::get('/booking/{id}/{table?}', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
@@ -79,7 +82,7 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 // Test
 
-Route::get('/oldindex/{id?}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
+Route::get('/oldindex/{id}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
 
 
 

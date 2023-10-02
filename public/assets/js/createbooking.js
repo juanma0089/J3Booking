@@ -5,15 +5,16 @@ $(function () {
 
         // Obtener los valores de los campos de entrada
         var event_id = $('#event_id').val() ? $('#event_id').val() : '';
-        // var type = $('#type').val() ? $('#type').val() : '';
+        var type = $('#type').val() ? $('#type').val() : '';
         var name = $('#name').val() ? $('#name').val() : '';
         var surname = $('#surname').val() ? $('#surname').val() : '';
         var diners = $('#diners').val() ? $('#diners').val() : '';
+        var table_id = $('#table_id').val() ? $('#table_id').val() : '';
         // var bottles = $('#bottles').val() ? $('#bottles').val() : '';
 
 
 
-        errors = validateFieldsBooking(event_id, name,surname, diners);
+        errors = validateFieldsBooking(event_id, type, name, surname, diners);
 
         console.log(errors)
         if (errors.length !== 0) {
@@ -41,10 +42,11 @@ $(function () {
                 },
                 data: {
                     'event_id' : event_id,
-                    'type' : 'pista',
+                    'type' : type,
                     'name': name,
                     'surname': surname,
-                    'diners': diners
+                    'diners': diners,
+                    'table_id': table_id
                 },
                 success: function (data) {
                     // alert('Se ha creado el usuario con éxito.');
@@ -52,6 +54,8 @@ $(function () {
                     $('#alertErrors').removeClass('alert-danger');
                     $('#alertErrors').prepend('Reserva creada con éxito');
                     $('#alertErrors').removeAttr('hidden');
+                    // Redirigir a la vista de índice después de crear el evento exitosamente
+                    window.location.href = "/";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 

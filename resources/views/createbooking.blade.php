@@ -1,7 +1,6 @@
 @extends('templates.template')
 
 @section('javascript')
-    {{ asset('assets/js/register.js') }}
     {{ asset('assets/js/createbooking.js') }}
 @endsection
 
@@ -25,11 +24,24 @@
                                 @endif
 
                                 <div class="alert alert-danger" role="alert" id='alertErrors' hidden></div>
+                                @php
 
+                                    if (request()->route('table')) {
+                                        $colorvip = 'bg-success';
+                                        $colorpista = 'bg-black';
+                                        $type = 'vip';
+                                    } else {
+                                        $colorpista = 'bg-success';
+                                        $type = 'pista';
+                                        $colorvip = 'bg-black';
+                                    }
+
+                                @endphp
                                 <div class="col-12 d-flex flex-row mb-4 justify-content-between gap-1 gap-md-0">
-                                    <button class="btn btn-outline-light bg-success col-6 col-md-4" id='registerBtn'>
-                                        {{ __('Reserva pista') }}</button>
-                                    <a class="btn btn-outline-light bg-black col-6 col-md-4"
+                                    <a href="{{ route('booking', ['id' => request()->route('id')]) }}" class="btn btn-outline-light {{ $colorpista }} col-6 col-md-4"
+                                        id='registerBtn'>
+                                        {{ __('Reserva pista') }}</a>
+                                    <a class="btn btn-outline-light {{ $colorvip }} col-6 col-md-4"
                                         href="{{ route('oldindex', ['id' => request()->route('id')]) }}" id='createVIP'>
                                         {{ __('Reserva VIP') }}</a>
                                 </div>
@@ -39,6 +51,14 @@
 
                                     <input id="event_id" type="number" class="d-none" name="event_id"
                                         value="{{ request()->route('id') }}" required hidden readonly>
+
+                                    <input id="type" type="text" class="d-none" name="type"
+                                        value="{{$type}}" required hidden readonly>
+
+                                    @if ($type = 'vip')
+                                        <input id="table_id" type="number" class="d-none" name="table_id"
+                                        value="{{ request()->route('table') }}" required hidden readonly>
+                                    @endif
 
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
