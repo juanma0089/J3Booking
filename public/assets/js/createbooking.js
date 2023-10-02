@@ -1,16 +1,19 @@
 $(function () {
+
     $('#createbooking').submit(function (e) {
         e.preventDefault();
 
         // Obtener los valores de los campos de entrada
+        var event_id = $('#event_id').val() ? $('#event_id').val() : '';
+        // var type = $('#type').val() ? $('#type').val() : '';
         var name = $('#name').val() ? $('#name').val() : '';
+        var surname = $('#surname').val() ? $('#surname').val() : '';
         var diners = $('#diners').val() ? $('#diners').val() : '';
-        var date = $('#date').val() ? $('#date').val() : '';
-        var time = $('#time').val() ? $('#time').val() : '';
-        var booking = $('#booking').val() ? $('#booking').val() : '';
+        // var bottles = $('#bottles').val() ? $('#bottles').val() : '';
 
 
-        errors = validateFieldsBooking(name, diners, date, time, booking);
+
+        errors = validateFieldsBooking(event_id, name,surname, diners);
 
         console.log(errors)
         if (errors.length !== 0) {
@@ -37,11 +40,11 @@ $(function () {
                     'X-CSRF-TOKEN': csrfToken
                 },
                 data: {
+                    'event_id' : event_id,
+                    'type' : 'pista',
                     'name': name,
-                    'diners': diners,
-                    'date': date,
-                    'time': time,
-                    'booking': booking
+                    'surname': surname,
+                    'diners': diners
                 },
                 success: function (data) {
                     // alert('Se ha creado el usuario con éxito.');

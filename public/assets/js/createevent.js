@@ -11,6 +11,7 @@ $(function () {
         var time = $('#time').val() ? $('#time').val() : '';
 
         // Obtener el campo de imagen
+
         var image = $('#image')[0].files[0]; // El primer archivo seleccionado
 
         errors = validateFieldsEvent(name, min_vip_esc, min_vip_mesa, min_vip_mesaalta, date, time);
@@ -53,11 +54,14 @@ $(function () {
                 processData: false, // Evitar que jQuery procese los datos
                 contentType: false, // Evitar que jQuery configure el tipo de contenido
                 success: function (data) {
-                    // alert('Se ha creado el usuario con éxito.');
+                    // Mostrar mensaje de éxito
                     $('#alertErrors').addClass('alert-success');
                     $('#alertErrors').removeClass('alert-danger');
                     $('#alertErrors').prepend('Evento creado con éxito');
                     $('#alertErrors').removeAttr('hidden');
+
+                    // Redirigir a la vista de índice después de crear el evento exitosamente
+                    window.location.href = "/";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 
@@ -78,4 +82,3 @@ $(function () {
         }
     });
 });
-

@@ -42,13 +42,32 @@ Route::get('/editpass',function () {return view('/users.passworduser');})->name(
 
 Route::get('/history', [BooksController::class, "history"])->name('history')->middleware('auth');
 
-Route::get('/booking', function () {
+Route::get('/booking/{id}', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
 
 Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
+
+// EVENTS
+
+Route::get('/eventform', function () {
+    return view('createevent');
+})->name('createEvent')->middleware('admin');
+
+Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');
+
+// Route::get('/editevent/{id}', function () {
+//     return view('editevent');
+// })->name('editevent')->middleware('admin');
+Route::get('/editevent/{id}', [EventsController::class, "editEvent"])->name('editevent')->middleware('admin');
+
+Route::put('/editevent/{id}', [EventsController::class, 'edit'])->name('editEvent.edit')->middleware('admin');
+// Route::get('/events', [EventsController::class, "index"])->name('events')->middleware('auth');
+
+Route::get('/deleteevent/{id}', [EventsController::class, 'delete'])->name('deleteevent')->middleware('admin');
+
 
 // OTHER ROUTES
 
@@ -60,8 +79,9 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 // Test
 
-Route::get('/eventform', function () {
-    return view('createevent');
-})->name('create')->middleware('admin');
+Route::get('/oldindex/{id?}', function () {
+    return view('oldindex');
+})->name('oldindex')->middleware('auth');
 
-Route::post('/eventform', [EventsController::class, 'create'])->name('eventForm.create');
+
+

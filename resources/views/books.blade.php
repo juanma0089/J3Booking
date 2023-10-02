@@ -13,19 +13,36 @@
             <div class="container">
                 <form method="" action="" class="row d-flex justify-content-center align-items-center p-3">
 
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <label for="">Tramo</label>
                         <select name="time" class="form-select bg-custom text-white border-0" aria-label="horario">
                             <option value="all">Todos</option>
                             <option value="night">Noche</option>
                             <option value="afternoon">Tarde</option>
                         </select>
+                    </div> --}}
+                    <div class="col-12">
+                        <label for="event">Evento</label>
+                        <select name="event" class="form-select bg-custom text-white border-0" aria-label="event">
+                            <option value="evento_1">Evento 1</option>
+                        </select>
                     </div>
                     <div class="col-10">
+                        <label for="rrpp">RRPP</label>
+                        <select name="rrpp" class="form-select bg-custom text-white border-0" aria-label="rrpp">
+                            <option value="all">Todos</option>
+                            @php
+
+                            @endphp
+                            <option value="rrpp1">rrpp1</option>
+                            <option value="rrpp2">rrpp2</option>
+                        </select>
+                    </div>
+                    {{-- <div class="col-10">
                         <label for="">Fecha</label>
                         <input class="form-control form-control-md bg-custom border-0 text-white border-dark" type="date"
                             name="datepicker" id="datepicker" value="">
-                    </div>
+                    </div> --}}
                     <div class="col-2 p-0 d-flex align-self-end">
                         <button id="search"
                             class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0 "
@@ -62,6 +79,21 @@
             </div>
 
         </div>
+       <div class="container-fluid bg-danger">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
+       </div>
+       <div class="container-fluid bg-danger">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
+       </div>
+       <div class="container-fluid bg-danger">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
+       </div>
+       <div class="container-fluid bg-danger">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
+       </div>
+       <div class="container-fluid bg-danger">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
+       </div>
 
         @if ('auth')
             <div id="roleuser" role='{{ Auth::user()->role }}' hidden></div>

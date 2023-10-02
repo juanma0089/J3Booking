@@ -6,18 +6,18 @@
     <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
 
 
-        <h1 class="text-center">Interior</h1>
+        <h1 class="text-center">Selecciona una mesa</h1>
         {{-- <p>Hay {{ $num_table }} mesas disponibles para reservar.</p> --}}
 
-        <div class="row ">
+        {{-- <div class="row ">
             <div class="d-flex justify-content-center align-items-center p-0">
                 <div class="mesa-rectangulo">
-                    <img src="assets/img/dj.png" alt="escenario" class="img-fluid">
+                    <img src="./public/assets/img/dj.png" alt="escenario" class="img-fluid">
                 </div>
             </div>
 
-        </div>
-
+        </div> --}}
+        
         <button id='btn-modal' class="bg-transparent border-0 text-success m-0 p-0" data-bs-target="#modal-table"
             data-bs-toggle="modal"></button>
 
