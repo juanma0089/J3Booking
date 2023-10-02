@@ -29,16 +29,16 @@
                                 <div class="col-12 d-flex flex-row mb-4 justify-content-between gap-1 gap-md-0">
                                     <button class="btn btn-outline-light bg-success col-6 col-md-4" id='registerBtn'>
                                         {{ __('Reserva pista') }}</button>
-                                    <button class="btn btn-outline-light bg-black col-6 col-md-4" id='createVIP'>
-                                        {{ __('Reserva VIP') }}</button>
+                                    <a class="btn btn-outline-light bg-black col-6 col-md-4"
+                                        href="{{ route('oldindex', ['id' => request()->route('id')]) }}" id='createVIP'>
+                                        {{ __('Reserva VIP') }}</a>
                                 </div>
 
                                 <form method="POST" action="{{ route('bookingForm.create') }}" id='createbooking'>
                                     @csrf
 
-                                    <input id="event_id" type="number"
-                                    class="d-none" name="event_id"
-                                    value="{{ request()->route('id') }}" required hidden readonly>
+                                    <input id="event_id" type="number" class="d-none" name="event_id"
+                                        value="{{ request()->route('id') }}" required hidden readonly>
 
                                     <div class="d-grid ">
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
