@@ -1,23 +1,15 @@
 @extends('templates.template')
 
-
+@section('javascript')
+    {{ asset('assets/js/tables.js') }}
+@endsection
 
 @section('body')
-    <div id="mainPanel" class="container overflow-y-auto overflow-x-hidden position-relative py-4">
+    <div id="mainPanel" idevent='{{ request()->route('id')}}' class="container overflow-y-auto overflow-x-hidden position-relative py-4">
 
 
-        <h1 class="text-center">Selecciona una mesa</h1>
-        {{-- <p>Hay {{ $num_table }} mesas disponibles para reservar.</p> --}}
+        <h1 class="text-center fw-lighter ">Selecciona una mesa</h1>
 
-        {{-- <div class="row ">
-            <div class="d-flex justify-content-center align-items-center p-0">
-                <div class="mesa-rectangulo">
-                    <img src="./public/assets/img/dj.png" alt="escenario" class="img-fluid">
-                </div>
-            </div>
-
-        </div> --}}
-        
         <button id='btn-modal' class="bg-transparent border-0 text-success m-0 p-0" data-bs-target="#modal-table"
             data-bs-toggle="modal"></button>
 
@@ -93,7 +85,8 @@
                         <div class="modal-footer d-flex justify-content-evenly">
                             <p class="btn btn-outline-light" data-bs-dismiss="modal" aria-label="Close">Volver</p>
                             <button type="button" id='assignTable'
-                                class="btn btn-outline-light text-success border-success" data-bs-dismiss="modal">Asignar</button>
+                                class="btn btn-outline-light text-success border-success"
+                                data-bs-dismiss="modal">Asignar</button>
                         </div>
                     </div>
                 </form>

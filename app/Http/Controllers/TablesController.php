@@ -12,22 +12,22 @@ class TablesController extends Controller
     {
         switch ($request->input('action')) {
             case 'get_all_tables':
-                return $this->getAllTables($request->input('date'), $request->input('tramo'));
+                return $this->getAllTables($request->input('idevent'));
             default:
-                return view('index');
+                return view('oldindex');
         }
     }
 
-    public function getAllTables($date, $tramo)
+    public function getAllTables($idevent)
     {
 
         $tables = DB::table('tables')
-            ->leftJoin('books', function ($join) use ($tramo, $date) {
+            ->leftJoin('books', function ($join) use ($idevent) {
                 $join->on('tables.id', '=', 'books.table_id')
-                    ->where('books.date', '=', $date)
-                    ->where('books.time', '=', $tramo);
+                    ->where('books.event_id', '=', $idevent);
             })
-            ->select('tables.*', DB::raw('CASE WHEN books.id IS NULL THEN 0 ELSE 1 END AS has_booking'))
+            ->select('tables.*', 'books.id as idbook', 'books.status as statusbook')  
+            ->orderBy('tables.type', 'asc')
             ->get();
 
         return response()->json($tables);

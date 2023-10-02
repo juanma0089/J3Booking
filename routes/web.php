@@ -79,9 +79,7 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 // Test
 
-Route::get('/oldindex/{id?}', function () {
-    return view('oldindex');
-})->name('oldindex')->middleware('auth');
+Route::get('/oldindex/{id?}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
 
 
 
