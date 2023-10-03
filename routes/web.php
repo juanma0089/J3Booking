@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\BottlesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TablesController;
@@ -84,5 +85,5 @@ Route::get('/', [EventsController::class, "index"])->name('index')->middleware('
 
 Route::get('/oldindex/{id}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
 
-
+Route::get('/getbottles', [BottlesController::class, 'getAllBottles'])->name('getbottles')->middleware('auth');
 

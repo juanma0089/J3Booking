@@ -94,6 +94,9 @@
                                             </div>
                                         </div>
 
+                                        <div id='containerBottles'>
+                                            
+                                        </div>
 
                                         {{-- <div class="col-12 gap-1 d-flex flex-row justify-content-between">
                                             <div class="col-9 text-white mb-4">
