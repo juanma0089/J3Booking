@@ -34,6 +34,16 @@ class BooksController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        if ($request->type === 'vip' && !empty($request->table_id)) {
+            $existingBooking = Book::where('table_id', $request->table_id)->where('status', '!=', 'cancelled')->first();
+
+            if ($existingBooking) {
+                toastr('La mesa VIP ya está asignada a una reserva existente.', 'error');
+                return back()->with('errors', 'La mesa VIP ya está asignada a una reserva existente.');
+            }
+        }
+
         if(!empty($request->table_id)){
             if(!Table::where('id', $request->table_id)->exists()){
                 return back()->with('errors', 'La mesa no se encuentra disponible.');

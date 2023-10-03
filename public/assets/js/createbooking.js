@@ -16,7 +16,6 @@ $(function () {
 
         errors = validateFieldsBooking(event_id, type, name, surname, diners);
 
-        console.log(errors)
         if (errors.length !== 0) {
             $('#alertErrors').empty();
             $('#alertErrors').removeAttr('hidden');
@@ -50,10 +49,10 @@ $(function () {
                 },
                 success: function (data) {
                     // alert('Se ha creado el usuario con éxito.');
-                    $('#alertErrors').addClass('alert-success');
-                    $('#alertErrors').removeClass('alert-danger');
-                    $('#alertErrors').prepend('Reserva creada con éxito');
-                    $('#alertErrors').removeAttr('hidden');
+                    // $('#alertErrors').addClass('alert-success');
+                    // $('#alertErrors').removeClass('alert-danger');
+                    // $('#alertErrors').prepend('Reserva creada con éxito');
+                    // $('#alertErrors').removeAttr('hidden');
                     // Redirigir a la vista de índice después de crear el evento exitosamente
                     window.location.href = "/";
                 },
@@ -69,7 +68,7 @@ $(function () {
                             );
                         });
                     } else {
-                        alert('Hubo un error al crear la reserva: ' + textStatus);
+                        window.location.reload();
                     }
                 }
             });
