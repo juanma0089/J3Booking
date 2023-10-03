@@ -69,7 +69,7 @@ $(function () {
                             );
                         });
                     } else {
-                        alert('Hubo un error al crear la reserva: ' + textStatus);
+                        window.location.reload();
                     }
                 }
             });

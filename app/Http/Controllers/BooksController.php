@@ -34,10 +34,19 @@ class BooksController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        if(!empty($request->table_id)){
-            if(!Table::where('id', $request->table_id)->exists()){
+        if (!empty($request->table_id)) {
+            if (!Table::where('id', $request->table_id)->exists()) {
                 return back()->with('errors', 'La mesa no se encuentra disponible.');
             }
+        }
+
+        if (Book::where('event_id', $request->event_id)
+            ->where('name', $request->name)
+            ->where('surname', $request->surname)
+            ->exists()
+        ) {
+            toastr('Ya existe una reserva con esos datos', 'error');
+            return back()->with('errors', 'Ya existe una reserva con esos datos');
         }
 
 
@@ -207,7 +216,8 @@ class BooksController extends Controller
         }
     }
 
-    public function assignTable($bookid, $tableid, $date, $tramo) {
+    public function assignTable($bookid, $tableid, $date, $tramo)
+    {
 
 
         if (!$bookid) {
@@ -217,7 +227,6 @@ class BooksController extends Controller
                 Book::where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->update(['table_id' => NULL]);
                 return response()->json(['success' => 'deleted']);
             }
-
         } else {
             $book = DB::table('books')->where('table_id', $tableid)->where('date', $date)->where('time', $tramo)->exists();
 

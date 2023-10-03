@@ -1,4 +1,8 @@
-let idevent = $('#mainPanel').attr('idevent')
+let idevent = $('#mainPanel').attr('idevent');
+let minVipEsc = $('#minVipEsc').attr('minVipEsc');
+let minVipMesa = $('#minVipMesa').attr('minVipMesa');
+let minVipMesaAlta = $('#minVipMesaAlta').attr('minVipMesaAlta');
+
 $(function () {
     getActualDate();
 
@@ -32,7 +36,8 @@ function printTables(tables) {
             if (firstTableRow < 1) {
                 html +=
                     '<div class="row d-flex justify-content-center align-content-center mt-4">' +
-                    '<h1 class="text-center">VIP Escenario</h1>';
+                    '<h1 class="text-center">VIP Escenario</h1>'+
+                    '<p class="text-center">Botellas min ('+ minVipEsc +')</p>';
 
                 firstTableRow = 1;
             }
@@ -45,7 +50,8 @@ function printTables(tables) {
             if (firstTableRow < 2) {
                 html += '</div><hr class="col-12 text-white">' +
                     '<div class="row d-flex justify-content-center align-content-center mt-4">' +
-                    '<h1 class="text-center">Mesas VIP</h1>';
+                    '<h1 class="text-center">Mesas VIP</h1>'+
+                    '<p class="text-center">Botellas min ('+ minVipMesa +')</p>';
 
                 firstTableRow = 2;
             }
@@ -57,7 +63,8 @@ function printTables(tables) {
             if (firstTableRow < 3) {
                 html += '</div><hr class="col-12 text-white">' +
                     '<div class="row d-flex justify-content-center align-content-center mt-4">' +
-                    '<h1 class="text-center">Mesas altas VIP</h1>';
+                    '<h1 class="text-center">Mesas altas VIP</h1>'+
+                    '<p class="text-center">Botellas min ('+ minVipMesaAlta +')</p>';
 
                 firstTableRow = 3;
             }
