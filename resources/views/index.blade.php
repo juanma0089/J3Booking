@@ -8,7 +8,16 @@
         <div class="container-fluid d-flex flex-wrap justify-content-center justify-content-md-start m-0 p-0">
 
             @foreach ($eventos as $evento)
-                @if ($evento->eliminado == 0)
+                @if (
+                    $evento->eliminado == 0 &&
+                        date('Y-m-d H:i:s') <= date('Y-m-d H:i:s', strtotime($evento->date . ' +1 day +10 hours')))
+                    @php
+                        $bookData = DB::table('books')
+                            ->select(DB::raw('COUNT(*) as total_books'), DB::raw('SUM(diners) as total_diners'))
+                            ->where('event_id', '=', $evento->id)
+                            ->first();
+                    @endphp
+
                     {{-- Inicio Card --}}
                     <section id='evento-{{ $evento->id }}' class="col-10 col-md-6 d-flex mb-2 p-1">
                         <div
@@ -30,6 +39,10 @@
                                 <div class='d-flex'>
                                     <h2 class="fw-bolder text-break">{{ $evento->name }}</h2>
                                 </div>
+                                <div class='d-flex flex-row justify-content-between'>
+                                    <p class="fw-light text-break">{{ 'Reservas : ' . $bookData->total_books }}</p>
+                                    <p class="fw-light text-break">{{ 'Asistentes : ' . $bookData->total_diners }}</p>
+                                </div>
                                 {{-- Buttons --}}
                                 <div
                                     class="col-12 bg-transparent border-0 align-self-lg-center text-dark d-flex justify-content-evenly align-self-end">
@@ -43,8 +56,8 @@
                                                 class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn"></button></a>
                                     @endif
                                     <a href="{{ route('booking', ['id' => $evento->id]) }}">
-                                    <button type="button"
-                                        class="fs-2 bi bi-person-plus text-success bg-transparent border-0 confirm-btn"></button></a>
+                                        <button type="button"
+                                            class="fs-2 bi bi-person-plus text-success bg-transparent border-0 confirm-btn"></button></a>
                                 </div>
                             </div>
                         </div>

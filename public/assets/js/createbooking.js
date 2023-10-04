@@ -28,29 +28,29 @@ $(function () {
                             $('#divtypebottles_' + identifier).append(htmlbottles)
                         }
                     });
+
+                    $('[id^="btndelete_"]').on('click', function () {
+                        idbutton = this.id.split('_')
+                        idbutton = idbutton[1]
+
+                        $('#sectionbottle_'+idbutton).remove();
+                    })
+                }
+                else{
+                    toastr.error('No hay registro de botellas en la base de datos');
                 }
 
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                // TODO Mostrar error si no se encuentran botellas en la base de datos.
-            }
         });
 
     })
-
     $('#createbooking').submit(function (e) {
         e.preventDefault();
 
-        // Obtener los valores de los campos de entrada
-        var event_id = $('#event_id').val() ? $('#event_id').val() : '';
-        var type = $('#type').val() ? $('#type').val() : '';
-        var name = $('#name').val() ? $('#name').val() : '';
-        var surname = $('#surname').val() ? $('#surname').val() : '';
-        var diners = $('#diners').val() ? $('#diners').val() : '';
-        var table_id = $('#table_id').val() ? $('#table_id').val() : '';
-        // var bottles = $('#bottles').val() ? $('#bottles').val() : '';
+        // Crear un objeto FormData para recopilar todos los datos del formulario
+        var formData = new FormData(this);
 
-        errors = validateFieldsBooking(event_id, type, name, surname, diners);
+        errors = validateFieldsBooking(formData.get('event_id'), formData.get('type'), formData.get('name'), formData.get('surname'), formData.get('diners'));
 
         if (errors.length !== 0) {
             $('#alertErrors').empty();
@@ -61,39 +61,21 @@ $(function () {
                     `<li>${value}</li>`
                 );
             });
-
         } else {
             $('#alertErrors').empty();
             $('#alertErrors').attr('hidden', 'true');
 
-            var csrfToken = $('input[name="_token"]').val();
-            var route = $('#createbooking').attr('action')
-
             $.ajax({
-                url: route,
+                url: $(this).attr('action'),
                 type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: {
-                    'event_id': event_id,
-                    'type': type,
-                    'name': name,
-                    'surname': surname,
-                    'diners': diners,
-                    'table_id': table_id
-                },
+                processData: false, // No procesar los datos (FormData se encarga de eso)
+                contentType: false, // No establecer el tipo de contenido (FormData se encarga de eso)
+                data: formData, // Usar el objeto FormData que contiene todos los datos del formulario
                 success: function (data) {
-                    // alert('Se ha creado el usuario con éxito.');
-                    // $('#alertErrors').addClass('alert-success');
-                    // $('#alertErrors').removeClass('alert-danger');
-                    // $('#alertErrors').prepend('Reserva creada con éxito');
-                    // $('#alertErrors').removeAttr('hidden');
                     // Redirigir a la vista de índice después de crear el evento exitosamente
                     window.location.href = "/";
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-
                     if (jqXHR.status === 422) {
                         var errors = jqXHR.responseJSON.errors;
                         $('#alertErrors').empty();
@@ -117,10 +99,12 @@ function generateHtmlTypeBottles(bottles) {
 
     let html = '';
 
-    html += '<div id="divtypebottles_' + countbottle + '" class="form-outline text-white mb-4 col-3 col-md-4">' +
+    html += '<section id="sectionbottle_' + countbottle + '" class="d-flex flex-column mb-2">' +
+        '<i id="btndelete_' + countbottle + '" class="col-auto bi bi-x-circle p-0 align-self-start mb-1 bg-transparent border-0 text-danger text-start"> Eliminar</i>' +
+        '<div id="divtypebottles_' + countbottle + '" class="form-outline text-white mb-4 col-3 col-md-4">' +
         '<select class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"' +
         'name="typebottle_' + countbottle + '" id="typebottles_' + countbottle + '" required>' +
-        '<option value="00" selected>Seleccione un tipo</option>';
+        '<option value="" selected>Seleccione un tipo</option>';
 
     $.each(bottles, function (index, bottle) {
         bottlesTypes[bottle.type] = 1;
@@ -141,7 +125,7 @@ function generateHtmlBottles(identifier, typebottle) {
     html +=
         '<select class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"' +
         'name="bottles[]" id="select_bottles_' + identifier + '" required>' +
-        '<option value="00" selected>Seleccione una botella</option>';
+        '<option value="" selected>Seleccione una botella</option>';
 
     $.each(arraybottles, function (id, bottle) {
         if (bottle.type == typebottle) {
@@ -149,7 +133,8 @@ function generateHtmlBottles(identifier, typebottle) {
         }
     });
 
-    html += '</div>';
+    html += '</div></section>';
 
     return html;
 }
+

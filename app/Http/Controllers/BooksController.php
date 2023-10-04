@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Bottle;
+use App\Models\Event;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Faker\Core\Barcode;
+use Faker\Core\Number;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
+use PHPUnit\Framework\Constraint\IsNan;
 
 use function Symfony\Component\String\b;
 
@@ -36,7 +41,7 @@ class BooksController extends Controller
         }
 
         if ($request->type === 'vip' && !empty($request->table_id)) {
-            $existingBooking = Book::where('table_id', $request->table_id)->where('status', '!=', 'cancelled')->first();
+            $existingBooking = Book::where('table_id', $request->table_id)->where('status', '!=', 'cancelled')->where('event_id', $request->event_id)->first();
 
             if ($existingBooking) {
                 toastr('La mesa VIP ya está asignada a una reserva existente.', 'error');
@@ -44,9 +49,39 @@ class BooksController extends Controller
             }
         }
 
-        if(!empty($request->table_id)){
-            if(!Table::where('id', $request->table_id)->exists()){
+        if (!empty($request->table_id)) {
+            if (!Table::where('id', $request->table_id)->exists()) {
                 return back()->with('errors', 'La mesa no se encuentra disponible.');
+            }
+        }
+
+        if ($request->type === 'vip') {
+            $table = Table::where('id', $request->table_id)->first();
+            $event = Event::where('id', $request->event_id)->first();
+            $minbottles = 0;
+            switch ($table->type) {
+                case 'escenario':
+                    $minbottles = $event->min_vip_esc;
+                    break;
+                case 'mesa':
+                    $minbottles = $event->min_vip_mesa;
+                    break;
+                case 'mesaalta':
+                    $minbottles = $event->min_vip_mesaalta;
+                    break;
+                default:
+            }
+
+            foreach ($request->bottles as $value) {
+                if(!preg_match('/^-?\d+$/', $value)){
+                    toastr('No se han registrado correctamente las botellas', 'error');
+                    return back()->with('errors', 'No se han registrado correctamente las botellas');
+                }
+            }
+
+            if (!$request->bottles || count($request->bottles) < $minbottles) {
+                toastr('No se ha registrado el mínimo de botellas ('. $minbottles .')', 'error');
+                return back()->with('errors', 'No se ha registrado el mínimo de botellas ('. $minbottles .')');
             }
         }
 
@@ -81,6 +116,14 @@ class BooksController extends Controller
             $newBook->user_id = Auth::id();
 
             $newBook->save();
+
+            try {
+                $newBook->bottles()->attach($request->bottles);
+            } catch (\Exception $e) {
+                // Manejar el error, por ejemplo, registrar el mensaje de error
+                Log::error($e->getMessage());
+            }
+            // $newBook->save();
             toastr('Se ha creado una nueva reserva', "success", '¡Listo!');
             return redirect()->route('index');
         } else {

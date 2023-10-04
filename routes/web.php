@@ -81,9 +81,11 @@ Route::get('/modal', function () {
 
 Route::get('/', [EventsController::class, "index"])->name('index')->middleware('auth');
 
-// Test
+// Test ¿Cambiar nombres?
 
 Route::get('/oldindex/{id}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
 
 Route::get('/getbottles', [BottlesController::class, 'getAllBottles'])->name('getbottles')->middleware('auth');
+
+Route::get('/eventhistory', [EventsController::class, 'history'])->name('eventhistory')->middleware('auth');
 
