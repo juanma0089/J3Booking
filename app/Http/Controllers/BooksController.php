@@ -176,7 +176,7 @@ class BooksController extends Controller
                 return $this->getAllBooks();
             case 'getbooks':
                 $status = $request->input('status') ? $request->input('status') : 'all';
-                return $this->getBooks($request->input('time'), $request->input('date'), $status);
+                return $this->getBooks($request->input('event'), $request->input('date'), $status);
             default:
                 return view('history');
         }

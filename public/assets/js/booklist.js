@@ -53,16 +53,14 @@ function ajaxQuery(action) {
     $('.book').remove()
 
     // Cuando entre en la página filtrará por el día actual directamente
-    $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
-    $(`option[value=${getTramo()}]`).attr('selected', true)
-
+    
     $.ajax({
         url: '/books',
         type: 'GET',
         data: {
             action: 'getbooks',
-            date: $("input[name='datepicker']").val(),
-            time: $("select[name='time']").val()
+            event: $("select[name='event']").val(),
+            time: $("select[name='rrpp']").val()
         },
         success: function (response) {
             var html = pintarTabla(response)

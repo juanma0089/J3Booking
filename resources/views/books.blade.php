@@ -24,7 +24,25 @@
                     <div class="col-12">
                         <label for="event">Evento</label>
                         <select name="event" class="form-select bg-custom text-white border-0" aria-label="event">
-                            <option value="evento_1">Evento 1</option>
+                            @php
+                                $events = DB::table('events')
+                                    ->select('id', 'name', 'date', 'time')
+                                    ->where('date', '>', now()->subDay()) // Filtrar eventos que no han pasado más de un día
+                                    ->orderBy('date', 'asc') 
+                                    ->where('eliminado', 0)
+                                    ->get();
+                            @endphp
+                            @if ($events)
+                                @foreach ($events as $event)
+                                    @php
+                                        $formattedDate = date('d/m/Y', strtotime($event->date));
+                                    @endphp
+
+                                    <option value="{{ $event->id }}">
+                                        {{ $event->name . ' - ' . ucfirst($event->time) . ' ' . $formattedDate }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="col-10">
@@ -32,10 +50,19 @@
                         <select name="rrpp" class="form-select bg-custom text-white border-0" aria-label="rrpp">
                             <option value="all">Todos</option>
                             @php
-
+                                $rrpp = DB::table('users')
+                                    ->select('id', 'name', 'surname')
+                                    ->where('role', '==', 'rrpp') // Filtrar eventos que no han pasado más de un día
+                                    ->orderBy('name', 'asc') // Ordenar por fecha ascendente
+                                    ->get();
                             @endphp
-                            <option value="rrpp1">rrpp1</option>
-                            <option value="rrpp2">rrpp2</option>
+                            @if ($rrpp)
+                            @foreach ($rrpp as $person)
+                                <option value="{{ $person->id }}">
+                                    {{ ucfirst($person->name) . ' ' . ucfirst($person->surname)}}
+                                </option>
+                            @endforeach
+                        @endif
                         </select>
                     </div>
                     {{-- <div class="col-10">
@@ -79,21 +106,31 @@
             </div>
 
         </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
+        <div class="container-fluid bg-danger">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora
+                maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas
+                optio ipsum dolorem cumque! Porro.</p>
+        </div>
+        <div class="container-fluid bg-danger">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora
+                maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas
+                optio ipsum dolorem cumque! Porro.</p>
+        </div>
+        <div class="container-fluid bg-danger">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora
+                maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas
+                optio ipsum dolorem cumque! Porro.</p>
+        </div>
+        <div class="container-fluid bg-danger">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora
+                maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas
+                optio ipsum dolorem cumque! Porro.</p>
+        </div>
+        <div class="container-fluid bg-danger">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora
+                maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas
+                optio ipsum dolorem cumque! Porro.</p>
+        </div>
 
         @if ('auth')
             <div id="roleuser" role='{{ Auth::user()->role }}' hidden></div>
