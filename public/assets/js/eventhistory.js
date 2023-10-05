@@ -54,7 +54,7 @@ function pintarTabla(events) {
             html += '<div class="p-0 d-flex justify-content-around row text-white border-bottom history">' +
 
             '<div class="col-4 col-md-4 d-flex justify-content-center justify-content-md-start align-content-center p-1">' +
-            `<img src="${event.image}" alt="Evento 1" class="img-fluid img-event">` +
+            `<img src="${event.image}" alt="Evento ${event.id}" class="img-fluid img-event">` +
             '</div>' +
             '<div class="d-flex pt-2 px-lg-2 px-sm-0 px-md-1 flex-fill row col-8 col-lg-3 p-lg-3 text-wrap">' +
             '<div class="pt-2 px-lg-2 px-sm-0 px-md-1 flex-fill col-6 col-lg-3 p-lg-3 text-wrap">' +
