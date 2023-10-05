@@ -7,7 +7,7 @@
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list text-white fs-1"></i>
             </button>
-            <a href="{{ route('history') }}">
+            <a href="{{ route('eventhistory') }}">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
                     <i class="bi bi-clock-history text-white fs-1"></i>
                 </button>
@@ -34,7 +34,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page"
-                        href="{{ route('history') }}">Historial</a>
+                        href="{{ route('eventhistory') }}">Historial eventos</a>
                     </li>
                     @if (Auth::user()->role == 'admin')
                     <li class="nav-item">

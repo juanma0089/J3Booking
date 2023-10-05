@@ -89,3 +89,4 @@ Route::get('/getbottles', [BottlesController::class, 'getAllBottles'])->name('ge
 
 Route::get('/eventhistory', [EventsController::class, 'history'])->name('eventhistory')->middleware('auth');
 
+

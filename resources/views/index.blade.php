@@ -41,7 +41,7 @@
                                 </div>
                                 <div class='d-flex flex-row justify-content-between'>
                                     <p class="fw-light text-break">{{ 'Reservas : ' . $bookData->total_books }}</p>
-                                    <p class="fw-light text-break">{{ 'Asistentes : ' . $bookData->total_diners }}</p>
+                                    <p class="fw-light text-break">{{ 'Asistentes : ' . ($bookData->total_diners ? $bookData->total_diners : '0') }}</p>
                                 </div>
                                 {{-- Buttons --}}
                                 <div

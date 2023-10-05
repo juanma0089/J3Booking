@@ -102,7 +102,7 @@ class EventsController extends Controller
             $event = Event::find($id);
             return view('editevent', ['event' => $event]);
         } else {
-           return redirect()->route('index');
+            return redirect()->route('index');
         }
     }
     public function edit(Request $request, $id)
@@ -175,33 +175,115 @@ class EventsController extends Controller
     }
 
     public function delete($id)
-{
-    // Buscar el evento utilizando el modelo Event
-    $event = Event::find($id);
+    {
+        // Buscar el evento utilizando el modelo Event
+        $event = Event::find($id);
 
-    if (!$event) {
-        // Manejar el caso en el que no se encuentre el evento
-        return abort(404);
+        if (!$event) {
+            // Manejar el caso en el que no se encuentre el evento
+            return abort(404);
+        }
+
+        $event->eliminado = 1;
+
+        $event->save();
+
+        return $this->index();
     }
-
-    $event->eliminado = 1;
-
-    $event->save();
-
-    return $this->index();
-}
     public function index()
     {
 
-        $eventos = DB::table('events')->orderby('date','ASC')->get();
+        $eventos = DB::table('events')->orderby('date', 'ASC')->get();
 
         return view('index', ['eventos' => $eventos]);
     }
-    public function history()
+
+    //* BACKEND BUSQUEDA EN HISTORIAL *//
+
+    public function history(Request $request)
+    {
+        switch ($request->input('action')) {
+
+            case 'getEventHistory':
+                return $this->getEventHistory($request->input('time'), $request->input('date'));
+            default:
+                return view('eventhistory');
+        }
+    }
+    public function getEventHistory($time, $date)
     {
 
-        $eventos = DB::table('events')->orderby('date','ASC')->get();
+        // if ($time === 'noche' && $date != 'all') {
+        //     $eventos = DB::table('events')->where('time', '=', $time)->where('date', '=', $date)->where('eliminado', '=', 0)->orderby('created_at', 'ASC')->get();
+        // } elseif ($time === 'noche' && $date == 'all') {
+        //     $eventos = DB::table('events')->where('time', '=', $time)->where('eliminado', '=', 0)->orderby('created_at', 'ASC')->get();
+        // } else if ($time === 'tarde' && $date != 'all') {
+        //     $eventos = DB::table('events')->where('time', '=', $time)->where('eliminado', '=', 0)->where('date', '=', $date)->orderby('created_at', 'ASC')->get();
+        // } else if ($time === 'tarde' && $date == 'all') {
+        //     $eventos = DB::table('events')->where('time', '=', $time)->where('eliminado', '=', 0)->orderby('created_at', 'ASC')->get();
+        // } else if ($time === 'all' && $date != 'all') {
+        //     $eventos = DB::table('events')->where('date', '=', $date)->where('eliminado', '=', 0)->orderby('created_at', 'ASC')->get();
+        // } else {
+        //     // $eventos = DB::table('events')->where('eliminado', '=', 0)->orderby('created_at', 'ASC')->get();
+        //     $eventos =  DB::table('events')
+        //         ->select('events.*', 'book_counts.total_books', 'book_counts.total_diners')
+        //         ->leftJoin('books', function ($join) {
+        //             $join->on('events.id', '=', 'books.event_id');
+        //             $join->where('books.eliminado', '=', 0);
+        //         })
+        //         ->where('events.eliminado', '=', 0)
+        //         ->groupBy('events.id')
+        //         ->orderBy('events.created_at', 'ASC')
+        //         ->selectSub(function ($query) {
+        //             $query->select(DB::raw('COUNT(*) as total_books'), DB::raw('SUM(diners) as total_diners'))
+        //                 ->from('books')
+        //                 ->whereRaw('books.event_id = events.id');
+        //         }, 'book_counts')
+        //         ->get();
+        // }
 
-        return view('eventhistory', ['eventos' => $eventos]);
+        // return response()->json($eventos);
+        // $query = DB::table('events')
+        //     ->leftJoin('books', 'events.id', '=', 'books.event_id')
+        //     ->where('events.eliminado', '=', 0)
+        //     ->groupBy('events.id')
+        //     ->orderBy('events.created_at', 'ASC');
+
+        // if ($time === 'noche') {
+        //     $query->where('events.time', '=', 'noche');
+        // } elseif ($time === 'tarde') {
+        //     $query->where('events.time', '=', 'tarde');
+        // }
+
+        // if ($date !== 'all') {
+        //     $query->where('events.date', '=', $date);
+        // }
+
+        // $eventos = $query
+        //     ->select('events.*', DB::raw('COUNT(*) as total_books'), DB::raw('SUM(books.diners) as total_diners'))
+        //     ->get();
+
+        // return response()->json($eventos);
+        $query = DB::table('events')
+            ->leftJoin('books', 'events.id', '=', 'books.event_id')
+            ->where('events.eliminado', '=', 0)
+            ->groupBy('events.id', 'events.name', 'events.date', 'events.time', 'events.min_vip_esc', 'events.min_vip_mesa', 'events.min_vip_mesaalta', 'events.image', 'events.eliminado', 'events.created_at', 'events.updated_at') // Agrega todas las columnas de 'events'
+            ->orderBy('events.created_at', 'ASC');
+
+        if ($time === 'noche') {
+            $query->where('events.time', '=', 'noche');
+        } elseif ($time === 'tarde') {
+            $query->where('events.time', '=', 'tarde');
+        }
+
+        if ($date !== 'all') {
+            $query->where('events.date', '=', $date);
+        }
+
+        $eventos = $query
+            ->select('events.*', DB::raw('COUNT(*) as total_books'), DB::raw('SUM(books.diners) as total_diners'))
+            ->get();
+
+        return response()->json($eventos);
     }
 }
