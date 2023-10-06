@@ -24,13 +24,13 @@
                     <div class="col-12">
                         <label for="event">Evento</label>
                         <select name="event" class="form-select bg-custom text-white border-0" aria-label="event">
-                            <option value="evento_1">Evento 1</option>
+                            <option value="" selected>Evento 1</option>
                         </select>
                     </div>
                     <div class="col-10">
                         <label for="rrpp">RRPP</label>
                         <select name="rrpp" class="form-select bg-custom text-white border-0" aria-label="rrpp">
-                            <option value="all">Todos</option>
+                            <option value="">Todos</option>
                             @php
 
                             @endphp
@@ -79,24 +79,10 @@
             </div>
 
         </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
-       <div class="container-fluid bg-danger">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi libero atque accusantium officia tempora maiores doloremque soluta eos aperiam exercitationem aspernatur voluptatibus, voluptatum similique quas optio ipsum dolorem cumque! Porro.</p>
-       </div>
+
 
         @if ('auth')
-            <div id="roleuser" role='{{ Auth::user()->role }}' hidden></div>
+            <div id="roleuser" userid='{{ Auth::user()->id }}' role='{{ Auth::user()->role }}' hidden></div>
         @endif
 
     </div>

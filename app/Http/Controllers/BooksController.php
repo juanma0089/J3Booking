@@ -154,7 +154,7 @@ class BooksController extends Controller
                 return $this->getAllBooks();
             case 'getbooks':
                 $status = $request->input('status') ? $request->input('status') : 'waiting';
-                return $this->getBooks($request->input('time'), $request->input('date'), $status);
+                return $this->getBooks($request->input('event'), $request->input('rrpp'), $status);
             case 'cancelbook':
                 return $this->cancelBook($request->input('id'));
             case 'acceptbook':
@@ -182,48 +182,84 @@ class BooksController extends Controller
         }
     }
 
-    public function getBooks($time, $date, $status)
+    public function getBooks($event, $rrpp, $status)
     {
+        if ($event != 'none' && $rrpp == 'all') {
+            $books = DB::table('books')
+            ->join('users', 'books.user_id', '=', 'users.id')
+            ->select('books.*', 'users.name as rrpp', 'users.role as role')
+            ->where('books.event_id', '=', $event)
+            ->where('books.status', '=', $status)
+            ->orderBy('books.name', 'asc')
+            ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+            ->get();
 
-        if ($time === 'all' && $status != 'all') {
+        } else if ($event != 'none' && $rrpp != 'all') {
+            // $books = DB::table('books')
+            //     ->join('users', 'books.user_id', '=', 'users.id')
+            //     ->select('books.*', 'users.name as rrpp')
+            //     ->where('books.event_id', '=', $event)
+            //     ->where('books.user_id', '=', $rrpp)
+            //     ->where('books.status', '=', $status)
+            //     ->orderBy('books.name','asc')
+            //     ->get();
             $books = DB::table('books')
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select('books.*', 'users.name as rrpp')
-                ->where('books.date', '=', $date)
-                ->where('books.status', '=', $status)
-                ->get();
-        } else if (!$date) {
-            $books = DB::table('books')
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select('books.*', 'users.name as rrpp')
-                ->where('books.time', '=', $time)
-                ->where('books.status', '=', $status)
-                ->get();
-        } else if ($status == 'all' && $time != 'all') {
-            $books = DB::table('books')
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select('books.*', 'users.name as rrpp')
-                ->where('books.time', '=', $time)
-                ->where('books.date', '=', $date)
-                ->get();
-        } else if ($status === 'all' && $time === 'all') {
-            $books = DB::table('books')
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select('books.*', 'users.name as rrpp')
-                ->where('books.date', '=', $date)
-                ->get();
+            ->join('users', 'books.user_id', '=', 'users.id')
+            ->select('books.*', 'users.name as rrpp', 'users.role as role')
+            ->where('books.event_id', '=', $event)
+            ->where('books.user_id', '=', $rrpp)
+            ->where('books.status', '=', $status)
+            ->orderBy('books.name', 'asc')
+            ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+            ->get();
         } else {
-            $books = DB::table('books')
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select('books.*', 'users.name as rrpp')
-                ->where('books.time', '=', $time)
-                ->where('books.date', '=', $date)
-                ->where('books.status', '=', $status)
-                ->get();
+            toastr('Selecciona un evento', 'info');
         }
 
         return response()->json($books);
     }
+    // public function getBooks($time, $date, $status)
+    // {
+
+    //     if ($time === 'all' && $status != 'all') {
+    //         $books = DB::table('books')
+    //             ->join('users', 'books.user_id', '=', 'users.id')
+    //             ->select('books.*', 'users.name as rrpp')
+    //             ->where('books.date', '=', $date)
+    //             ->where('books.status', '=', $status)
+    //             ->get();
+    //     } else if (!$date) {
+    //         $books = DB::table('books')
+    //             ->join('users', 'books.user_id', '=', 'users.id')
+    //             ->select('books.*', 'users.name as rrpp')
+    //             ->where('books.time', '=', $time)
+    //             ->where('books.status', '=', $status)
+    //             ->get();
+    //     } else if ($status == 'all' && $time != 'all') {
+    //         $books = DB::table('books')
+    //             ->join('users', 'books.user_id', '=', 'users.id')
+    //             ->select('books.*', 'users.name as rrpp')
+    //             ->where('books.time', '=', $time)
+    //             ->where('books.date', '=', $date)
+    //             ->get();
+    //     } else if ($status === 'all' && $time === 'all') {
+    //         $books = DB::table('books')
+    //             ->join('users', 'books.user_id', '=', 'users.id')
+    //             ->select('books.*', 'users.name as rrpp')
+    //             ->where('books.date', '=', $date)
+    //             ->get();
+    //     } else {
+    //         $books = DB::table('books')
+    //             ->join('users', 'books.user_id', '=', 'users.id')
+    //             ->select('books.*', 'users.name as rrpp')
+    //             ->where('books.time', '=', $time)
+    //             ->where('books.date', '=', $date)
+    //             ->where('books.status', '=', $status)
+    //             ->get();
+    //     }
+
+    //     return response()->json($books);
+    // }
 
 
     public function getAllBooks()
