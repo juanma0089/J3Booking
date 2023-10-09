@@ -334,4 +334,18 @@ class BooksController extends Controller
         }
         return response()->json(['success' => 'noChanges']);
     }
+
+    public function editBookDinners(Request $request)
+    {
+        $idReserva = $request->input('idReserva');
+        $newValue = $request->input('newValue');
+
+        // Realiza la actualización en la base de datos aquí
+        if($newValue >= 1 && is_int($newValue)){
+            Book::where('id', $idReserva)->update(['diners' => $newValue]);
+            return response()->json();
+        }else{
+            toastr('El parámetro no es válido','error');
+        }
+    }
 }

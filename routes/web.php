@@ -54,6 +54,8 @@ Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.c
 
 Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
 
+Route::post('/editDinners', [BooksController::class, 'editBookDinners']);
+
 // EVENTS
 
 Route::get('/eventform', function () {

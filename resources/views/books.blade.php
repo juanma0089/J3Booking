@@ -1,10 +1,14 @@
 @extends('templates.template')
-
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('javascript')
     {{ asset('assets/js/booklist.js') }}
 @endsection
 
 @section('body')
+
+
     <div id="mainPanel" class="container-fluid mt-4">
 
         <div>
@@ -13,14 +17,6 @@
             <div class="container">
                 <form method="" action="" class="row d-flex justify-content-center align-items-center p-3">
 
-                    {{-- <div class="col-12">
-                        <label for="">Tramo</label>
-                        <select name="time" class="form-select bg-custom text-white border-0" aria-label="horario">
-                            <option value="all">Todos</option>
-                            <option value="night">Noche</option>
-                            <option value="afternoon">Tarde</option>
-                        </select>
-                    </div> --}}
                     <div class="col-12">
                         <label for="event">Evento</label>
                         <select name="event" class="form-select bg-custom text-white border-0" aria-label="event">
@@ -53,7 +49,6 @@
                             @php
                                 $rrpp = DB::table('users')
                                     ->select('id', 'name', 'surname')
-                                    // ->where('role', '==', 'rrpp') // Filtrar eventos que no han pasado más de un día
                                     ->orderBy('name', 'asc') // Ordenar por fecha ascendente
                                     ->get();
                             @endphp
@@ -66,11 +61,7 @@
                             @endif
                         </select>
                     </div>
-                    {{-- <div class="col-10">
-                        <label for="">Fecha</label>
-                        <input class="form-control form-control-md bg-custom border-0 text-white border-dark" type="date"
-                            name="datepicker" id="datepicker" value="">
-                    </div> --}}
+
                     <div class="col-2 p-0 d-flex align-self-end">
                         <button id="search"
                             class="form-control form-control-md p-0 bi bi-search fs-2 bg-transparent text-white border-0 "
@@ -95,13 +86,10 @@
                     class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-3 d-flex justify-content-center">
                     <p class="align-self-lg-center p-0 m-0">Rrpp</p>
                 </div>
-                {{-- <div
-                    class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">
-                    <p class="align-self-lg-center p-0 m-0">Botellas</p>
-                </div> --}}
+
                 <div
                     class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-none d-md-flex justify-content-center">
-                    <p class="align-self-lg-center p-0 m-0">Acciones</p>
+                    <p class="align-self-lg-center p-0 m-0">Info</p>
                 </div>
 
             </div>

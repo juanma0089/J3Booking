@@ -76,5 +76,5 @@ INSERT INTO `tables` (`id`, `position`, `type`, `created_at`, `updated_at`) VALU
 (75, 'out', 'cruzcampo', NULL, NULL),
 (76, 'out', 'cruzcampo', NULL, NULL);
 
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `jobtitle`, `role`, `phone`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `phone`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Admin', 'admin@admin.com', '$2y$10$UfmtaPYNuAi5aOZmQ082neQOsWFmFRZYVvBgASlKqs866JRQqeSTG', NULL, NULL, NULL, 'rrpp', 'admin', '666666666', NULL, '2023-04-03 08:36:20', '2023-05-15 16:45:33');
