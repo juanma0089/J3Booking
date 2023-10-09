@@ -24,18 +24,46 @@
                     <div class="col-12">
                         <label for="event">Evento</label>
                         <select name="event" class="form-select bg-custom text-white border-0" aria-label="event">
-                            <option value="" selected>Evento 1</option>
+                            {{-- <option value="" selected></option> --}}
+                            @php
+                                $events = DB::table('events')
+                                    ->select('id', 'name', 'date', 'time')
+                                    ->where('date', '>', now()->subDay()) // Filtrar eventos que no han pasado más de un día
+                                    ->orderBy('date', 'asc')
+                                    ->where('eliminado', 0)
+                                    ->get();
+                            @endphp
+                            @if ($events)
+                                @foreach ($events as $event)
+                                    @php
+                                        $formattedDate = date('d/m/Y', strtotime($event->date));
+                                    @endphp
+
+                                    <option value="{{ $event->id }}">
+                                        {{ $event->name . ' - ' . ucfirst($event->time) . ' ' . $formattedDate }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="col-10">
                         <label for="rrpp">RRPP</label>
                         <select name="rrpp" class="form-select bg-custom text-white border-0" aria-label="rrpp">
-                            <option value="">Todos</option>
+                            <option value="all" selected>Todos</option>
                             @php
-
+                                $rrpp = DB::table('users')
+                                    ->select('id', 'name', 'surname')
+                                    // ->where('role', '==', 'rrpp') // Filtrar eventos que no han pasado más de un día
+                                    ->orderBy('name', 'asc') // Ordenar por fecha ascendente
+                                    ->get();
                             @endphp
-                            <option value="rrpp1">rrpp1</option>
-                            <option value="rrpp2">rrpp2</option>
+                            @if ($rrpp)
+                                @foreach ($rrpp as $person)
+                                    <option value="{{ $person->id }}">
+                                        {{ ucfirst($person->name) . ' ' . ucfirst($person->surname) }}
+                                    </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     {{-- <div class="col-10">
@@ -82,7 +110,7 @@
 
 
         @if ('auth')
-            <div id="roleuser" userid='{{ Auth::user()->id }}' role='{{ Auth::user()->role }}' hidden></div>
+            <div id="roleuser" role='{{ Auth::user()->role }}' hidden></div>
         @endif
 
     </div>

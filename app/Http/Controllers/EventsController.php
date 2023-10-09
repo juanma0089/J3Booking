@@ -286,4 +286,5 @@ class EventsController extends Controller
 
         return response()->json($eventos);
     }
+
 }

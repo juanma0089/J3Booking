@@ -52,33 +52,17 @@ function ajaxQuery(action) {
 
     $('.book').remove()
 
-    var url = window.location.href;
-    var match = url.match(/\/books\/(\d+)/);
-    var match_rrpp = url.match(/\/books\/(\d+)\/(\d+)/);
-    if (match_rrpp) {
-        var urlevent = '/books/' + match_rrpp[1] + '/' + match_rrpp[2];
-        var eventinput = $("input[name='event']").val() ?? match_rrpp[1];
-        var rrppinput = $("input[name='rrpp']").val() ?? match_rrpp[2];
-    }else if(match){
-        var urlevent = '/books/' + match[1];
-        var eventinput = $("input[name='event']").val() ?? match[1];
-        var rrppinput = $("input[name='rrpp']").val() ?? 'all';
-    } else {
-        urlevent = '/books'
-        var eventinput = $("input[name='event']").val() ?? 'none';
-        var rrppinput = $("input[name='rrpp']").val() ?? 'all';
-    }
-    // Cuando entre en la página filtrará por el día actual directamente
-    // $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val()
-    // $(`option[value=${getTramo()}]`).attr('selected', true)
+    var eventinput = $("select[name='event']").val() ?? 'none';
+    var rrppinput = $("select[name='rrpp']").val() ?? 'all';
+
 
     $.ajax({
-        url: urlevent,
+        url: '/books',
         type: 'GET',
         data: {
             action: 'getbooks',
-            event: eventinput,
-            rrpp: rrppinput
+            event: eventinput ??  $("select[name='event']").val(),
+            rrpp: rrppinput ?? $("select[name='rrpp']").val()
         },
         success: function (response) {
             var html = pintarTabla(response)
@@ -111,7 +95,6 @@ function ajaxQuery(action) {
 function pintarTabla(books) {
     let html = '';
     let role = $('#roleuser').attr('role');
-    let user = $('#roleuser').attr('user_id');
 
         for (let i = 0; i < books.length; i++) {
             const book = books[i];
@@ -128,9 +111,7 @@ function pintarTabla(books) {
                 '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-5 col-lg-3 d-flex justify-content-center">' +
                 `<p class="align-self-lg-center text-center  p-0 m-0">${book.rrpp}</p>` +
                 '</div>' +
-                // '<div class="align-self-center px-lg-2 py-3 px-sm-0 px-md-1 flex-fill col-2 col-lg-2 d-flex justify-content-center">'+
-                // `<p class="align-self-lg-center p-0 m-0">pendiente</p>`+
-                // '</div>'+
+
                 '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 d-flex flex-fill flex-row justify-content-around col-12 col-lg-2 mb-3">' +
                 '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-3 d-flex justify-content-center">';
             if (book.type == 'pista') {
@@ -168,9 +149,6 @@ function pintarTabla(books) {
                 '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">' +
                 `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`;
 
-            if (user == 'book.user_id' || role != 'normal') {
-                html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class="fs-2 bi bi-pencil-square text-warning bg-transparent border-0 confirm-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`
-            }
             if (role != 'normal') {
                 html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class="fs-2 bi bi-clipboard-check text-success bg-transparent border-0 confirm-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`
             }
