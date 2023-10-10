@@ -32,7 +32,6 @@ class UsersController extends Controller
             $newUser->surname = $request->surname;
             $newUser->email = $request->email;
             $newUser->password = Hash::make($request->email);
-            $newUser->jobtitle = $request->jobtitle;
             $newUser->role = $request->role;
             $newUser->phone = $request->phone ?? '';
 
@@ -107,7 +106,6 @@ class UsersController extends Controller
             $user->name = $request->name;
             $user->surname = $request->surname;
             $user->email = $request->email;
-            $user->jobtitle = $request->jobtitle;
             $user->role = $request->role;
             $user->phone = $request->phone ?? '';
 
@@ -133,7 +131,6 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'surname' =>  ['string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
             'password' => [],
-            'jobtitle' => ['required', 'string', Rule::in(['rrpp'])],
             'role' => ['required', 'string', Rule::in(['normal', 'moderator', 'admin'])],
             'phone' => ['regex:/^[0-9]{9}$/i'],
         ];

@@ -146,18 +146,6 @@
                                                             <div class="form-outline text-white mb-4 col-3 col-md-4">
                                                                 <select
                                                                     class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
-                                                                    name="jobtitle" id='jobtitle' required>
-                                                                    <option value="" hidden
-                                                                        {{ $user->jobtitle == '' ? 'selected' : '' }}>
-                                                                        Puesto</option>
-                                                                    <option value="rrpp"
-                                                                        {{ $user->jobtitle == 'rrpp' ? 'selected' : '' }}>
-                                                                        Relaciones públicas</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-outline text-white mb-4 col-3 col-md-4">
-                                                                <select
-                                                                    class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                                     name="role" id='role' required>
                                                                     <option value="" hidden
                                                                         {{ $user->role == '' ? 'selected' : '' }}>
