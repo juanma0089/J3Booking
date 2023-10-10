@@ -176,7 +176,7 @@ class BooksController extends Controller
                 return $this->getAllBooks();
             case 'getbooks':
                 $status = $request->input('status') ? $request->input('status') : 'all';
-                return $this->getBooks($request->input('time'), $request->input('date'), $status);
+                return $this->getBooks($request->input('event'), $request->input('rrpp'), $status);
             default:
                 return view('history');
         }
@@ -184,7 +184,7 @@ class BooksController extends Controller
 
     public function getBooks($event, $rrpp, $status)
     {
-        if ($event != 'none' && $rrpp == 'all') {
+        if ($event != 'none' && $rrpp == 'all' && $status != 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp', 'users.role as role')
@@ -193,13 +193,30 @@ class BooksController extends Controller
                 ->orderBy('books.name', 'asc')
                 ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
                 ->get();
-        } else if ($event != 'none' && $rrpp != 'all') {
+        } else if ($event != 'none' && $rrpp != 'all' && $status != 'all') {
             $books = DB::table('books')
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select('books.*', 'users.name as rrpp', 'users.role as role')
                 ->where('books.event_id', '=', $event)
                 ->where('books.user_id', '=', $rrpp)
                 ->where('books.status', '=', $status)
+                ->orderBy('books.name', 'asc')
+                ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+                ->get();
+        } else if ($event != 'none' && $rrpp == 'all' && $status == 'all') { // Pertenece a History Exclusivamente
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp', 'users.role as role')
+                ->where('books.event_id', '=', $event)
+                ->orderBy('books.name', 'asc')
+                ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+                ->get();
+        } else if ($event != 'none' && $rrpp != 'all' && $status == 'all') { // Pertenece a History Exclusivamente
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp', 'users.role as role')
+                ->where('books.event_id', '=', $event)
+                ->where('books.user_id', '=', $rrpp)
                 ->orderBy('books.name', 'asc')
                 ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
                 ->get();
@@ -341,11 +358,11 @@ class BooksController extends Controller
         $newValue = $request->input('newValue');
 
         // Realiza la actualización en la base de datos aquí
-        if($newValue >= 1 && is_int($newValue)){
+        if ($newValue >= 1 && is_int($newValue)) {
             Book::where('id', $idReserva)->update(['diners' => $newValue]);
             return response()->json();
-        }else{
-            toastr('El parámetro no es válido','error');
+        } else {
+            toastr('El parámetro no es válido', 'error');
         }
     }
 }
