@@ -73,15 +73,15 @@ class BooksController extends Controller
             }
 
             foreach ($request->bottles as $value) {
-                if(!preg_match('/^-?\d+$/', $value)){
+                if (!preg_match('/^-?\d+$/', $value)) {
                     toastr('No se han registrado correctamente las botellas', 'error');
                     return back()->with('errors', 'No se han registrado correctamente las botellas');
                 }
             }
 
             if (!$request->bottles || count($request->bottles) < $minbottles) {
-                toastr('No se ha registrado el mínimo de botellas ('. $minbottles .')', 'error');
-                return back()->with('errors', 'No se ha registrado el mínimo de botellas ('. $minbottles .')');
+                toastr('No se ha registrado el mínimo de botellas (' . $minbottles . ')', 'error');
+                return back()->with('errors', 'No se ha registrado el mínimo de botellas (' . $minbottles . ')');
             }
         }
 
@@ -186,34 +186,40 @@ class BooksController extends Controller
     {
         if ($event != 'none' && $rrpp == 'all') {
             $books = DB::table('books')
-            ->join('users', 'books.user_id', '=', 'users.id')
-            ->select('books.*', 'users.name as rrpp', 'users.role as role')
-            ->where('books.event_id', '=', $event)
-            ->where('books.status', '=', $status)
-            ->orderBy('books.name', 'asc')
-            ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
-            ->get();
-
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp', 'users.role as role')
+                ->where('books.event_id', '=', $event)
+                ->where('books.status', '=', $status)
+                ->orderBy('books.name', 'asc')
+                ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+                ->get();
         } else if ($event != 'none' && $rrpp != 'all') {
-            // $books = DB::table('books')
-            //     ->join('users', 'books.user_id', '=', 'users.id')
-            //     ->select('books.*', 'users.name as rrpp')
-            //     ->where('books.event_id', '=', $event)
-            //     ->where('books.user_id', '=', $rrpp)
-            //     ->where('books.status', '=', $status)
-            //     ->orderBy('books.name','asc')
-            //     ->get();
             $books = DB::table('books')
-            ->join('users', 'books.user_id', '=', 'users.id')
-            ->select('books.*', 'users.name as rrpp', 'users.role as role')
-            ->where('books.event_id', '=', $event)
-            ->where('books.user_id', '=', $rrpp)
-            ->where('books.status', '=', $status)
-            ->orderBy('books.name', 'asc')
-            ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
-            ->get();
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp', 'users.role as role')
+                ->where('books.event_id', '=', $event)
+                ->where('books.user_id', '=', $rrpp)
+                ->where('books.status', '=', $status)
+                ->orderBy('books.name', 'asc')
+                ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+                ->get();
         } else {
-            toastr('Selecciona un evento', 'info');
+            $fechaActual = now()->subHours(7)->toDateString();
+            $books = DB::table('books')
+                ->join('users', 'books.user_id', '=', 'users.id')
+                ->select('books.*', 'users.name as rrpp', 'users.role as role')
+                ->where('books.event_id', '=', function ($query) use ($fechaActual) {
+                    $query->select('id')
+                        ->from('events')
+                        ->where('eliminado', '=', '0')
+                        ->where('date', '>=', $fechaActual)
+                        ->orderBy('date', 'asc')
+                        ->limit(1);
+                })
+                ->where('books.status', '=', $status)
+                ->orderBy('books.name', 'asc')
+                ->addSelect(DB::raw('(SELECT GROUP_CONCAT(CONCAT(b.type, " ", b.name, " - ", b.price, "€ ") SEPARATOR "<br> ") FROM book_bottle bb JOIN bottles b ON bb.bottle_id = b.id WHERE bb.book_id = books.id) AS bottles_info'))
+                ->get();
         }
 
         return response()->json($books);
@@ -327,5 +333,19 @@ class BooksController extends Controller
             }
         }
         return response()->json(['success' => 'noChanges']);
+    }
+
+    public function editBookDinners(Request $request)
+    {
+        $idReserva = $request->input('idReserva');
+        $newValue = $request->input('newValue');
+
+        // Realiza la actualización en la base de datos aquí
+        if($newValue >= 1 && is_int($newValue)){
+            Book::where('id', $idReserva)->update(['diners' => $newValue]);
+            return response()->json();
+        }else{
+            toastr('El parámetro no es válido','error');
+        }
     }
 }

@@ -52,7 +52,9 @@ Route::get('/booking/{id}/{table?}', function () {
 
 Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
 
-Route::get('/books/{id?}', [BooksController::class, "index"])->name('books')->middleware('auth');
+Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
+
+Route::post('/editDinners', [BooksController::class, 'editBookDinners']);
 
 // EVENTS
 

@@ -64,7 +64,7 @@ function pintarTabla(users) {
             `<p class="align-self-lg-center p-0 m-0 text-truncate">${user.name} ${user.surname ? user.surname : ''}</p>` +
             `<p class="align-self-lg-center p-0 m-0 text-truncate text-muted">${user.email}</p>` +
             '</div><div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-2 d-flex justify-content-center d-none d-md-flex">' +
-            `<p class="align-self-lg-center p-0 m-0">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
+            // `<p class="align-self-lg-center p-0 m-0">${user.jobtitle ? user.jobtitle.toUpperCase() : ''}</p>` +
             '</div><div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-2 d-flex justify-content-center d-none d-md-flex">' +
             `<p class="align-self-lg-center p-0 m-0">` +
             `${user.role.substr(0, 1).toUpperCase() + user.role.substr(1)}</p></div>` +
