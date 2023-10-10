@@ -56,7 +56,7 @@ function ajaxQuery() {
     const match = url.match(regex);
     var idParam = '';
     (match) ? idParam = match[1] : idParam = null;
-    console.log(idParam)
+
 
     $.ajax({
         url: '/history/' + idParam,
@@ -91,7 +91,6 @@ function pintarTabla(books) {
     let role = $('#roleuser').attr('role');
     let user_id = $('#roleuser').attr('user_id');
 
-    console.log(books)
     for (let i = 0; i < books.length; i++) {
         const book = books[i];
 
@@ -145,7 +144,6 @@ function pintarTabla(books) {
         if ((role != 'normal' || user_id == book.user_id) && book.status == 'waiting') {
             html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`;
         }
-        console.log(user_id);
     html += '</div></div></div></div>';
 }
 
