@@ -24,7 +24,8 @@ class TablesController extends Controller
         $tables = DB::table('tables')
             ->leftJoin('books', function ($join) use ($idevent) {
                 $join->on('tables.id', '=', 'books.table_id')
-                    ->where('books.event_id', '=', $idevent);
+                    ->where('books.event_id', '=', $idevent)
+                    ->where('books.status','!=','cancelled');
             })
             ->select('tables.*', 'books.id as idbook', 'books.status as statusbook')
             ->orderBy('tables.id', 'asc')
