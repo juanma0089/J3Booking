@@ -365,4 +365,11 @@ class BooksController extends Controller
             toastr('El parámetro no es válido', 'error');
         }
     }
+    public function getBook(Request $request)
+    {
+        $book = Book::with('bottles')->find($request->id);
+
+        return view('editbook', ['book' => $book]);
+
+    }
 }

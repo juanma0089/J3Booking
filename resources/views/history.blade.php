@@ -49,7 +49,7 @@
                             type="button">
                     </div>
                 </form>
-
+                <a id="book-link" href="{{ route('editbook', ['id' => ':bookId']) }}" class="d-none"></a>
             </div>
             @php
                 $eventId = request('id');

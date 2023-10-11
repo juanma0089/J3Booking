@@ -56,6 +56,9 @@ Route::get('/books', [BooksController::class, "index"])->name('books')->middlewa
 
 Route::post('/editDinners', [BooksController::class, 'editBookDinners']);
 
+Route::get('/editbook/{id?}', [BooksController::class, 'getBook'])->name('editbook')->middleware('auth');
+
+Route::get('/deletebottle/{book}/{bottle}', [BottlesController::class, 'deleteBottle'])->name('deletebottle')->middleware('auth');
 // EVENTS
 
 Route::get('/eventform', function () {

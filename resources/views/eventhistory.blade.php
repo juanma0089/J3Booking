@@ -35,6 +35,7 @@
                     </div>
                 </form>
 
+                <a id="evento-link" href="{{ route('history', ['id' => ':eventoId']) }}" class="d-none"></a>
             </div>
         </div>
         <div id="lista_ac">
@@ -44,7 +45,6 @@
                 <p class="mb-1 opacity-75 text-muted text-center"> Historial de eventos</p>
 
             </div>
-            <a id="evento-link" href="{{ route('history', ['id' => ':eventoId']) }}" class="d-none">aas</a>
 
         </div>
     </div>

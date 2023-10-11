@@ -48,9 +48,6 @@ function ajaxQuery() {
 
     $('.history').remove()
 
-    $("input[name='datepicker']").val() ? $("input[name='datepicker']").val() : $("input[name='datepicker']").val(getActualDate())
-
-
     const url = window.location.href;
     const regex = /\/history\/(\d+)/; // Expresión regular para buscar un número después de "/history/"
     const match = url.match(regex);
@@ -78,6 +75,23 @@ function ajaxQuery() {
                 $('#btnConfirmModal').removeClass('btn-outline-success').addClass('btn-outline-danger');
                 completeModal(bookname, 'delete')
             })
+            $(document).ready(function() {
+                console.log('paso 1')
+                $("[data-book-id]").each(function() {
+                    console.log('paso 2')
+                    let bookId = $(this).data("book-id");
+                    console.log(bookId)
+
+                    // Obtén el atributo href del enlace oculto dentro del bucle
+                    var bookLink = $('#book-link').attr('href');
+
+                    // Reemplaza ':eventoId' con el valor real en la URL
+                    var url = bookLink.replace(':bookId', bookId);
+
+                    // Establece la URL generada en el enlace actual del bucle
+                    $(this).attr("href", url);
+                });
+            });
         },
         error: function () {
             alert('Ha ocurrido un error al obtener las reservas.');
@@ -142,7 +156,8 @@ function pintarTabla(books) {
         '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
         '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">';
         if ((role != 'normal' || user_id == book.user_id) && book.status == 'waiting') {
-            html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`;
+            html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>` +
+            `<a type="button" data-book-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-pencil-square text-warning bg-transparent border-0"></a>`;
         }
     html += '</div></div></div></div>';
 }
