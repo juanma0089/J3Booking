@@ -280,11 +280,10 @@ class EventsController extends Controller
             $query->where('events.date', '=', $date);
         }
 
-        $eventos = $query
-            ->select('events.*', DB::raw('COUNT(*) as total_books'), DB::raw('SUM(books.diners) as total_diners'))
-            ->get();
+        $query->select('events.*', DB::raw('(SELECT SUM(books.diners) FROM books WHERE books.event_id = events.id AND books.status != "cancelled") as total_diners'), DB::raw('(SELECT COUNT(*) FROM books WHERE books.event_id = events.id) as total_books'));
+
+        $eventos = $query->get();
 
         return response()->json($eventos);
     }
-
 }
