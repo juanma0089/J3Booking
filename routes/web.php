@@ -50,13 +50,15 @@ Route::get('/booking/{id}/{table?}', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
-Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
+Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create')->middleware('auth');
 
 Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
 
-Route::post('/editDinners', [BooksController::class, 'editBookDinners']);
+Route::post('/editDinners', [BooksController::class, 'editBookDinners'])->middleware('auth');
 
 Route::get('/editbook/{id?}', [BooksController::class, 'getBook'])->name('editbook')->middleware('auth');
+
+Route::put('/bookingedit', [BooksController::class, 'edit'])->name('bookingForm.edit')->middleware('auth');
 
 Route::get('/deletebottle/{book}/{bottle}', [BottlesController::class, 'deleteBottle'])->name('deletebottle')->middleware('auth');
 // EVENTS

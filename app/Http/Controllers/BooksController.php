@@ -131,6 +131,111 @@ class BooksController extends Controller
             return back()->with('errors', $errors);
         }
     }
+    public function edit(Request $request)
+    {
+
+        // Validación
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'int', 'min:1'],
+            'user_id' => ['required', 'int', 'min:1'],
+            'event_id' => ['required', 'int', 'min:1'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'surname' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'type' => Rule::in(['pista', 'vip']),
+            'diners' => ['int', 'min:1'],
+        ]);
+
+        if ($validator->fails()) {
+            toastr('Algunos de los datos introducidos no es válido.', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Comprobación si es VIP: Si existe otra reserva con esa mesa en el mismo evento
+        if ($request->type === 'vip' && !empty($request->table_id)) {
+            $existingBooking = Book::where('table_id', $request->table_id)->where('status', '!=', 'cancelled')->where('event_id', $request->event_id)->where('id', '!=', $request->id)->first();
+
+            if ($existingBooking) {
+                toastr('La mesa VIP ya está asignada a una reserva existente.', 'error');
+                return back()->with('errors', 'La mesa VIP ya está asignada a una reserva existente.');
+            }
+        }
+
+        // Comprobación si es VIP: Existe la mesa
+        if (!empty($request->table_id)) {
+            if (!Table::where('id', $request->table_id)->exists()) {
+                return back()->with('errors', 'La mesa no se encuentra disponible.');
+            }
+        }
+
+        if ($request->type === 'vip' && $request->bottles) {
+            $table = Table::where('id', $request->table_id)->first();
+            $event = Event::where('id', $request->event_id)->first();
+            $minbottlesMap = [
+                'escenario' => $event->min_vip_esc,
+                'mesa' => $event->min_vip_mesa,
+                'mesaalta' => $event->min_vip_mesaalta,
+            ];
+
+            $minbottles = $minbottlesMap[$table->type] ?? 0;
+
+            foreach ($request->bottles as $value) {
+                if (!preg_match('/^-?\d+$/', $value)) {
+                    toastr('No se han registrado correctamente las botellas', 'error');
+                    return back()->with('errors', 'No se han registrado correctamente las botellas');
+                }
+            }
+
+            if (empty($request->bottles) || count($request->bottles) < $minbottles) {
+                toastr('No se han registrado correctamente las botellas o no se ha registrado el mínimo de botellas (' . $minbottles . ')', 'error');
+                return back()->with('errors', 'No se han registrado correctamente las botellas o no se ha registrado el mínimo de botellas (' . $minbottles . ')');
+            }
+        }
+
+        if (Book::where('event_id', $request->event_id)
+            ->where('name', $request->name)
+            ->where('surname', $request->surname)
+            ->where('id', '!=', $request->id)
+            ->exists()
+        ) {
+            toastr('Ya existe una reserva con esos datos', 'error');
+            return back()->with('errors', 'Ya existe una reserva con esos datos');
+        }
+
+
+        $errors = $request->has('errors');
+        if (!$errors) {
+            $booking = Book::find($request->id);
+            if (!$booking) {
+                toastr('La reserva que intentas editar no existe.', 'error');
+                return back()->with('errors', 'La reserva que intentas editar no existe.');
+            }
+            // Realizar las actualizaciones en la reserva existente
+            $booking->event_id = $request->event_id;
+            $booking->name = $request->name;
+            $booking->surname = $request->surname;
+            $booking->diners = $request->diners;
+            $booking->type = $request->type;
+            $booking->user_id = $request->user_id;
+
+
+            // Guardar la reserva actualizada
+            $booking->save();
+
+
+            try {
+                $booking->bottles()->attach($request->bottles);
+            } catch (\Exception $e) {
+                // Manejar el error, por ejemplo, registrar el mensaje de error
+                Log::error($e->getMessage());
+            }
+            // $newBook->save();
+            toastr('Se ha actualizado la reserva de ' . $booking->name, "success", '¡Listo!');
+            return back();
+        } else {
+            $errors = $request->errors();
+            return back()->with('errors', $errors);
+        }
+    }
 
     public function validatedate($request)
     {
@@ -370,6 +475,5 @@ class BooksController extends Controller
         $book = Book::with('bottles')->find($request->id);
 
         return view('editbook', ['book' => $book]);
-
     }
 }

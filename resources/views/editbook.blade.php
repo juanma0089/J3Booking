@@ -34,9 +34,13 @@
                                     @endif
                                 </div>
 
-                                <form method="POST" action="{{ route('bookingForm.create') }}" id='createbooking'>
+                                <form method="POST" action="{{ route('bookingForm.edit') }}" id='editbooking'>
                                     @csrf
-
+                                    @method('PUT')
+                                    <input id="id" type="number" class="d-none" name="id"
+                                        value={{ $book->id }} required hidden readonly>
+                                    <input id="user_id" type="number" class="d-none" name="user_id"
+                                        value={{ $book->user_id }} required hidden readonly>
                                     <input id="event_id" type="number" class="d-none" name="event_id"
                                         value={{ $book->event_id }} required hidden readonly>
 
@@ -107,33 +111,10 @@
 
                                         </div>
 
-                                        {{-- <div class="col-12 gap-1 d-flex flex-row justify-content-between">
-                                            <div class="col-9 text-white mb-4">
-                                                <select
-                                                    class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
-                                                    name="bottle_type_2" id='bottle_type' required>
-                                                    <option value="" hidden selected>Tipo botella</option>
-                                                    <option value="vip">VIP</option>
-                                                    <option value="pista">Pista</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-3 text-white mb-4">
-                                                <select
-                                                    class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
-                                                    name="bottle_mount_2" id='bottle_mount' required>
-                                                    <option value="1" selected>1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
-                                        </div> --}}
-
                                     </div>
 
                                     <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit" id='registerBtn'>
-                                        {{ __('Registrar reserva') }}</button>
+                                        {{ __('Editar reserva') }}</button>
 
                                 </form>
 
