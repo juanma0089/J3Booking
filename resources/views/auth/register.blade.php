@@ -62,14 +62,14 @@
                                             <label class="form-label" for="phone">Teléfono</label>
                                         </div>
 
-                                        <div class="form-outline text-white mb-4 col-3 col-md-4">
+                                        {{-- <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select
                                                 class="form-select form-select-lg bg-custom rounded-1 text-white no-autofill white-border"
                                                 name="jobtitle" id='jobtitle' required>
                                                 <option value="" hidden selected>Puesto</option>
                                                 <option value="rrpp">Relaciones públicas</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-outline text-white mb-4 col-3 col-md-4">
                                             <select

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\BottlesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TablesController;
@@ -40,16 +41,26 @@ Route::get('/editpass',function () {return view('/users.passworduser');})->name(
 
 // BOOKS ROUTES
 
-Route::get('/history', [BooksController::class, "history"])->name('history')->middleware('auth');
+Route::get('/history/{id}', [BooksController::class, "history"])->name('history')->middleware('auth');
 
-Route::get('/booking/{id}', function () {
+// Route::get('/booking/{id}', function () {
+//     return view('createbooking');
+// })->name('booking')->middleware('auth');
+Route::get('/booking/{id}/{table?}', function () {
     return view('createbooking');
 })->name('booking')->middleware('auth');
 
-Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create');
+Route::post('/booking', [BooksController::class, 'create'])->name('bookingForm.create')->middleware('auth');
 
 Route::get('/books', [BooksController::class, "index"])->name('books')->middleware('auth');
 
+Route::post('/editDinners', [BooksController::class, 'editBookDinners'])->middleware('auth');
+
+Route::get('/editbook/{id?}', [BooksController::class, 'getBook'])->name('editbook')->middleware('auth');
+
+Route::put('/bookingedit', [BooksController::class, 'edit'])->name('bookingForm.edit')->middleware('auth');
+
+Route::get('/deletebottle/{book}/{bottle}', [BottlesController::class, 'deleteBottle'])->name('deletebottle')->middleware('auth');
 // EVENTS
 
 Route::get('/eventform', function () {
@@ -77,11 +88,12 @@ Route::get('/modal', function () {
 
 Route::get('/', [EventsController::class, "index"])->name('index')->middleware('auth');
 
-// Test
+// Test ¿Cambiar nombres?
 
-Route::get('/oldindex/{id?}', function () {
-    return view('oldindex');
-})->name('oldindex')->middleware('auth');
+Route::get('/oldindex/{id}', [TablesController::class, 'index'])->name('oldindex')->middleware('auth');
 
+Route::get('/getbottles', [BottlesController::class, 'getAllBottles'])->name('getbottles')->middleware('auth');
+
+Route::get('/eventhistory', [EventsController::class, 'history'])->name('eventhistory')->middleware('auth');
 
 

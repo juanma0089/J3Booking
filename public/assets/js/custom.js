@@ -9,7 +9,7 @@ $('.fa-eye').on('click', function () {
     $('#password').attr('type') === 'password' ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password');
 });
 
-function validateFields(name = '', surname = '', email = '', phone = '', jobtitle = '', role = '') {
+function validateFields(name = '', surname = '', email = '', phone = '', role = '') {
     let errors = [];
     let ok;
 
@@ -42,14 +42,6 @@ function validateFields(name = '', surname = '', email = '', phone = '', jobtitl
         ok = false;
     } else if (!phone.match(/^[0-9]{9}$/ || phone.length != 9)) {
         errors.push('El teléfono introducido no es válido')
-        ok = false;
-    }
-
-    if (!jobtitle) {
-        errors.push('Por favor, seleccione un puesto de trabajo.');
-        ok = false;
-    } else if (jobtitle != 'rrpp') {
-        errors.push('El usuario debe tener un puesto de Relaciones públicas')
         ok = false;
     }
 
@@ -113,7 +105,7 @@ function validateFieldsEvent(name = '', minvipesc = '', minvipmesa = '', minvipm
 }
 
 
-function validateFieldsBooking(event_id = '', name = '', surname = '',  diners = '') {
+function validateFieldsBooking(event_id = '',type='', name = '', surname = '',  diners = '') {
     let errors = [];
     let ok;
 
@@ -144,6 +136,13 @@ function validateFieldsBooking(event_id = '', name = '', surname = '',  diners =
         ok = false;
     } else if (isNaN(diners) || diners < 1) {
         errors.push('Por favor, introduzca un número válido para el nº de clientes (mínimo 1).')
+        ok = false;
+    }
+    if (!type) {
+        errors.push('Ha ocurrido un error con el tipo de reserva.')
+        ok = false;
+    } else if (type != 'pista' && type != 'vip') {
+        errors.push('Ha ocurrido un error con el tipo de reserva.')
         ok = false;
     }
 

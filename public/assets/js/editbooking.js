@@ -44,7 +44,7 @@ $(function () {
         });
 
     })
-    $('#createbooking').submit(function (e) {
+    $('#editbooking').submit(function (e) {
         e.preventDefault();
 
         // Crear un objeto FormData para recopilar todos los datos del formulario
@@ -72,8 +72,9 @@ $(function () {
                 contentType: false, // No establecer el tipo de contenido (FormData se encarga de eso)
                 data: formData, // Usar el objeto FormData que contiene todos los datos del formulario
                 success: function (data) {
-                    // Redirigir a la vista de índice después de crear el evento exitosamente
-                    window.location.href = "/";
+                    // Redirigir a la vista history del evento después de crear el evento exitosamente
+                    window.location.href = "/history/" + formData.get('event_id');
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     if (jqXHR.status === 422) {
