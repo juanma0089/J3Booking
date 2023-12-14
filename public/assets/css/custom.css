@@ -17,6 +17,10 @@ select {
     border-color: white !important;
 }
 
+.text-observaciones {
+    font-style: italic;
+}
+
 .bg-custom {
     background-color: #111214 !important;
 }

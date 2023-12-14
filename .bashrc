@@ -1,0 +1,1 @@
+alias composer="~/.bin/php -d disable_functions= ~/www/composer.phar"

@@ -46,6 +46,8 @@
 
                                     <input id="type" type="text" class="d-none" name="type"
                                         value="{{ $book->type }}" required hidden readonly>
+                                    <input id="observaciones" type="text" class="d-none" name="observaciones"
+                                        value="{{ $book->observaciones }}" required hidden readonly>
 
                                     @if ($type = 'vip')
                                         <input id="table_id" type="number" class="d-none" name="table_id"
@@ -74,6 +76,14 @@
                                                 value="{{ $book->diners }}" required>
                                             <label class="form-label" for="diners">Nº de personas</label>
                                         </div>
+
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="observaciones" type="text"
+                                                class="form-control form-control-lg no-autofill " name="observaciones"
+                                                value="{{ $book->observaciones }}">
+                                            <label class="form-label" for="Observaciones">Observaciones</label>
+                                        </div>
+
                                         @foreach ($book->bottles as $bottle)
                                             <section class="d-flex flex-column mb-2">
                                                 <a href="{{ route('deletebottle', ['book' => $book->id, 'bottle' => $bottle->id]) }}"

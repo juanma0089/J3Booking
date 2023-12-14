@@ -75,10 +75,16 @@ function ajaxQuery() {
                 $('#btnConfirmModal').removeClass('btn-outline-success').addClass('btn-outline-danger');
                 completeModal(bookname, 'delete')
             })
+
+            $('.destroy-btn').on('click', function () {
+                let bookname = $(this).attr('data-name')
+                $("#btnConfirmModal").attr('book-id', $(this).attr('data-id'));
+                $("#btnConfirmModal").attr('action', 'destroybook');
+                $('#btnConfirmModal').removeClass('btn-outline-success').addClass('btn-outline-danger');
+                completeModal(bookname, 'destroy')
+            })
             $(document).ready(function() {
-                console.log('paso 1')
                 $("[data-book-id]").each(function() {
-                    console.log('paso 2')
                     let bookId = $(this).data("book-id");
                     console.log(bookId)
 
@@ -138,6 +144,8 @@ function pintarTabla(books) {
     else {
         html += `<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-3 d-flex justify-content-center"><p class="align-self-lg-center text-center text-danger bi bi-x p-0 m-0">Cancelada</p></div>`;
     }
+
+
     html += `<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-4 col-lg-3 d-flex justify-content-center"><div class="accordion accordion-flush" id="accordionFlushExample">` +
 
         `<div class="accordion-item">` +
@@ -152,12 +160,22 @@ function pintarTabla(books) {
         `<div class="form-outline form-white mb-4 col-3 col-md-4">` +
         `<p class="align-self-lg-center text-start p-0 m-0 text-capitalize">${book.bottles_info} </p>` +
         `<div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 53.6px;"></div><div class="form-notch-trailing"></div></div></div></div>` +
-        `</div>` +
-        '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
+        `</div>` ;
+
+        if (book.observaciones) {
+            html +=  '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-12">' +
+            `<p class='mb-0 opacity-75 font-italic text-center text-observaciones'>${book.observaciones}</p></div>`; 
+        }
+
+        html += '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
         '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">';
         if ((role != 'normal' || user_id == book.user_id) && book.status == 'waiting') {
             html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>` +
             `<a type="button" data-book-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-pencil-square text-warning bg-transparent border-0"></a>`;
+        }
+
+        if (role == 'admin') {
+            html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-trash text-danger bg-transparent border-0 destroy-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`;
         }
     html += '</div></div></div></div>';
 }
@@ -170,6 +188,9 @@ function completeModal(bookname, func) {
     if (func == 'delete') {
         $('#messageModal').append(`¿Está seguro que desea cancelar la reserva de ${bookname}?`);
     }
+    if (func == 'destroy') {
+        $('#messageModal').append(`¿Está seguro que desea eliminar la reserva de ${bookname} de forma permanente?`);
+    }
 
 }
 
@@ -177,5 +198,8 @@ function createAlert(action, bookName) {
 
     if (action == 'cancelbook') {
         toastr.warning('La reserva ha sido cancelada.', '¡Cancelada!');
+    }
+    if (action == 'destroybook') {
+        toastr.warning('La reserva ha sido eliminada.', '¡Eliminada!');
     }
 }

@@ -193,10 +193,17 @@ function pintarTabla(books) {
             `<div class="form-outline form-white mb-4 col-3 col-md-4">` +
             `<p class="align-self-lg-center text-start p-0 m-0 text-capitalize">${book.bottles_info} </p>` +
             `<div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 53.6px;"></div><div class="form-notch-trailing"></div></div></div></div>` +
-            `</div>` +
-            '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
+            `</div>`;
+            if (book.observaciones) {
+                html += '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-12">' +
+                    `<p class='mb-0 opacity-75 font-italic text-center text-observaciones'>${book.observaciones}</p></div>`;
+            }
+
+            html += '<div class="align-self-center px-lg-2 px-sm-0 px-md-1 flex-fill col-12 col-lg-2">' +
             '<div class="bg-transparent border-0 align-self-lg-center p-3 text-dark d-flex justify-content-evenly">' +
             `<button type="button" data-id="${book.id}" data-name="${book.name}" class=" fs-2 bi bi-x-lg text-danger bg-transparent border-0 delete-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`;
+
+
 
         if (role != 'normal') {
             html += `<button type="button" data-id="${book.id}" data-name="${book.name}" class="fs-2 bi bi-clipboard-check text-success bg-transparent border-0 confirm-btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>`

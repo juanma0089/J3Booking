@@ -74,25 +74,32 @@
                                                 value="{{ old('surname') }}" required autofocus>
                                             <label class="form-label" for="surname">Apellidos</label>
                                         </div>
-
-
+                                        
+                                        
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="diners" type="number"
-                                                class="form-control form-control-lg no-autofill" name="diners"
-                                                value="{{ old('diners') }}" required>
+                                            class="form-control form-control-lg no-autofill" name="diners"
+                                            value="{{ old('diners') }}" required>
                                             <label class="form-label" for="diners">Nº de personas</label>
+                                        </div>
+                                        
+                                        <div class="form-outline form-white mb-4 col-3 col-md-4">
+                                            <input id="observaciones" type="text"
+                                                class="form-control form-control-lg no-autofill " name="observaciones"
+                                                value="{{ old('observaciones') }}">
+                                            <label class="form-label" for="Observaciones">Observaciones</label>
                                         </div>
 
                                         <div class="col-12 mb-4 ">
                                             <div class="d-flex justify-content-center">
                                                 <button id="addbottle"
-                                                    class="bg-success text-white btn-outline-white rounded-5 d-flex flex-row p-2 "
-                                                    type="button">
-                                                    <p class="py-0 m-0 fw-lighter">Añadir botella</p>
-                                                    <i class="bi bi-plus-lg ms-1"></i>
-                                                </button>
-                                            </div>
+                                                class="bg-success text-white btn-outline-white rounded-5 d-flex flex-row p-2 "
+                                                type="button">
+                                                <p class="py-0 m-0 fw-lighter">Añadir botella</p>
+                                                <i class="bi bi-plus-lg ms-1"></i>
+                                            </button>
                                         </div>
+                                    </div>
 
                                         <div id='containerBottles'>
                                             

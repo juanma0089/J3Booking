@@ -15,6 +15,7 @@
                         $bookData = DB::table('books')
                             ->select(DB::raw('COUNT(*) as total_books'), DB::raw('SUM(diners) as total_diners'))
                             ->where('event_id', '=', $evento->id)
+                            ->where('status', '!=', 'cancelled')
                             ->first();
                     @endphp
 

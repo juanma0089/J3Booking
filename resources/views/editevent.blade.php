@@ -39,7 +39,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_esc" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_esc"
-                                                value="{{ old('min_vip_esc') ? old('min_vip_esc', $event->min_vip_esc) : 2 }}"
+                                                value="{{ old('min_vip_esc', $event->min_vip_esc)}}"
                                                 min="0" required>
                                             <label class="form-label" for="min_vip_esc">Mín. botellas VIP Escenario</label>
                                         </div>
@@ -47,7 +47,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_mesa" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_mesa"
-                                                value="{{ old('min_vip_mesa') ? old('min_vip_mesa', $event->min_vip_mesa) : 3 }}"min="0"
+                                                value="{{ old('min_vip_mesa', $event->min_vip_mesa)}}"min="0"
                                                 required>
                                             <label class="form-label" for="min_vip_mesa">Mín. botellas VIP Mesas</label>
                                         </div>
@@ -55,7 +55,7 @@
                                         <div class="form-outline form-white mb-4 col-3 col-md-4">
                                             <input id="min_vip_mesaalta" type="number"
                                                 class="form-control form-control-lg no-autofill" name="min_vip_mesaalta"
-                                                value="{{ old('min_vip_mesaalta') ? old('min_vip_mesaalta', $event->min_vip_mesaalta) : 1 }}"min="0"
+                                                value="{{ old('min_vip_mesaalta', $event->min_vip_mesaalta)}}"min="0"
                                                 required>
                                             <label class="form-label" for="min_vip_mesaalta">Mín. botellas VIP Mesas
                                                 Altas</label>

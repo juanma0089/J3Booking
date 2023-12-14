@@ -72,13 +72,14 @@ class BooksController extends Controller
                 default:
             }
 
-            foreach ($request->bottles as $value) {
-                if (!preg_match('/^-?\d+$/', $value)) {
-                    toastr('No se han registrado correctamente las botellas', 'error');
-                    return back()->with('errors', 'No se han registrado correctamente las botellas');
+            if ($request->bottles) {
+                foreach ($request->bottles as $value) {
+                    if (!preg_match('/^-?\d+$/', $value)) {
+                        toastr('No se han registrado correctamente las botellas', 'error');
+                        return back()->with('errors', 'No se han registrado correctamente las botellas');
+                    }
                 }
             }
-
             if (!$request->bottles || count($request->bottles) < $minbottles) {
                 toastr('No se ha registrado el mínimo de botellas (' . $minbottles . ')', 'error');
                 return back()->with('errors', 'No se ha registrado el mínimo de botellas (' . $minbottles . ')');
@@ -111,6 +112,7 @@ class BooksController extends Controller
             $newBook->surname = $request->surname;
             $newBook->diners = $request->diners;
             $newBook->type = $request->type;
+            $newBook->observaciones = $request->observaciones;
             $newBook->table_id = $request->table_id;
             // $newBook->time = $request->time;
             $newBook->user_id = Auth::id();
@@ -215,6 +217,7 @@ class BooksController extends Controller
             $booking->surname = $request->surname;
             $booking->diners = $request->diners;
             $booking->type = $request->type;
+            $booking->observaciones = $request->observaciones;
             $booking->user_id = $request->user_id;
 
 
@@ -262,6 +265,8 @@ class BooksController extends Controller
                 return $this->getBooks($request->input('event'), $request->input('rrpp'), $status);
             case 'cancelbook':
                 return $this->cancelBook($request->input('id'));
+            case 'destroybook':
+                return $this->destroyBook($request->input('id'));
             case 'acceptbook':
                 return $this->acceptBook($request->input('id'));
             case 'getAcceptedBooks':
@@ -408,6 +413,23 @@ class BooksController extends Controller
             // TODO section en el front para mostrar el mensaje
             toastr('La reserva que desea cancelar no ha sido creada por usted', 'error', 'Ops, ¡Error!');
             return back();
+        }
+    }
+
+    public function destroyBook($id)
+    {
+        try {
+            $book = Book::find($id);
+        
+            if (Auth::user()->role == 'admin') {
+                $book->delete();
+                return back();
+            } else {
+                toastr('No tienes permisos para realizar esta acción', 'error', 'Ops, ¡Error!');
+                return back();
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 
