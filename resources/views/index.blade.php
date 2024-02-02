@@ -26,7 +26,7 @@
                             {{-- Img --}}
                             <div
                                 class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start align-content-center p-1">
-                                <img src="{{ asset('assets/img/events/' . $evento->image) }}" alt="{{ $evento->name }}"
+                                <img src="{{ './public/assets/img/events/' . $evento->image }}" alt="{{ $evento->name }}"
                                     class="img-fluid img-event">
 
                             </div>

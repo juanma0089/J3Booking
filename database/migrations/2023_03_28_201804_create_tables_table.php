@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['escenario', 'mesa', 'mesaalta']);
+            $table->enum('type', ['escenario','altaescenario', 'mesa', 'mesaalta']);
+            $table->nummesa()->nullable();
             $table->timestamps();
         });
     }

@@ -25,8 +25,8 @@ function validateFields(name = '', surname = '', email = '', phone = '', role = 
     if (!surname) {
         errors.push('Por favor, introduzca los apellidos.')
         ok = false;
-    } 
-    // else if (!surname.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/)) {
+    }
+    //  else if (!surname.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/)) {
     //     errors.push('Los apellidos introducidos no son válidos, contiene más de un espacio o carácteres especiales')
     //     ok = false;
     // }
@@ -81,8 +81,7 @@ function validateFieldsEvent(name = '', minvipesc = '', minvipmesa = '', minvipm
     if (!minvipmesaalta) {
         errors.push('Por favor, introduzca el número mínimo de botellas para las mesas altas.')
         ok = false;
-    } 
-    else if (isNaN(minvipmesaalta) || minvipmesaalta < 0) {
+    } else if (isNaN(minvipmesaalta) || minvipmesaalta < 0) {
         errors.push('Por favor, introduzca un número válido para el min de botellas para las mesas altas')
         ok = false;
     }

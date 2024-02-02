@@ -27,8 +27,8 @@ class BooksController extends Controller
 
         $validator = Validator::make($request->all(), [
             'event_id' => ['required', 'int', 'min:1'],
-            'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
-            'surname' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'surname' => ['required', 'string', 'min:2', 'max:255'],
             'type' => Rule::in(['pista', 'vip']),
             'diners' => ['int', 'min:1'],
             // 'date' => ['required', 'date_format:Y-m-d'],
@@ -55,12 +55,16 @@ class BooksController extends Controller
             }
         }
 
+        $nummesa = '';
+
         if ($request->type === 'vip') {
             $table = Table::where('id', $request->table_id)->first();
+            $nummesa = $table->nummesa;
             $event = Event::where('id', $request->event_id)->first();
             $minbottles = 0;
             switch ($table->type) {
                 case 'escenario':
+                case 'altaescenario':
                     $minbottles = $event->min_vip_esc;
                     break;
                 case 'mesa':
@@ -80,7 +84,7 @@ class BooksController extends Controller
                     }
                 }
             }
-            if (!$request->bottles || count($request->bottles) < $minbottles) {
+            if ((!$request->bottles || count($request->bottles) < $minbottles) && $minbottles != 0) {
                 toastr('No se ha registrado el mínimo de botellas (' . $minbottles . ')', 'error');
                 return back()->with('errors', 'No se ha registrado el mínimo de botellas (' . $minbottles . ')');
             }
@@ -114,6 +118,7 @@ class BooksController extends Controller
             $newBook->type = $request->type;
             $newBook->observaciones = $request->observaciones;
             $newBook->table_id = $request->table_id;
+            $newBook->nummesa = $nummesa;
             // $newBook->time = $request->time;
             $newBook->user_id = Auth::id();
 
@@ -141,8 +146,8 @@ class BooksController extends Controller
             'id' => ['required', 'int', 'min:1'],
             'user_id' => ['required', 'int', 'min:1'],
             'event_id' => ['required', 'int', 'min:1'],
-            'name' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
-            'surname' => ['required', 'string', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$/i', 'min:2', 'max:255'],
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'surname' => ['required', 'string', 'min:2', 'max:255'],
             'type' => Rule::in(['pista', 'vip']),
             'diners' => ['int', 'min:1'],
         ]);
@@ -420,7 +425,7 @@ class BooksController extends Controller
     {
         try {
             $book = Book::find($id);
-        
+
             if (Auth::user()->role == 'admin') {
                 $book->delete();
                 return back();

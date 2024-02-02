@@ -1,0 +1,144 @@
+body {
+    background-color: #111214 !important;
+}
+
+#navbar_footer{
+    height: 50px !important;
+}
+
+#mainPanel{
+    height: calc(100vh - 100px) !important;
+    top: 50px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+select {
+    border-color: white !important;
+}
+
+.text-observaciones {
+    font-style: italic;
+}
+
+.bg-custom {
+    background-color: #111214 !important;
+}
+
+.fa-eye {
+    cursor: pointer;
+}
+
+.logo-login {
+    margin-top: -180px;
+}
+
+.no-autofill:-webkit-autofill,
+.no-autofill:-webkit-autofill:hover,
+.no-autofill:-webkit-autofill:focus,
+.no-autofill:-webkit-autofill:active {
+    transition: background-color 999999s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+
+.mesa-icon {
+    font-size: 4rem;
+}
+
+.mesa-cruz {
+    font-size: 3rem;
+}
+
+.navbar-toggler-icon {
+    color: white !important;
+}
+
+.usertable {
+    max-width: 80vw;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--text-white);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.9;
+    filter: invert(0.9);
+}
+
+/** MOBILE PARAMS  */
+
+@media screen and (max-width: 767px) {
+    .logo-login {
+        width: 300px;
+        height: auto;
+        margin-top: -120px;
+    }
+
+    .mesa-icon {
+        font-size: 2.5rem;
+    }
+
+    .mesa-cruz {
+        font-size: 2rem;
+    }
+
+    .usertable {
+        max-width: 95vw;
+    }
+
+}
+
+/** TOASTR NOTIFICATiON**/
+
+/* #toast-container > div {
+    opacity:1 !important;
+} */
+
+/** Scroll Bar **/
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #a32929 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #a3292900;
+    border-radius: 0px;
+    border: 0px none #ffffff;
+  }
+
+/* EDIT USER  */
+
+.accordion-button:not(.collapsed){
+    background-color: transparent !important;
+    font-size: 0.8em;
+    transition: font-size 0.5s ease-in-out;
+
+}
+.accordion-button:is(.collapsed){
+    background-color: transparent !important;
+    font-size: 0.65em;
+    transition: font-size 0.5s ease-in-out;
+
+}
+.img-event{
+    width: auto;
+    max-height: 200px;
+    height: auto;
+    align-content: center;
+    align-self: center;
+}
+
+.card-container{
+    justify-content: space-between;
+}
